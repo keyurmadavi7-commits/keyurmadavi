@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KEYUR</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth; /* Smooth scroll effect added */
+    }
 
+    .hero {
+      height: 100vh;
+      background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .glass {
+      padding: 40px 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .glass h1 {
+      font-size: 70px;
+      letter-spacing: 6px;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    /* Scroll arrow indicator */
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      color: white;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-15px); }
+      60% { transform: translateX(-50%) translateY(-7px); }
+    }
+  </style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div class="glass">
+    <h1>KEYUR</h1>
+    <p>Creative Developer</p>
+  </div>
+  <div class="scroll-down">&#x2193;</div>
+</section>
+
+</body>
+</html>
