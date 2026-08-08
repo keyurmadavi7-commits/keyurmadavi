@@ -12,55 +12,23 @@
       scroll-behavior: smooth;
     }
 
-    /* =========================
-       BODY
-    ========================= */
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-
-      /* Variables controlled by JavaScript */
-      --bg-x: 0px;
-      --bg-y: 0px;
-    }
-
-    /* =========================
-       MOVING BACKGROUND
-    ========================= */
-
-    body::before {
-      content: "";
-
-      position: fixed;
-
-      top: -5%;
-      left: -5%;
-
-      width: 110%;
-      height: 110%;
-
-      z-index: -2;
 
       background:
         linear-gradient(
-          rgba(0, 0, 0, 0.18),
-          rgba(0, 0, 0, 0.30)
+          rgba(0, 0, 0, 0.38),
+          rgba(0, 0, 0, 0.52)
         ),
         url("https://images.unsplash.com/photo-1706177818542-bcd369cc1fad?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-        center/cover no-repeat;
+        center/cover no-repeat fixed;
 
-      transform:
-        translate3d(var(--bg-x), var(--bg-y), 0)
-        scale(1.05);
-
-      transition: transform 0.15s ease-out;
-
-      will-change: transform;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
+
 
     /* =========================
        TOP NAVIGATION
@@ -113,6 +81,7 @@
       transform: translateY(-2px);
     }
 
+
     /* =========================
        HERO
     ========================= */
@@ -127,6 +96,7 @@
       position: relative;
     }
 
+
     /* =========================
        FROZEN / LIQUID GLASS
     ========================= */
@@ -136,24 +106,19 @@
 
       padding: 40px 80px;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.18),
-          rgba(255,255,255,0.06)
-        );
+      background: rgba(20, 25, 35, 0.22);
 
       border-radius: 25px;
 
-      backdrop-filter: blur(20px) saturate(150%);
-      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      backdrop-filter: blur(22px) saturate(130%);
+      -webkit-backdrop-filter: blur(22px) saturate(130%);
 
-      border: 1px solid rgba(255,255,255,0.30);
+      border: 1px solid rgba(255,255,255,0.20);
 
       box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.35),
-        inset 0 -1px 1px rgba(255,255,255,0.08),
-        0 20px 50px rgba(0,0,0,0.30);
+        inset 0 1px 1px rgba(255,255,255,0.18),
+        inset 0 -1px 1px rgba(0,0,0,0.12),
+        0 20px 50px rgba(0,0,0,0.35);
 
       text-align: center;
 
@@ -162,23 +127,18 @@
       z-index: 1;
     }
 
-    .glass::before,
-    .glass-journey::before,
-    .info-card::before,
-    .skill::before,
-    .project-card::before {
-
+    .glass::before {
       content: "";
 
       position: absolute;
 
-      top: -50%;
-      left: -30%;
+      top: -60%;
+      left: -40%;
 
-      width: 80%;
-      height: 180%;
+      width: 70%;
+      height: 200%;
 
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.035);
 
       transform: rotate(25deg);
 
@@ -195,6 +155,7 @@
       font-size: 20px;
       margin: 10px 0 0 0;
     }
+
 
     /* =========================
        SCROLL ARROW
@@ -234,6 +195,7 @@
 
     }
 
+
     /* =========================
        GENERAL SECTIONS
     ========================= */
@@ -266,6 +228,7 @@
 
       line-height: 1.7;
     }
+
 
     /* =========================
        WEATHER + LOCATION
@@ -342,6 +305,7 @@
       line-height: 1.8;
     }
 
+
     /* =========================
        SKILLS
     ========================= */
@@ -390,6 +354,7 @@
         inset 0 1px 1px rgba(255,255,255,0.25),
         0 10px 30px rgba(0,0,0,0.20);
     }
+
 
     /* =========================
        PROJECTS
@@ -450,6 +415,7 @@
         inset 0 1px 1px rgba(255,255,255,0.30),
         0 20px 40px rgba(0,0,0,0.35);
     }
+
 
     /* =========================
        JOURNEY
@@ -516,6 +482,7 @@
       padding: 0;
     }
 
+
     /* =========================
        MUSIC INDICATOR
     ========================= */
@@ -542,6 +509,7 @@
 
       z-index: 1000;
     }
+
 
     /* =========================
        MOBILE
@@ -597,7 +565,9 @@
   </style>
 </head>
 
+
 <body>
+
 
   <!-- =========================
        TOP NAVIGATION
@@ -987,30 +957,6 @@
 
   <script>
 
-    /* =========================
-       CURSOR PARALLAX
-    ========================= */
-
-    document.addEventListener("mousemove", function(event) {
-
-      const x = (event.clientX / window.innerWidth) - 0.5;
-      const y = (event.clientY / window.innerHeight) - 0.5;
-
-      const moveX = x * 18;
-      const moveY = y * 18;
-
-      document.body.style.setProperty(
-        "--bg-x",
-        moveX + "px"
-      );
-
-      document.body.style.setProperty(
-        "--bg-y",
-        moveY + "px"
-      );
-
-    });
-
 
     /* =========================
        WEATHER
@@ -1134,7 +1080,9 @@
       { once: true }
     );
 
+
   </script>
+
 
 </body>
 </html>
