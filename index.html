@@ -3,244 +3,1138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>KEYUR</title>
+
   <style>
-   body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  scroll-behavior: smooth;
-  color: white;
-  background: url("https://images.unsplash.com/photo-1664990587479-5fc4b6e0b8a5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover no-repeat fixed;
-}
 
-/* ===== Hero Section ===== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.glass {
-  padding: 40px 80px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-align: center;
-  z-index: 1;
-}
+    /* =========================
+       BODY
+    ========================= */
 
-.glass h1 {
-  font-size: 70px;
-  letter-spacing: 6px;
-  margin: 0;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
 
-.glass p {
-  font-size: 20px;
-  margin: 10px 0 0 0;
-}
+      /* Variables controlled by JavaScript */
+      --bg-x: 0px;
+      --bg-y: 0px;
+    }
 
-/* Scroll-down arrow */
-.scroll-down {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 30px;
-  color: white;
-  animation: bounce 2s infinite;
-  cursor: pointer;
-}
+    /* =========================
+       MOVING BACKGROUND
+    ========================= */
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-  40% { transform: translateX(-50%) translateY(-15px); }
-  60% { transform: translateX(-50%) translateY(-7px); }
-}
+    body::before {
+      content: "";
 
-/* ===== Sections ===== */
-section {
-  padding: 80px 20px;
-  text-align: center;
-}
+      position: fixed;
 
-section h2 {
-  font-size: 50px;
-  margin-bottom: 20px;
-}
+      top: -5%;
+      left: -5%;
 
-section p {
-  font-size: 18px;
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  color: #ddd;
-}
+      width: 110%;
+      height: 110%;
 
-/* ===== Skills Grid ===== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto 60px auto;
-}
+      z-index: -2;
 
-.skill {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
-}
+      background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.18),
+          rgba(0, 0, 0, 0.30)
+        ),
+        url("https://images.unsplash.com/photo-1706177818542-bcd369cc1fad?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+        center/cover no-repeat;
 
-/* ===== Projects Grid ===== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto 60px auto;
-}
+      transform:
+        translate3d(var(--bg-x), var(--bg-y), 0)
+        scale(1.05);
 
-.project-card {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 25px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+      transition: transform 0.15s ease-out;
 
-.project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-} 
-.project-card { 
-  ... 
-}
+      will-change: transform;
+    }
 
-/* ===== My Journey Glass Section ===== */
-.project-card {
-  ...
-}
+    /* =========================
+       TOP NAVIGATION
+    ========================= */
 
-/* ===== My Journey Glass Section ===== */
-.glass-journey {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 50px 60px;
-  border-radius: 25px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  max-width: 900px;
-  margin: 40px auto 80px auto;
-  text-align: center;
-}
+    .nav {
+      position: fixed;
+      top: 20px;
+      left: 20px;
 
-.glass-journey h2 {
-  font-size: 50px;
-  margin-bottom: 20px;
-}
+      display: flex;
+      gap: 10px;
 
-.glass-journey p, .glass-journey li {
-  font-size: 22px;
-  line-height: 1.6;
-  color: #ddd;
-  margin-bottom: 15px;
-}
+      padding: 10px;
 
-.glass-journey ul {
-  list-style-position: inside;
-  margin-bottom: 20px;
-}
+      background: rgba(255, 255, 255, 0.10);
+
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      border-radius: 18px;
+
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.25),
+        0 10px 30px rgba(0,0,0,0.25);
+
+      z-index: 1000;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+
+      padding: 10px 16px;
+
+      border-radius: 12px;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: relative;
+    }
+
+    /* =========================
+       FROZEN / LIQUID GLASS
+    ========================= */
+
+    .glass {
+      position: relative;
+
+      padding: 40px 80px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.18),
+          rgba(255,255,255,0.06)
+        );
+
+      border-radius: 25px;
+
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+      border: 1px solid rgba(255,255,255,0.30);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.35),
+        inset 0 -1px 1px rgba(255,255,255,0.08),
+        0 20px 50px rgba(0,0,0,0.30);
+
+      text-align: center;
+
+      overflow: hidden;
+
+      z-index: 1;
+    }
+
+    .glass::before,
+    .glass-journey::before,
+    .info-card::before,
+    .skill::before,
+    .project-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: -50%;
+      left: -30%;
+
+      width: 80%;
+      height: 180%;
+
+      background: rgba(255,255,255,0.08);
+
+      transform: rotate(25deg);
+
+      pointer-events: none;
+    }
+
+    .glass h1 {
+      font-size: 70px;
+      letter-spacing: 6px;
+      margin: 0;
+    }
+
+    .glass p {
+      font-size: 20px;
+      margin: 10px 0 0 0;
+    }
+
+    /* =========================
+       SCROLL ARROW
+    ========================= */
+
+    .scroll-down {
+
+      position: absolute;
+
+      bottom: 20px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      font-size: 30px;
+
+      color: white;
+
+      animation: bounce 2s infinite;
+
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      40% {
+        transform: translateX(-50%) translateY(-15px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(-7px);
+      }
+
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+
+      padding: 100px 20px;
+
+      text-align: center;
+
+      position: relative;
+    }
+
+    section h2 {
+
+      font-size: 50px;
+
+      margin-bottom: 25px;
+    }
+
+    section p {
+
+      font-size: 18px;
+
+      max-width: 800px;
+
+      margin: 0 auto 40px auto;
+
+      color: #ddd;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       WEATHER + LOCATION
+    ========================= */
+
+    .info-container {
+
+      max-width: 1000px;
+
+      margin: 0 auto 70px auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+      gap: 25px;
+    }
+
+    .info-card {
+
+      position: relative;
+
+      padding: 30px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.16),
+          rgba(255,255,255,0.06)
+        );
+
+      border-radius: 25px;
+
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+      border: 1px solid rgba(255,255,255,0.30);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.30),
+        0 20px 50px rgba(0,0,0,0.25);
+
+      overflow: hidden;
+    }
+
+    .info-card h3 {
+
+      font-size: 26px;
+
+      margin-top: 0;
+    }
+
+    .weather-main {
+
+      font-size: 42px;
+
+      font-weight: bold;
+
+      margin: 15px 0;
+    }
+
+    .weather-details {
+
+      color: #ddd;
+
+      line-height: 1.7;
+    }
+
+    .coordinates {
+
+      font-size: 25px;
+
+      line-height: 1.8;
+    }
+
+    /* =========================
+       SKILLS
+    ========================= */
+
+    .skills-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+      gap: 20px;
+
+      max-width: 1000px;
+
+      margin: 0 auto 60px auto;
+    }
+
+    .skill {
+
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.16),
+          rgba(255,255,255,0.06)
+        );
+
+      padding: 25px;
+
+      border-radius: 18px;
+
+      backdrop-filter: blur(15px) saturate(140%);
+      -webkit-backdrop-filter: blur(15px) saturate(140%);
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      color: white;
+
+      font-weight: bold;
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.25),
+        0 10px 30px rgba(0,0,0,0.20);
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+      gap: 20px;
+
+      max-width: 1000px;
+
+      margin: 0 auto 60px auto;
+    }
+
+    .project-card {
+
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.16),
+          rgba(255,255,255,0.06)
+        );
+
+      padding: 25px;
+
+      border-radius: 20px;
+
+      backdrop-filter: blur(15px) saturate(140%);
+      -webkit-backdrop-filter: blur(15px) saturate(140%);
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      color: white;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.25),
+        0 10px 30px rgba(0,0,0,0.20);
+    }
+
+    .project-card:hover {
+
+      transform: translateY(-10px);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.30),
+        0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    /* =========================
+       JOURNEY
+    ========================= */
+
+    .glass-journey {
+
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.16),
+          rgba(255,255,255,0.06)
+        );
+
+      padding: 50px 60px;
+
+      border-radius: 28px;
+
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+      border: 1px solid rgba(255,255,255,0.30);
+
+      max-width: 900px;
+
+      margin: 40px auto 80px auto;
+
+      text-align: center;
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.30),
+        0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .glass-journey h2 {
+
+      font-size: 50px;
+
+      margin-bottom: 20px;
+    }
+
+    .glass-journey p,
+    .glass-journey li {
+
+      font-size: 22px;
+
+      line-height: 1.6;
+
+      color: #ddd;
+
+      margin-bottom: 15px;
+    }
+
+    .glass-journey ul {
+
+      list-style-position: inside;
+
+      margin-bottom: 20px;
+
+      padding: 0;
+    }
+
+    /* =========================
+       MUSIC INDICATOR
+    ========================= */
+
+    .music-note {
+
+      position: fixed;
+
+      bottom: 20px;
+      right: 20px;
+
+      padding: 10px 14px;
+
+      background: rgba(255,255,255,0.10);
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      border-radius: 15px;
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      font-size: 13px;
+
+      z-index: 1000;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .nav {
+
+        left: 10px;
+        top: 10px;
+
+        gap: 4px;
+
+        padding: 6px;
+      }
+
+      .nav a {
+
+        padding: 8px 10px;
+
+        font-size: 12px;
+      }
+
+      .glass {
+
+        padding: 30px 35px;
+      }
+
+      .glass h1 {
+
+        font-size: 45px;
+      }
+
+      section h2 {
+
+        font-size: 38px;
+      }
+
+      .glass-journey {
+
+        padding: 35px 25px;
+      }
+
+      .glass-journey p,
+      .glass-journey li {
+
+        font-size: 18px;
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
 
-  <!-- ===== Hero ===== -->
+  <!-- =========================
+       TOP NAVIGATION
+  ========================= -->
+
+  <nav class="nav">
+
+    <a href="#about">
+      About Me
+    </a>
+
+    <a href="#projects">
+      Projects
+    </a>
+
+    <a href="#journey">
+      Journey
+    </a>
+
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
   <section class="hero">
+
     <div class="glass">
-      <h1>KEYUR</h1>
-      <p>Creative Developer</p>
+
+      <h1>
+        KEYUR
+      </h1>
+
+      <p>
+        Creative Developer
+      </p>
+
     </div>
-    <div class="scroll-down">&#x2193;</div>
+
+    <div class="scroll-down">
+      &#x2193;
+    </div>
+
   </section>
 
-  <!-- ===== About ===== -->
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    Hi! I’m Keyur, founder of KEYUR™. I build thoughtful digital experiences and creative projects that make people feel hyped, inspired, and sometimes even emotional.  
-    I love mixing creativity with problem-solving, exploring tech and art, and turning ideas into things people actually enjoy.  
-    From content creation to web development, every project I take on is made with intention, attention to detail, and a little bit of chaos that makes it fun.  
-    My goal? To leave a small mark in the digital world that makes people think, feel, or just go “woah, that’s cool.”
-  </p>
-</section>
 
-<!-- ===== My Journey ===== -->
-<section id="journey">
-  <h2>My Journey</h2>
-  <p>
-    This is my first ever website, and to whoever just watches by it, I hope you like it. I'm new in all this stuff, and here are all my phases:
-  </p>
-  <ul>
-    <li><strong>AGE 10:</strong> I started exploring physics, clearly unknown and all that, still fresh.</li>
-    <li><strong>AGE 11:</strong> I started dreaming of making a website introducing me to anyone who passes by.</li>
-    <li><strong>AGE 12:</strong> Started learning computerology.</li>
-    <li><strong>AGE 13:</strong> Made my first site (&gt; , &lt;) — hope you like it.</li>
-  </ul>
-  <p>And thus, I actually hope you like it. I know it's not so good, and thank you for being a visitor.</p>
-</section>
+  <!-- =========================
+       ABOUT ME
+  ========================= -->
 
-<!-- ===== Skills ===== -->
-<section id="skills">
-  ...
-</section>
+  <section id="about">
 
-<!-- ===== Projects ===== -->
-<section id="projects">
-  ...
-</section>
+    <h2>
+      About Me
+    </h2>
 
-  
-  <!-- ===== Skills ===== -->
+    <p>
+
+      Hi! I’m Keyur, founder of KEYUR™.
+      I build thoughtful digital experiences and creative projects
+      that make people feel hyped, inspired, and sometimes even emotional.
+
+      I love mixing creativity with problem-solving, exploring tech and art,
+      and turning ideas into things people actually enjoy.
+
+      From content creation to web development, every project I take on
+      is made with intention, attention to detail, and a little bit of chaos
+      that makes it fun.
+
+      My goal? To leave a small mark in the digital world that makes people
+      think, feel, or just go “woah, that’s cool.”
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       WEATHER + LOCATION
+  ========================= -->
+
+  <section id="information">
+
+    <h2>
+      Right Now
+    </h2>
+
+    <div class="info-container">
+
+
+      <!-- WEATHER -->
+
+      <div class="info-card">
+
+        <h3>
+          🌦️ Mumbai Weather
+        </h3>
+
+        <div
+          class="weather-main"
+          id="temperature"
+        >
+          Loading...
+        </div>
+
+        <div class="weather-details">
+
+          <div id="weather-condition">
+            Checking the sky...
+          </div>
+
+          <div id="humidity">
+            Humidity: --
+          </div>
+
+          <div id="wind">
+            Wind: --
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- COORDINATES -->
+
+      <div class="info-card">
+
+        <h3>
+          📍 Coordinates
+        </h3>
+
+        <div class="coordinates">
+
+          <div>
+            Latitude:
+            <strong>
+              ~19.08° N
+            </strong>
+          </div>
+
+          <div>
+            Longitude:
+            <strong>
+              ~72.88° E
+            </strong>
+          </div>
+
+          <div>
+            Mumbai, India
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MY JOURNEY
+  ========================= -->
+
+  <section id="journey">
+
+    <div class="glass-journey">
+
+      <h2>
+        My Journey
+      </h2>
+
+      <p>
+
+        This is my first ever website, and to whoever just watches by it,
+        I hope you like it. I'm new in all this stuff, and here are all my phases:
+
+      </p>
+
+      <ul>
+
+        <li>
+
+          <strong>
+            AGE 10:
+          </strong>
+
+          I started exploring physics,
+          clearly unknown and all that,
+          still fresh.
+
+        </li>
+
+        <li>
+
+          <strong>
+            AGE 11:
+          </strong>
+
+          I started dreaming of making a website
+          introducing me to anyone who passes by.
+
+        </li>
+
+        <li>
+
+          <strong>
+            AGE 12:
+          </strong>
+
+          Started learning computerology.
+
+        </li>
+
+        <li>
+
+          <strong>
+            AGE 13:
+          </strong>
+
+          Made my first site
+          (&gt; , &lt;) — hope you like it.
+
+        </li>
+
+      </ul>
+
+      <p>
+
+        And thus, I actually hope you like it.
+        I know it's not so good,
+        and thank you for being a visitor.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SKILLS
+  ========================= -->
+
   <section id="skills">
-    <h2>Skills</h2>
+
+    <h2>
+      Skills
+    </h2>
+
     <div class="skills-grid">
-      <div class="skill">Web Development</div>
-      <div class="skill">Editing & Content Creation</div>
-      <div class="skill">Problem Solving</div>
-      <div class="skill">Physics & Math 😎</div>
+
+      <div class="skill">
+        Web Development
+      </div>
+
+      <div class="skill">
+        Editing & Content Creation
+      </div>
+
+      <div class="skill">
+        Problem Solving
+      </div>
+
+      <div class="skill">
+        Physics & Math 😎
+      </div>
+
     </div>
+
   </section>
 
-  <!-- ===== Projects ===== -->
+
+  <!-- =========================
+       PROJECTS
+  ========================= -->
+
   <section id="projects">
-    <h2>Projects</h2>
+
+    <h2>
+      Projects
+    </h2>
+
     <div class="projects-grid">
+
+
+      <!-- PROJECT ONE -->
+
       <div class="project-card">
-        <h3>Project One- universe simulation </h3>
-        <p> In this project , I will create a simulation in which you can simulate literally everything that you want , I'll make a link ill add here later , then make a app on the same simulator too :D </p>
+
+        <h3>
+          Project One — Universe Simulation
+        </h3>
+
+        <p>
+
+          In this project, I will create a simulation
+          in which you can simulate literally everything
+          that you want.
+
+          I'll add a link here later,
+          then make an app on the same simulator too :D
+
+        </p>
+
       </div>
+
+
+      <!-- PROJECT TWO -->
+
       <div class="project-card">
-        <h3>Project Two - collab with my friend </h3>
-        <p>I would make a app with the help of my friend . basically in this collab , he'd do most of the stuff , but dw , I'll do some things too , and the app would be hosted on his web too , and mine with his credentials bc he did most of the work.</p>
+
+        <h3>
+          Project Two — Collab With My Friend
+        </h3>
+
+        <p>
+
+          I would make an app with the help of my friend.
+
+          Basically, in this collab, he'd do most of the stuff,
+          but don't worry, I'll do some things too.
+
+          The app would be hosted on his web too,
+          and mine, with his credentials because
+          he did most of the work.
+
+        </p>
+
       </div>
+
+
+      <!-- PROJECT THREE -->
+
       <div class="project-card">
-        <h3>Project Three- ultima scanner </h3>
-        <p> in this app , you can scan any app for any viruses , and many more , just copy it's web link , and put it in the typerbar of this app  :D</p>
+
+        <h3>
+          Project Three — Ultima Scanner
+        </h3>
+
+        <p>
+
+          In this app, you can check a web link
+          for potential security problems and many more.
+
+          Just copy its web link and put it
+          in the typer bar of this app :D
+
+        </p>
+
       </div>
+
+
     </div>
+
   </section>
+
+
+  <!-- =========================
+       BACKGROUND AUDIO
+  ========================= -->
+
+  <audio
+    id="backgroundMusic"
+    loop
+  >
+
+    <source
+      src="background-music.mp3"
+      type="audio/mpeg"
+    >
+
+  </audio>
+
+
+  <div class="music-note">
+    ♪ background audio
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       CURSOR PARALLAX
+    ========================= */
+
+    document.addEventListener("mousemove", function(event) {
+
+      const x = (event.clientX / window.innerWidth) - 0.5;
+      const y = (event.clientY / window.innerHeight) - 0.5;
+
+      const moveX = x * 18;
+      const moveY = y * 18;
+
+      document.body.style.setProperty(
+        "--bg-x",
+        moveX + "px"
+      );
+
+      document.body.style.setProperty(
+        "--bg-y",
+        moveY + "px"
+      );
+
+    });
+
+
+    /* =========================
+       WEATHER
+    ========================= */
+
+    const latitude = 19.0760;
+
+    const longitude = 72.8777;
+
+
+    const weatherURL =
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=" + latitude +
+      "&longitude=" + longitude +
+      "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
+      "&timezone=auto";
+
+
+    fetch(weatherURL)
+
+      .then(response => response.json())
+
+      .then(data => {
+
+        const current = data.current;
+
+
+        document.getElementById("temperature").textContent =
+          Math.round(current.temperature_2m) + "°C";
+
+
+        document.getElementById("humidity").textContent =
+          "Humidity: " +
+          current.relative_humidity_2m +
+          "%";
+
+
+        document.getElementById("wind").textContent =
+          "Wind: " +
+          current.wind_speed_10m +
+          " km/h";
+
+
+        document.getElementById("weather-condition").textContent =
+          getWeatherDescription(
+            current.weather_code
+          );
+
+      })
+
+      .catch(error => {
+
+        document.getElementById("temperature").textContent =
+          "Unavailable";
+
+        document.getElementById("weather-condition").textContent =
+          "Weather data couldn't be loaded.";
+
+      });
+
+
+    function getWeatherDescription(code) {
+
+      if (code === 0) {
+        return "Clear sky ☀️";
+      }
+
+      if (code >= 1 && code <= 3) {
+        return "Partly cloudy ⛅";
+      }
+
+      if (code >= 45 && code <= 48) {
+        return "Foggy 🌫️";
+      }
+
+      if (code >= 51 && code <= 67) {
+        return "Rainy 🌧️";
+      }
+
+      if (code >= 71 && code <= 77) {
+        return "Snowy ❄️";
+      }
+
+      if (code >= 80 && code <= 82) {
+        return "Rain showers 🌦️";
+      }
+
+      if (code >= 95) {
+        return "Thunderstorm ⛈️";
+      }
+
+      return "Unknown conditions";
+
+    }
+
+
+    /* =========================
+       BACKGROUND MUSIC
+    ========================= */
+
+    const music =
+      document.getElementById(
+        "backgroundMusic"
+      );
+
+
+    music.volume = 0.08;
+
+
+    document.addEventListener(
+      "click",
+      function () {
+
+        if (music.paused) {
+
+          music.play().catch(() => {});
+
+        }
+
+      },
+      { once: true }
+    );
+
+  </script>
+
 </body>
 </html>
