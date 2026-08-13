@@ -31,14 +31,14 @@
 
     .background {
       position: fixed;
-      inset: -1%;
-      width: 102%;
-      height: 102%;
+      inset: -3%;
+      width: 106%;
+      height: 106%;
 
       background:
         linear-gradient(
-          rgba(0, 0, 0, 0.30),
-          rgba(0, 0, 0, 0.46)
+          rgba(0, 0, 0, 0.22),
+          rgba(0, 0, 0, 0.32)
         ),
         url("https://images.unsplash.com/photo-1768345756353-7d907c11a770?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
         center / cover no-repeat;
@@ -56,8 +56,8 @@
 
       background:
         linear-gradient(
-          rgba(0, 0, 0, 0.10),
-          rgba(0, 0, 0, 0.20)
+          rgba(0, 0, 0, 0.12),
+          rgba(0, 0, 0, 0.22)
         );
 
       pointer-events: none;
@@ -79,18 +79,17 @@
 
       padding: 8px;
 
-      background: rgba(20, 25, 23, 0.48);
+      background: rgba(255, 255, 255, 0.08);
 
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.28);
 
       border-radius: 16px;
 
-      backdrop-filter: blur(22px) saturate(115%);
-      -webkit-backdrop-filter: blur(22px) saturate(115%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
 
       box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.30),
-        inset 0 1px 1px rgba(255, 255, 255, 0.10);
+        0 10px 30px rgba(0, 0, 0, 0.22);
 
       z-index: 1000;
     }
@@ -112,7 +111,7 @@
     }
 
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
     }
 
@@ -125,29 +124,20 @@
     .info-card,
     .skill,
     .project-card,
-    .glass-journey {
+    .glass-journey,
+    .norge-strip {
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.12),
-          rgba(255, 255, 255, 0.045)
-        );
+      background: rgba(255, 255, 255, 0.10);
 
-      border: 1px solid rgba(255, 255, 255, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.28);
 
-      backdrop-filter:
-        blur(24px)
-        saturate(105%);
-
-      -webkit-backdrop-filter:
-        blur(24px)
-        saturate(105%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
 
       box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.12),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.12),
-        0 18px 45px rgba(0, 0, 0, 0.28);
+        inset 0 1px 1px rgba(255, 255, 255, 0.20),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.25);
     }
 
 
@@ -220,6 +210,91 @@
 
       60% {
         transform: translateX(-50%) translateY(-6px);
+      }
+
+    }
+
+
+    /* =========================
+       NORGE CORE STRIP
+    ========================= */
+
+    .norge-strip {
+      position: relative;
+
+      width: 100%;
+
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      border-left: none;
+      border-right: none;
+
+      border-radius: 0;
+
+      background:
+        rgba(255, 255, 255, 0.07);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.18),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+        0 12px 30px rgba(0, 0, 0, 0.20);
+    }
+
+    .norge-track {
+      display: flex;
+
+      width: max-content;
+
+      white-space: nowrap;
+
+      animation:
+        norgeScroll 24s linear infinite;
+
+      will-change: transform;
+    }
+
+    .norge-content {
+      display: flex;
+      align-items: center;
+
+      flex-shrink: 0;
+    }
+
+    .norge-content span {
+      display: inline-block;
+
+      margin: 0 34px;
+
+      font-size: 13px;
+
+      letter-spacing: 4px;
+
+      font-weight: bold;
+
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .norge-content .separator {
+      margin: 0 4px;
+
+      font-size: 10px;
+
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    @keyframes norgeScroll {
+
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
       }
 
     }
@@ -334,9 +409,9 @@
 
       border-radius: 50%;
 
-      border: 1px solid rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.40);
 
-      background: rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.10);
 
       display: flex;
       justify-content: center;
@@ -345,8 +420,8 @@
       font-size: 18px;
 
       box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.10),
-        0 8px 20px rgba(0,0,0,0.25);
+        inset 0 1px 2px rgba(255,255,255,0.25),
+        0 8px 20px rgba(0,0,0,0.20);
     }
 
     .frequency {
@@ -365,7 +440,7 @@
     .frequency span {
       width: 3px;
 
-      background: rgba(255,255,255,0.48);
+      background: rgba(255,255,255,0.55);
 
       border-radius: 5px;
 
@@ -520,8 +595,7 @@
 
     .skill:hover {
       transform: translateY(-6px);
-      background:
-        rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.14);
     }
 
 
@@ -560,8 +634,7 @@
 
       transform: translateY(-8px);
 
-      background:
-        rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.14);
     }
 
     .project-card h3 {
@@ -577,6 +650,7 @@
 
     /* =========================
        MOBILE
+       Desktop remains the priority.
     ========================= */
 
     @media (max-width: 800px) {
@@ -586,57 +660,51 @@
         max-width: 500px;
       }
 
+      .norge-strip {
+        height: 48px;
+      }
+
     }
 
     @media (max-width: 600px) {
 
       .nav {
-
         left: 10px;
         top: 10px;
-
         gap: 4px;
-
         padding: 6px;
       }
 
       .nav a {
-
         padding: 8px 10px;
-
         font-size: 12px;
       }
 
       .glass {
-
         padding: 30px 35px;
       }
 
       .glass h1 {
-
         font-size: 45px;
       }
 
       section h2 {
-
         font-size: 38px;
       }
 
       .glass-journey {
-
         padding: 35px 25px;
       }
 
       .glass-journey p,
       .glass-journey li {
-
         font-size: 18px;
       }
 
       .background {
-        inset: -1%;
-        width: 102%;
-        height: 102%;
+        inset: -2%;
+        width: 104%;
+        height: 104%;
       }
 
     }
@@ -648,13 +716,18 @@
 <body>
 
 
-  <!-- BACKGROUND -->
+  <!-- =========================
+       BACKGROUND
+  ========================= -->
 
   <div class="background" id="background"></div>
+
   <div class="background-overlay"></div>
 
 
-  <!-- NAVIGATION -->
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
 
   <nav class="nav">
 
@@ -673,13 +746,17 @@
   </nav>
 
 
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================= -->
 
   <section class="hero">
 
     <div class="glass">
 
-      <h1>KEYUR</h1>
+      <h1>
+        KEYUR
+      </h1>
 
       <p>
         Creative Developer
@@ -694,7 +771,67 @@
   </section>
 
 
-  <!-- ABOUT ME -->
+  <!-- =========================
+       NORGE CORE STRIP
+  ========================= -->
+
+  <div class="norge-strip">
+
+    <div class="norge-track">
+
+      <div class="norge-content">
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+      </div>
+
+
+      <div class="norge-content">
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+        <span>NORGE CORE</span>
+        <span class="separator">•</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ABOUT ME
+  ========================= -->
 
   <section id="about">
 
@@ -723,7 +860,9 @@
   </section>
 
 
-  <!-- RIGHT NOW -->
+  <!-- =========================
+       RIGHT NOW
+  ========================= -->
 
   <section id="information">
 
@@ -841,7 +980,9 @@
   </section>
 
 
-  <!-- MY JOURNEY -->
+  <!-- =========================
+       MY JOURNEY
+  ========================= -->
 
   <section id="journey">
 
@@ -861,27 +1002,47 @@
       <ul>
 
         <li>
-          <strong>AGE 10:</strong>
+
+          <strong>
+            AGE 10:
+          </strong>
+
           I started exploring physics,
           clearly unknown and all that,
           still fresh.
+
         </li>
 
         <li>
-          <strong>AGE 11:</strong>
+
+          <strong>
+            AGE 11:
+          </strong>
+
           I started dreaming of making a website
           introducing me to anyone who passes by.
+
         </li>
 
         <li>
-          <strong>AGE 12:</strong>
+
+          <strong>
+            AGE 12:
+          </strong>
+
           Started learning computerology.
+
         </li>
 
         <li>
-          <strong>AGE 13:</strong>
+
+          <strong>
+            AGE 13:
+          </strong>
+
           Made my first site
           (&gt; , &lt;) — hope you like it.
+
         </li>
 
       </ul>
@@ -899,7 +1060,9 @@
   </section>
 
 
-  <!-- SKILLS -->
+  <!-- =========================
+       SKILLS
+  ========================= -->
 
   <section id="skills">
 
@@ -930,7 +1093,9 @@
   </section>
 
 
-  <!-- PROJECTS -->
+  <!-- =========================
+       PROJECTS
+  ========================= -->
 
   <section id="projects">
 
@@ -1013,7 +1178,9 @@
   </section>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
 
   <script>
 
@@ -1041,14 +1208,8 @@
         (event.clientY / window.innerHeight) - 0.5;
 
 
-      /*
-        Very subtle movement.
-        Only enough to make the background
-        feel alive.
-      */
-
-      targetX = x * -5;
-      targetY = y * -3;
+      targetX = x * -12;
+      targetY = y * -8;
 
     });
 
@@ -1061,8 +1222,10 @@
       currentY +=
         (targetY - currentY) * 0.05;
 
+
       background.style.transform =
         `translate3d(${currentX}px, ${currentY}px, 0)`;
+
 
       requestAnimationFrame(moveBackground);
 
@@ -1119,6 +1282,7 @@
 
       })
 
+
       .catch(() => {
 
         document.getElementById("temperature").textContent =
@@ -1165,6 +1329,7 @@
     }
 
   </script>
+
 
 </body>
 </html>
