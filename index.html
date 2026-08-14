@@ -1,1258 +1,1119 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>KEYUR</title>
+<title>KEYUR</title>
 
-  <style>
+<style>
 
-    /* =========================
-       BASE
-    ========================= */
+/* =========================================================
+   BASE
+========================================================= */
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      background: #111;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #111;
+  overflow-x: hidden;
+}
 
+section {
+  position: relative;
+}
 
-    /* =========================
-       MOVING BACKGROUND
-    ========================= */
 
-    .background {
-      position: fixed;
-      inset: -3%;
-      width: 106%;
-      height: 106%;
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
-      background:
-        linear-gradient(
-          rgba(0, 0, 0, 0.22),
-          rgba(0, 0, 0, 0.32)
-        ),
-        url("https://images.unsplash.com/photo-1573326008737-a215597aac86?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-        center / cover no-repeat;
+.background {
+  position: fixed;
+  inset: -3%;
+  width: 106%;
+  height: 106%;
 
-      z-index: -2;
-      transform: translate3d(0, 0, 0);
-      will-change: transform;
-    }
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.22),
+      rgba(0,0,0,0.32)
+    ),
+    url("https://images.unsplash.com/photo-1573326008737-a215597aac86?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    center / cover no-repeat;
 
-    .background-overlay {
-      position: fixed;
-      inset: 0;
+  z-index: -2;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
 
-      background:
-        linear-gradient(
-          rgba(0, 0, 0, 0.12),
-          rgba(0, 0, 0, 0.22)
-        );
+.background-overlay {
+  position: fixed;
+  inset: 0;
 
-      pointer-events: none;
-      z-index: -1;
-    }
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.12),
+      rgba(0,0,0,0.22)
+    );
 
+  pointer-events: none;
+  z-index: -1;
+}
 
-    /* =========================
-       CURSOR FOLLOWER
-    ========================= */
 
-    .cursor-follower {
-      position: fixed;
+/* =========================================================
+   CURSOR FOLLOWER
+========================================================= */
 
-      width: 18px;
-      height: 18px;
+.cursor-follower {
+  position: fixed;
 
-      border-radius: 50%;
+  width: 18px;
+  height: 18px;
 
-      background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
 
-      border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255,255,255,0.12);
 
-      box-shadow:
-        0 0 14px rgba(255, 255, 255, 0.18),
-        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255,255,255,0.45);
 
-      pointer-events: none;
-      z-index: 9999;
+  box-shadow:
+    0 0 14px rgba(255,255,255,0.18),
+    inset 0 1px 2px rgba(255,255,255,0.25);
 
-      transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+  z-index: 9999;
 
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+  transform: translate3d(-50%,-50%,0);
 
-      transition:
-        width 0.2s ease,
-        height 0.2s ease,
-        opacity 0.2s ease;
-    }
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 
 
-    /* =========================
-       FIXED RIGHT NAVIGATION
-    ========================= */
+/* =========================================================
+   FIXED NAVIGATION
+========================================================= */
 
-    .nav {
-      position: fixed;
+.nav {
+  position: fixed;
 
-      top: 50%;
-      right: 24px;
+  top: 50%;
+  right: 24px;
 
-      transform: translateY(-50%);
+  transform: translateY(-50%);
 
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+  width: 52px;
 
-      padding: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-      background: rgba(255, 255, 255, 0.08);
+  gap: 8px;
 
-      border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 9px;
 
-      border-radius: 18px;
+  background: rgba(255,255,255,0.08);
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.28);
 
-      box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.22);
+  border-radius: 18px;
 
-      z-index: 1000;
-    }
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
-    .nav-search {
-      width: 145px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.22);
 
-      padding: 10px 12px;
+  z-index: 1000;
 
-      box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 11px;
+.nav-search {
+  width: 100%;
+  height: 34px;
 
-      outline: none;
+  padding: 7px;
 
-      background: rgba(255,255,255,0.08);
+  box-sizing: border-box;
 
-      color: white;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 10px;
 
-      font-size: 13px;
+  outline: none;
 
-      transition:
-        background 0.25s ease,
-        border 0.25s ease;
-    }
+  background: rgba(255,255,255,0.08);
 
-    .nav-search::placeholder {
-      color: rgba(255,255,255,0.55);
-    }
+  color: white;
 
-    .nav-search:focus {
-      background: rgba(255,255,255,0.13);
-      border-color: rgba(255,255,255,0.42);
-    }
+  font-size: 12px;
 
-    .nav a {
-      color: white;
-      text-decoration: none;
+  text-align: center;
 
-      padding: 10px 13px;
+  transition:
+    background 0.25s ease,
+    border 0.25s ease;
+}
 
-      border-radius: 11px;
+.nav-search::placeholder {
+  color: rgba(255,255,255,0.55);
+}
 
-      font-size: 13px;
-      font-weight: bold;
+.nav-search:focus {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.42);
+}
 
-      transition:
-        background 0.25s ease,
-        transform 0.25s ease;
-    }
+.nav-divider {
+  width: 26px;
+  height: 1px;
 
-    .nav a:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateX(-3px);
-    }
+  background: rgba(255,255,255,0.18);
 
+  margin: 2px 0;
+}
 
-    /* =========================
-       FROZEN GLASS
-    ========================= */
+.nav-button {
+  width: 34px;
+  height: 34px;
 
-    .glass,
-    .info-card,
-    .skill,
-    .project-card,
-    .glass-journey,
-    .norge-strip,
-    .now-playing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      background: rgba(255, 255, 255, 0.10);
+  color: rgba(255,255,255,0.72);
 
-      border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+  text-decoration: none;
 
-      box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.20),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.05),
-        0 15px 40px rgba(0, 0, 0, 0.25);
-    }
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
 
+.nav-button svg {
+  width: 17px;
+  height: 17px;
 
-    /* =========================
-       HERO / HOME
-    ========================= */
+  fill: none;
+  stroke: currentColor;
 
-    .hero {
-      min-height: 100vh;
+  stroke-width: 1.6;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-      position: relative;
-    }
+.nav-button:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
 
-    .glass {
-      width: min(1050px, calc(100% - 100px));
+  transform: translateX(-3px);
+}
 
-      padding: 48px 55px;
+.nav-button.active {
+  background: rgba(255,255,255,0.16);
+  color: white;
+}
 
-      border-radius: 25px;
 
-      position: relative;
-      z-index: 1;
+/* =========================================================
+   GLASS
+========================================================= */
 
-      box-sizing: border-box;
-    }
+.glass,
+.glass-journey,
+.project-card,
+.home-weather,
+.small-info,
+.now-playing {
 
-    .hero-title {
-      text-align: center;
-    }
+  background: rgba(255,255,255,0.10);
 
-    .glass h1 {
-      font-size: 70px;
-      letter-spacing: 6px;
-      margin: 0;
-    }
+  border: 1px solid rgba(255,255,255,0.28);
 
-    .glass p {
-      font-size: 20px;
-      margin: 10px 0 0;
-    }
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
-    .availability {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.20),
+    inset 0 -1px 1px rgba(0,0,0,0.05),
+    0 15px 40px rgba(0,0,0,0.25);
+}
 
-      gap: 9px;
 
-      margin-top: 22px;
+/* =========================================================
+   PANEL 1 — IDENTITY
+========================================================= */
 
-      color: rgba(255,255,255,0.78);
+.hero {
+  min-height: 100vh;
 
-      font-size: 14px;
-      letter-spacing: 0.5px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    .availability-dot {
-      width: 9px;
-      height: 9px;
+  padding: 60px 20px;
 
-      border-radius: 50%;
+  box-sizing: border-box;
+}
 
-      background: #5cff72;
+.hero-card {
+  width: min(1050px, calc(100% - 100px));
 
-      box-shadow:
-        0 0 9px rgba(92,255,114,0.65);
-    }
+  padding: 70px 55px;
 
+  border-radius: 25px;
 
-    /* =========================
-       HOME WEATHER
-    ========================= */
+  text-align: center;
 
-    .home-information {
-      margin-top: 45px;
+  box-sizing: border-box;
+}
 
-      display: grid;
+.hero-title h1 {
+  margin: 0;
 
-      grid-template-columns: 2fr 1fr;
+  font-size: 70px;
 
-      gap: 18px;
-    }
+  letter-spacing: 7px;
+}
 
-    .home-weather {
-      min-height: 255px;
+.hero-title p {
+  margin: 12px 0 0;
 
-      padding: 25px;
+  font-size: 20px;
+}
 
-      box-sizing: border-box;
+.availability {
+  display: flex;
 
-      border-radius: 20px;
+  align-items: center;
+  justify-content: center;
 
-      background: rgba(255,255,255,0.065);
+  gap: 9px;
 
-      border: 1px solid rgba(255,255,255,0.18);
-    }
+  margin-top: 24px;
 
-    .home-weather h3,
-    .small-info h3 {
-      margin: 0 0 15px;
+  color: rgba(255,255,255,0.78);
 
-      font-size: 20px;
-    }
+  font-size: 14px;
 
-    .weather-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+  letter-spacing: 0.5px;
+}
 
-    .weather-main {
-      font-size: 40px;
-      font-weight: bold;
-    }
+.availability-dot {
+  width: 9px;
+  height: 9px;
 
-    .weather-condition {
-      color: #ddd;
-      margin-top: 4px;
-    }
+  border-radius: 50%;
 
-    .weather-chart {
-      height: 115px;
+  background: #5cff72;
 
-      margin-top: 18px;
+  box-shadow:
+    0 0 9px rgba(92,255,114,0.65);
+}
 
-      position: relative;
 
-      overflow: hidden;
+/* =========================================================
+   NORGE CORE STRIP
+========================================================= */
 
-      border-radius: 12px;
+.norge-strip {
+  position: relative;
 
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.04),
-          rgba(255,255,255,0.015)
-        );
-    }
+  width: 100%;
+  height: 54px;
 
-    .weather-chart::before,
-    .weather-chart::after {
-      content: "";
+  display: flex;
+  align-items: center;
 
-      position: absolute;
+  overflow: hidden;
 
-      left: 0;
-      right: 0;
+  background: rgba(255,255,255,0.07);
 
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
+  border-top: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
 
-    .weather-chart::before {
-      top: 35%;
-    }
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.18),
+    0 12px 30px rgba(0,0,0,0.20);
+}
 
-    .weather-chart::after {
-      top: 70%;
-    }
+.norge-track {
+  display: flex;
 
-    .rain-line {
-      position: absolute;
+  width: max-content;
 
-      left: 0;
-      right: 0;
+  white-space: nowrap;
 
-      bottom: 0;
+  animation:
+    norgeScroll 24s linear infinite;
 
-      height: 100%;
-    }
+  will-change: transform;
+}
 
-    .rain-line svg {
-      width: 100%;
-      height: 100%;
-    }
+.norge-content {
+  display: flex;
+  align-items: center;
 
-    .rain-line polyline {
-      fill: none;
+  flex-shrink: 0;
+}
 
-      stroke: rgba(255,255,255,0.75);
+.norge-content span {
+  display: inline-block;
 
-      stroke-width: 2;
+  margin: 0 34px;
 
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+  font-size: 13px;
 
-    .rain-labels {
-      display: flex;
+  letter-spacing: 4px;
 
-      justify-content: space-between;
+  font-weight: bold;
 
-      margin-top: 7px;
+  color: rgba(255,255,255,0.72);
+}
 
-      color: rgba(255,255,255,0.48);
+.norge-content .separator {
+  margin: 0 4px;
 
-      font-size: 10px;
-    }
+  font-size: 10px;
 
-    .small-information {
-      display: grid;
+  color: rgba(255,255,255,0.35);
+}
 
-      grid-template-rows: 1fr 1fr;
+@keyframes norgeScroll {
+  from {
+    transform: translateX(0);
+  }
 
-      gap: 18px;
-    }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
-    .small-info {
-      padding: 22px;
 
-      border-radius: 20px;
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
 
-      background: rgba(255,255,255,0.065);
+.content-section {
+  padding: 130px 20px;
 
-      border: 1px solid rgba(255,255,255,0.18);
+  box-sizing: border-box;
+}
 
-      box-sizing: border-box;
-    }
+.section-inner {
+  width: min(1000px, calc(100% - 100px));
 
-    .small-info-content {
-      color: #ddd;
+  margin: 0 auto;
+}
 
-      font-size: 16px;
+.section-title {
+  margin: 0 0 35px;
 
-      line-height: 1.7;
-    }
+  font-size: 50px;
 
-    .small-info strong {
-      color: white;
-    }
+  letter-spacing: 1px;
+}
 
 
-    /* =========================
-       NOW PLAYING
-    ========================= */
+/* =========================================================
+   PANEL 2 — ABOUT ME
+========================================================= */
 
-    .now-playing {
-      margin-top: 18px;
+.about-text {
+  max-width: 820px;
 
-      padding: 24px 28px;
+  font-size: 19px;
 
-      border-radius: 20px;
+  line-height: 1.8;
 
-      display: flex;
-      align-items: center;
-      gap: 20px;
+  color: #ddd;
 
-      text-align: left;
-    }
+  margin: 0;
+}
 
-    .music-control {
-      width: 56px;
-      height: 56px;
 
-      flex-shrink: 0;
+/* =========================================================
+   PANEL 3 — MY JOURNEY
+========================================================= */
 
-      border-radius: 50%;
+.glass-journey {
+  max-width: 900px;
 
-      border: 1px solid rgba(255,255,255,0.40);
+  margin: 0 auto;
 
-      background: rgba(255,255,255,0.10);
+  padding: 50px 60px;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  border-radius: 25px;
 
-      font-size: 18px;
+  box-sizing: border-box;
+}
 
-      box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.25),
-        0 8px 20px rgba(0,0,0,0.20);
-    }
+.glass-journey h2 {
+  margin: 0 0 25px;
 
-    .playing-text {
-      flex: 1;
-    }
+  font-size: 50px;
+}
 
-    .playing-label {
-      font-size: 11px;
+.glass-journey p,
+.glass-journey li {
+  font-size: 19px;
 
-      letter-spacing: 2px;
+  line-height: 1.7;
 
-      color: rgba(255,255,255,0.48);
+  color: #ddd;
+}
 
-      margin-bottom: 5px;
-    }
+.glass-journey ul {
+  padding-left: 22px;
+}
 
-    .music-title {
-      font-size: 19px;
-    }
+.glass-journey li {
+  margin-bottom: 17px;
+}
 
-    .frequency {
-      width: 150px;
-      height: 38px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+/* =========================================================
+   PANEL 4 — HOME DASHBOARD
+========================================================= */
 
-      gap: 3px;
+.home-section {
+  padding: 130px 20px;
+}
 
-      overflow: hidden;
-    }
+.home-dashboard {
+  width: min(1050px, calc(100% - 100px));
 
-    .frequency span {
-      width: 3px;
+  margin: 0 auto;
+}
 
-      background: rgba(255,255,255,0.55);
+.home-dashboard-title {
+  margin: 0 0 35px;
 
-      border-radius: 5px;
+  font-size: 50px;
+}
 
-      animation:
-        frequency 1.2s ease-in-out infinite alternate;
-    }
 
-    .frequency span:nth-child(1) {
-      height: 10px;
-      animation-delay: .1s;
-    }
+/* WEATHER + RIGHT COLUMN */
 
-    .frequency span:nth-child(2) {
-      height: 18px;
-      animation-delay: .2s;
-    }
+.home-information {
+  display: grid;
 
-    .frequency span:nth-child(3) {
-      height: 26px;
-      animation-delay: .3s;
-    }
+  grid-template-columns: 2fr 1fr;
 
-    .frequency span:nth-child(4) {
-      height: 15px;
-      animation-delay: .4s;
-    }
+  gap: 18px;
+}
 
-    .frequency span:nth-child(5) {
-      height: 30px;
-      animation-delay: .5s;
-    }
+.home-weather {
+  min-height: 320px;
 
-    .frequency span:nth-child(6) {
-      height: 20px;
-      animation-delay: .6s;
-    }
+  padding: 28px;
 
-    .frequency span:nth-child(7) {
-      height: 12px;
-      animation-delay: .7s;
-    }
+  border-radius: 20px;
 
-    .frequency span:nth-child(8) {
-      height: 25px;
-      animation-delay: .8s;
-    }
+  box-sizing: border-box;
+}
 
-    .frequency span:nth-child(9) {
-      height: 17px;
-      animation-delay: .9s;
-    }
+.home-weather h3,
+.small-info h3 {
+  margin: 0 0 15px;
 
-    .frequency span:nth-child(10) {
-      height: 28px;
-      animation-delay: 1s;
-    }
+  font-size: 20px;
+}
 
-    @keyframes frequency {
-      from {
-        transform: scaleY(0.55);
-        opacity: 0.55;
-      }
+.weather-location {
+  color: rgba(255,255,255,0.55);
 
-      to {
-        transform: scaleY(1);
-        opacity: 0.9;
-      }
-    }
+  font-size: 13px;
 
+  margin-bottom: 12px;
+}
 
-    /* =========================
-       SCROLL ARROW
-    ========================= */
+.weather-main {
+  font-size: 44px;
 
-    .scroll-down {
-      position: absolute;
+  font-weight: bold;
+}
 
-      bottom: 20px;
-      left: 50%;
+.weather-condition {
+  color: #ddd;
 
-      transform: translateX(-50%);
+  margin-top: 4px;
+}
 
-      font-size: 30px;
+.weather-chart {
+  height: 125px;
 
-      color: white;
+  margin-top: 22px;
 
-      animation: bounce 2s infinite;
-    }
+  position: relative;
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
+  overflow: hidden;
 
-      40% {
-        transform: translateX(-50%) translateY(-12px);
-      }
+  border-radius: 12px;
 
-      60% {
-        transform: translateX(-50%) translateY(-6px);
-      }
-    }
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.015)
+    );
+}
 
+.weather-chart::before,
+.weather-chart::after {
+  content: "";
 
-    /* =========================
-       NORGE CORE STRIP
-    ========================= */
+  position: absolute;
 
-    .norge-strip {
-      position: relative;
+  left: 0;
+  right: 0;
 
-      width: 100%;
-      height: 54px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
 
-      display: flex;
-      align-items: center;
+.weather-chart::before {
+  top: 35%;
+}
 
-      overflow: hidden;
+.weather-chart::after {
+  top: 70%;
+}
 
-      border-left: none;
-      border-right: none;
+.rain-line {
+  position: absolute;
 
-      border-radius: 0;
+  inset: 0;
+}
 
-      background: rgba(255,255,255,0.07);
+.rain-line svg {
+  width: 100%;
+  height: 100%;
+}
 
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.18),
-        inset 0 -1px 1px rgba(0,0,0,0.05),
-        0 12px 30px rgba(0,0,0,0.20);
-    }
+.rain-line polyline {
+  fill: none;
 
-    .norge-track {
-      display: flex;
+  stroke: rgba(255,255,255,0.75);
 
-      width: max-content;
+  stroke-width: 2;
 
-      white-space: nowrap;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-      animation:
-        norgeScroll 24s linear infinite;
+.rain-labels {
+  display: flex;
 
-      will-change: transform;
-    }
+  justify-content: space-between;
 
-    .norge-content {
-      display: flex;
-      align-items: center;
+  margin-top: 7px;
 
-      flex-shrink: 0;
-    }
+  color: rgba(255,255,255,0.48);
 
-    .norge-content span {
-      display: inline-block;
+  font-size: 10px;
+}
 
-      margin: 0 34px;
 
-      font-size: 13px;
+/* RIGHT SIDE */
 
-      letter-spacing: 4px;
+.small-information {
+  display: grid;
 
-      font-weight: bold;
+  grid-template-rows: 1fr 1fr;
 
-      color: rgba(255,255,255,0.72);
-    }
+  gap: 18px;
+}
 
-    .norge-content .separator {
-      margin: 0 4px;
+.small-info {
+  padding: 24px;
 
-      font-size: 10px;
+  border-radius: 20px;
 
-      color: rgba(255,255,255,0.35);
-    }
+  box-sizing: border-box;
+}
 
-    @keyframes norgeScroll {
-      from {
-        transform: translateX(0);
-      }
+.small-info-content {
+  color: #ddd;
 
-      to {
-        transform: translateX(-50%);
-      }
-    }
+  font-size: 16px;
 
+  line-height: 1.7;
+}
 
-    /* =========================
-       SECTIONS
-    ========================= */
+.small-info strong {
+  color: white;
+}
 
-    section {
-      padding: 100px 20px;
-      text-align: center;
-      position: relative;
-    }
+.time-value {
+  font-size: 25px;
 
-    section h2 {
-      font-size: 50px;
-      margin-bottom: 25px;
-    }
+  margin-bottom: 5px;
+}
 
-    section p {
-      font-size: 18px;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      color: #ddd;
-      line-height: 1.7;
-    }
 
+/* NOW PLAYING */
 
-    /* =========================
-       JOURNEY
-    ========================= */
+.now-playing {
+  margin-top: 18px;
 
-    .glass-journey {
-      max-width: 900px;
+  min-height: 125px;
 
-      margin: 40px auto 80px;
+  padding: 24px 30px;
 
-      padding: 50px 60px;
+  border-radius: 20px;
 
-      border-radius: 25px;
-    }
+  display: flex;
 
-    .glass-journey h2 {
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
+  align-items: center;
 
-    .glass-journey p,
-    .glass-journey li {
-      font-size: 22px;
+  gap: 24px;
 
-      line-height: 1.6;
+  box-sizing: border-box;
+}
 
-      color: #ddd;
+.playing-text {
+  flex: 1;
+}
 
-      margin-bottom: 15px;
-    }
+.playing-label {
+  font-size: 11px;
 
-    .glass-journey ul {
-      list-style-position: inside;
-      padding: 0;
-      margin-bottom: 20px;
-    }
+  letter-spacing: 2px;
 
+  color: rgba(255,255,255,0.48);
 
-    /* =========================
-       SKILLS
-    ========================= */
+  margin-bottom: 7px;
+}
 
-    .skills-grid {
-      display: grid;
+.music-title {
+  font-size: 21px;
+}
 
-      grid-template-columns:
-        repeat(auto-fit, minmax(200px, 1fr));
+.frequency {
+  width: 170px;
+  height: 42px;
 
-      gap: 20px;
+  display: flex;
 
-      max-width: 1000px;
+  align-items: center;
+  justify-content: center;
 
-      margin: 0 auto 60px;
-    }
+  gap: 3px;
 
-    .skill {
-      padding: 25px;
+  overflow: hidden;
+}
 
-      border-radius: 17px;
+.frequency span {
+  width: 3px;
 
-      font-weight: bold;
+  background: rgba(255,255,255,0.55);
 
-      transition:
-        transform 0.3s ease,
-        background 0.3s ease;
-    }
+  border-radius: 5px;
 
-    .skill:hover {
-      transform: translateY(-6px);
+  animation:
+    frequency 1.2s ease-in-out infinite alternate;
+}
 
-      background:
-        rgba(255,255,255,0.14);
-    }
+.frequency span:nth-child(1) { height: 10px; animation-delay: .1s; }
+.frequency span:nth-child(2) { height: 18px; animation-delay: .2s; }
+.frequency span:nth-child(3) { height: 26px; animation-delay: .3s; }
+.frequency span:nth-child(4) { height: 15px; animation-delay: .4s; }
+.frequency span:nth-child(5) { height: 30px; animation-delay: .5s; }
+.frequency span:nth-child(6) { height: 20px; animation-delay: .6s; }
+.frequency span:nth-child(7) { height: 12px; animation-delay: .7s; }
+.frequency span:nth-child(8) { height: 25px; animation-delay: .8s; }
+.frequency span:nth-child(9) { height: 17px; animation-delay: .9s; }
+.frequency span:nth-child(10) { height: 28px; animation-delay: 1s; }
 
+@keyframes frequency {
+  from {
+    transform: scaleY(0.55);
+    opacity: 0.55;
+  }
 
-    /* =========================
-       PROJECTS
-    ========================= */
+  to {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+}
 
-    .projects-grid {
-      display: grid;
 
-      grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
+/* =========================================================
+   PANEL 5 — PROJECTS
+========================================================= */
 
-      gap: 20px;
+.projects-grid {
+  display: grid;
 
-      max-width: 1000px;
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
 
-      margin: 0 auto 60px;
-    }
+  gap: 20px;
+}
 
-    .project-card {
-      padding: 25px;
+.project-card {
+  padding: 28px;
 
-      border-radius: 20px;
+  border-radius: 20px;
 
-      text-align: center;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
 
-      transition:
-        transform 0.3s ease,
-        background 0.3s ease;
-    }
+.project-card:hover {
+  transform: translateY(-8px);
 
-    .project-card:hover {
-      transform: translateY(-8px);
+  background:
+    rgba(255,255,255,0.14);
+}
 
-      background:
-        rgba(255,255,255,0.14);
-    }
+.project-card h3 {
+  font-size: 21px;
 
-    .project-card h3 {
-      font-size: 21px;
-      margin-top: 0;
-    }
+  margin-top: 0;
+}
 
-    .project-card p {
-      font-size: 16px;
-      margin-bottom: 0;
-    }
+.project-card p {
+  font-size: 16px;
 
+  line-height: 1.65;
 
-    /* =========================
-       MOBILE
-    ========================= */
+  color: #ddd;
+}
 
-    @media (max-width: 900px) {
 
-      .nav {
-        right: 12px;
-      }
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
 
-      .glass {
-        width: calc(100% - 70px);
-      }
+.scroll-down {
+  position: absolute;
 
-      .home-information {
-        grid-template-columns: 1fr;
-      }
+  bottom: 24px;
+  left: 50%;
 
-      .small-information {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: none;
-      }
+  transform: translateX(-50%);
 
-    }
+  font-size: 26px;
 
-    @media (max-width: 600px) {
+  color: rgba(255,255,255,0.75);
 
-      .cursor-follower {
-        display: none;
-      }
+  animation: bounce 2s infinite;
+}
 
-      .nav {
-        right: 10px;
+@keyframes bounce {
 
-        top: 50%;
+  0%,20%,50%,80%,100% {
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
 
-        padding: 6px;
-      }
+  40% {
+    transform:
+      translateX(-50%)
+      translateY(-10px);
+  }
 
-      .nav-search {
-        width: 115px;
-      }
+  60% {
+    transform:
+      translateX(-50%)
+      translateY(-5px);
+  }
 
-      .nav a {
-        padding: 8px 9px;
-        font-size: 11px;
-      }
+}
 
-      .glass {
-        width: calc(100% - 35px);
 
-        padding: 32px 22px;
-      }
+/* =========================================================
+   MOBILE
+========================================================= */
 
-      .glass h1 {
-        font-size: 45px;
-      }
+@media (max-width: 900px) {
 
-      .home-information {
-        margin-top: 30px;
-      }
+  .nav {
+    right: 12px;
+  }
 
-      .small-information {
-        grid-template-columns: 1fr;
-      }
+  .hero-card,
+  .home-dashboard,
+  .section-inner {
+    width: calc(100% - 70px);
+  }
 
-      .now-playing {
-        flex-wrap: wrap;
-      }
+  .home-information {
+    grid-template-columns: 1fr;
+  }
 
-      .frequency {
-        width: 100%;
-      }
+  .small-information {
+    grid-template-columns: 1fr 1fr;
 
-      section h2 {
-        font-size: 38px;
-      }
+    grid-template-rows: none;
+  }
 
-      .glass-journey {
-        padding: 35px 25px;
-      }
+}
 
-      .glass-journey p,
-      .glass-journey li {
-        font-size: 18px;
-      }
 
-      .background {
-        inset: -2%;
-        width: 104%;
-        height: 104%;
-      }
+@media (max-width: 600px) {
 
-    }
+  .cursor-follower {
+    display: none;
+  }
 
-  </style>
+  .nav {
+    right: 8px;
+
+    padding: 6px;
+
+    width: 48px;
+  }
+
+  .nav-search {
+    font-size: 10px;
+  }
+
+  .nav-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .hero-card {
+    width: calc(100% - 45px);
+
+    padding: 45px 22px;
+  }
+
+  .hero-title h1 {
+    font-size: 45px;
+
+    letter-spacing: 5px;
+  }
+
+  .hero-title p {
+    font-size: 17px;
+  }
+
+  .content-section,
+  .home-section {
+    padding: 90px 15px;
+  }
+
+  .section-inner,
+  .home-dashboard {
+    width: calc(100% - 45px);
+  }
+
+  .section-title,
+  .home-dashboard-title {
+    font-size: 38px;
+  }
+
+  .glass-journey {
+    padding: 35px 25px;
+  }
+
+  .glass-journey h2 {
+    font-size: 38px;
+  }
+
+  .small-information {
+    grid-template-columns: 1fr;
+  }
+
+  .now-playing {
+    flex-wrap: wrap;
+  }
+
+  .frequency {
+    width: 100%;
+  }
+
+  .background {
+    inset: -2%;
+
+    width: 104%;
+    height: 104%;
+  }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
-  <!-- =========================
-       BACKGROUND
-  ========================= -->
 
-  <div class="background" id="background"></div>
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
-  <div class="background-overlay"></div>
+<div class="background" id="background"></div>
 
+<div class="background-overlay"></div>
 
-  <!-- =========================
-       CURSOR FOLLOWER
-  ========================= -->
 
-  <div class="cursor-follower" id="cursorFollower"></div>
+<!-- =====================================================
+     CURSOR
+===================================================== -->
 
+<div class="cursor-follower" id="cursorFollower"></div>
 
-  <!-- =========================
-       FIXED NAVIGATION
-  ========================= -->
 
-  <nav class="nav">
+<!-- =====================================================
+     FIXED MINIMAL NAVIGATION
+===================================================== -->
 
-    <input
-      class="nav-search"
-      id="navSearch"
-      type="text"
-      placeholder="Search..."
-      aria-label="Search"
-    >
+<nav class="nav">
 
-    <a href="#home">Home</a>
+  <input
+    class="nav-search"
+    id="navSearch"
+    type="text"
+    placeholder="..."
+    aria-label="Search"
+  >
 
-    <a href="#about">About</a>
+  <div class="nav-divider"></div>
 
-    <a href="#projects">Projects</a>
 
-    <a href="#journey">Journey</a>
+  <!-- IDENTITY -->
 
-    <a href="#skills">Skills</a>
+  <a
+    class="nav-button"
+    href="#identity"
+    aria-label="Identity"
+    title="Identity"
+  >
 
-  </nav>
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3"></circle>
+      <path d="M5 20c1.5-4 4-6 7-6s5.5 2 7 6"></path>
+    </svg>
 
+  </a>
 
-  <!-- =========================
-       HOME
-  ========================= -->
 
-  <section class="hero" id="home">
+  <!-- ABOUT -->
 
-    <div class="glass">
+  <a
+    class="nav-button"
+    href="#about"
+    aria-label="About"
+    title="About"
+  >
 
-      <div class="hero-title">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 10v6"></path>
+      <circle
+        cx="12"
+        cy="7"
+        r=".7"
+        fill="currentColor"
+        stroke="none"
+      ></circle>
+    </svg>
 
-        <h1>
-          KEYUR
-        </h1>
+  </a>
 
-        <p>
-          Creative Developer
-        </p>
 
-        <div class="availability">
+  <!-- JOURNEY -->
 
-          <span class="availability-dot"></span>
+  <a
+    class="nav-button"
+    href="#journey"
+    aria-label="Journey"
+    title="Journey"
+  >
 
-          <span>
-            Available for restoration
-          </span>
+    <svg viewBox="0 0 24 24">
+      <path d="M5 19c4-7 5-10 14-14"></path>
+      <circle cx="5" cy="19" r="2"></circle>
+      <circle cx="19" cy="5" r="2"></circle>
+    </svg>
 
-        </div>
+  </a>
 
-      </div>
 
+  <!-- HOME -->
 
-      <!-- =========================
-           HOME INFORMATION
-      ========================= -->
+  <a
+    class="nav-button"
+    href="#home"
+    aria-label="Home"
+    title="Home"
+  >
 
-      <div class="home-information">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 11.5 12 5l8 6.5"></path>
+      <path d="M6.5 10.5V19h11v-8.5"></path>
+      <path d="M10 19v-5h4v5"></path>
+    </svg>
 
+  </a>
 
-        <!-- WEATHER -->
 
-        <div class="home-weather">
+  <!-- PROJECTS -->
 
-          <h3>
-            Mumbai Weather
-          </h3>
+  <a
+    class="nav-button"
+    href="#projects"
+    aria-label="Projects"
+    title="Projects"
+  >
 
-          <div class="weather-top">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 7h6l2 2h8v10H4z"></path>
+      <path d="M4 7V5h6l2 2"></path>
+    </svg>
 
-            <div>
+  </a>
 
-              <div
-                class="weather-main"
-                id="temperature"
-              >
-                Loading...
-              </div>
+</nav>
 
-              <div
-                class="weather-condition"
-                id="weather-condition"
-              >
-                Checking the sky...
-              </div>
 
-            </div>
+<!-- =====================================================
+     PANEL 1 — IDENTITY
+===================================================== -->
 
-          </div>
+<section
+  class="hero"
+  id="identity"
+>
 
+  <div class="glass hero-card">
 
-          <div class="weather-chart">
+    <div class="hero-title">
 
-            <div class="rain-line">
+      <h1>KEYUR</h1>
 
-              <svg
-                viewBox="0 0 500 115"
-                preserveAspectRatio="none"
-              >
+      <p>
+        Creative Developer
+      </p>
 
-                <polyline
-                  id="weatherLine"
-                  points="0,80 70,65 140,75 210,45 280,60 350,35 420,55 500,25"
-                />
+      <div class="availability">
 
-              </svg>
+        <span class="availability-dot"></span>
 
-            </div>
-
-          </div>
-
-          <div class="rain-labels">
-
-            <span>Now</span>
-            <span>+3h</span>
-            <span>+6h</span>
-            <span>+9h</span>
-            <span>+12h</span>
-
-          </div>
-
-        </div>
-
-
-        <!-- SMALL CARDS -->
-
-        <div class="small-information">
-
-
-          <!-- COORDINATES -->
-
-          <div class="small-info">
-
-            <h3>
-              Coordinates
-            </h3>
-
-            <div class="small-info-content">
-
-              Latitude:
-              <strong>
-                19.0760° N
-              </strong>
-
-              <br>
-
-              Longitude:
-              <strong>
-                72.8777° E
-              </strong>
-
-              <br>
-
-              Mumbai, India
-
-            </div>
-
-          </div>
-
-
-          <!-- TIME -->
-
-          <div class="small-info">
-
-            <h3>
-              Current Time
-            </h3>
-
-            <div
-              class="small-info-content"
-              id="currentTime"
-            >
-              Loading...
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =========================
-           NOW PLAYING
-      ========================= -->
-
-      <div class="now-playing">
-
-        <div class="music-control">
-          ♪
-        </div>
-
-        <div class="playing-text">
-
-          <div class="playing-label">
-            NOW PLAYING
-          </div>
-
-          <div class="music-title">
-            Golden Brown
-          </div>
-
-        </div>
-
-        <div class="frequency">
-
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="scroll-down">
-      ↓
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       NORGE CORE STRIP
-  ========================= -->
-
-  <div class="norge-strip">
-
-    <div class="norge-track">
-
-      <div class="norge-content">
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-      </div>
-
-
-      <div class="norge-content">
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
-
-        <span>NORGE CORE</span>
-        <span class="separator">•</span>
+        <span>
+          Available for Restoration
+        </span>
 
       </div>
 
@@ -1261,17 +1122,87 @@
   </div>
 
 
-  <!-- =========================
-       ABOUT ME
-  ========================= -->
+  <div class="scroll-down">
+    ↓
+  </div>
 
-  <section id="about">
+</section>
 
-    <h2>
+
+<!-- =====================================================
+     NORGE CORE STRIP
+===================================================== -->
+
+<div class="norge-strip">
+
+  <div class="norge-track">
+
+    <div class="norge-content">
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+    </div>
+
+
+    <div class="norge-content">
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+      <span>NORGE CORE</span>
+      <span class="separator">•</span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     PANEL 2 — ABOUT ME
+===================================================== -->
+
+<section
+  class="content-section"
+  id="about"
+>
+
+  <div class="section-inner">
+
+    <h2 class="section-title">
       About Me
     </h2>
 
-    <p>
+    <p class="about-text">
 
       Hi! I’m Keyur, founder of KEYUR™.
       I build thoughtful digital experiences and creative projects
@@ -1289,113 +1220,271 @@
 
     </p>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =========================
-       MY JOURNEY
-  ========================= -->
+<!-- =====================================================
+     PANEL 3 — MY JOURNEY
+===================================================== -->
 
-  <section id="journey">
+<section
+  class="content-section"
+  id="journey"
+>
 
-    <div class="glass-journey">
-
-      <h2>
-        My Journey
-      </h2>
-
-      <p>
-
-        This is my first ever website, and to whoever just watches by it,
-        I hope you like it. I'm new in all this stuff, and here are all my phases:
-
-      </p>
-
-      <ul>
-
-        <li>
-          <strong>AGE 10:</strong>
-          I started exploring physics,
-          clearly unknown and all that,
-          still fresh.
-        </li>
-
-        <li>
-          <strong>AGE 11:</strong>
-          I started dreaming of making a website
-          introducing me to anyone who passes by.
-        </li>
-
-        <li>
-          <strong>AGE 12:</strong>
-          Started learning computerology.
-        </li>
-
-        <li>
-          <strong>AGE 13:</strong>
-          Made my first site
-          (&gt; , &lt;) — hope you like it.
-        </li>
-
-      </ul>
-
-      <p>
-
-        And thus, I actually hope you like it.
-        I know it's not so good,
-        and thank you for being a visitor.
-
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SKILLS
-  ========================= -->
-
-  <section id="skills">
+  <div class="glass-journey">
 
     <h2>
-      Skills
+      My Journey
     </h2>
 
-    <div class="skills-grid">
+    <p>
 
-      <div class="skill">
-        Web Development
+      This is my first ever website, and to whoever just watches by it,
+      I hope you like it. I'm new in all this stuff, and here are all my phases:
+
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>AGE 10:</strong>
+        I started exploring physics,
+        clearly unknown and all that,
+        still fresh.
+      </li>
+
+      <li>
+        <strong>AGE 11:</strong>
+        I started dreaming of making a website
+        introducing me to anyone who passes by.
+      </li>
+
+      <li>
+        <strong>AGE 12:</strong>
+        Started learning computerology.
+      </li>
+
+      <li>
+        <strong>AGE 13:</strong>
+        Made my first site
+        (&gt; , &lt;) — hope you like it.
+      </li>
+
+    </ul>
+
+    <p>
+
+      And thus, I actually hope you like it.
+      I know it's not so good,
+      and thank you for being a visitor.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PANEL 4 — HOME
+===================================================== -->
+
+<section
+  class="home-section"
+  id="home"
+>
+
+  <div class="home-dashboard">
+
+    <h2 class="home-dashboard-title">
+      Home
+    </h2>
+
+
+    <!-- WEATHER / COORDINATES / TIME -->
+
+    <div class="home-information">
+
+
+      <!-- WEATHER -->
+
+      <div class="home-weather">
+
+        <h3>
+          Weather
+        </h3>
+
+        <div class="weather-location">
+          Mumbai • Current conditions
+        </div>
+
+        <div
+          class="weather-main"
+          id="temperature"
+        >
+          Loading...
+        </div>
+
+        <div
+          class="weather-condition"
+          id="weather-condition"
+        >
+          Checking the sky...
+        </div>
+
+
+        <div class="weather-chart">
+
+          <div class="rain-line">
+
+            <svg
+              viewBox="0 0 500 115"
+              preserveAspectRatio="none"
+            >
+
+              <polyline
+                id="weatherLine"
+                points="0,80 70,65 140,75 210,45 280,60 350,35 420,55 500,25"
+              />
+
+            </svg>
+
+          </div>
+
+        </div>
+
+
+        <div class="rain-labels">
+
+          <span>Now</span>
+          <span>+3h</span>
+          <span>+6h</span>
+          <span>+9h</span>
+          <span>+12h</span>
+
+        </div>
+
       </div>
 
-      <div class="skill">
-        Editing & Content Creation
-      </div>
 
-      <div class="skill">
-        Problem Solving
-      </div>
+      <!-- RIGHT COLUMN -->
 
-      <div class="skill">
-        Physics & Math
+      <div class="small-information">
+
+
+        <!-- COORDINATES -->
+
+        <div class="small-info">
+
+          <h3>
+            Coordinates
+          </h3>
+
+          <div class="small-info-content">
+
+            Latitude:
+            <strong>
+              19.0760° N
+            </strong>
+
+            <br>
+
+            Longitude:
+            <strong>
+              72.8777° E
+            </strong>
+
+            <br>
+
+            Mumbai, India
+
+          </div>
+
+        </div>
+
+
+        <!-- CURRENT TIME -->
+
+        <div class="small-info">
+
+          <h3>
+            Current Time
+          </h3>
+
+          <div
+            class="small-info-content"
+            id="currentTime"
+          >
+            Loading...
+          </div>
+
+        </div>
+
       </div>
 
     </div>
 
-  </section>
+
+    <!-- NOW PLAYING -->
+
+    <div class="now-playing">
+
+      <div class="playing-text">
+
+        <div class="playing-label">
+          NOW PLAYING
+        </div>
+
+        <div class="music-title">
+          Golden Brown
+        </div>
+
+      </div>
 
 
-  <!-- =========================
-       PROJECTS
-  ========================= -->
+      <div class="frequency">
 
-  <section id="projects">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
 
-    <h2>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PANEL 5 — PROJECTS
+===================================================== -->
+
+<section
+  class="content-section"
+  id="projects"
+>
+
+  <div class="section-inner">
+
+    <h2 class="section-title">
       Projects
     </h2>
 
+
     <div class="projects-grid">
+
 
       <div class="project-card">
 
@@ -1457,309 +1546,366 @@
 
       </div>
 
+
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-  <script>
-
-
-    /* =========================
-       CURSOR FOLLOWER
-    ========================= */
-
-    const cursorFollower =
-      document.getElementById("cursorFollower");
-
-    let cursorX = 0;
-    let cursorY = 0;
-
-    let followerX = 0;
-    let followerY = 0;
+<script>
 
 
-    document.addEventListener("mousemove", (event) => {
+/* =========================================================
+   CURSOR FOLLOWER
+========================================================= */
 
-      cursorX = event.clientX;
-      cursorY = event.clientY;
+const cursorFollower =
+  document.getElementById("cursorFollower");
 
+let cursorX = 0;
+let cursorY = 0;
+
+let followerX = 0;
+let followerY = 0;
+
+document.addEventListener("mousemove", (event) => {
+
+  cursorX = event.clientX;
+  cursorY = event.clientY;
+
+});
+
+function moveCursorFollower() {
+
+  followerX +=
+    (cursorX - followerX) * 0.12;
+
+  followerY +=
+    (cursorY - followerY) * 0.12;
+
+  cursorFollower.style.transform =
+    `translate3d(${followerX}px, ${followerY}px, 0)`;
+
+  requestAnimationFrame(moveCursorFollower);
+
+}
+
+moveCursorFollower();
+
+
+/* =========================================================
+   BACKGROUND MOVEMENT
+========================================================= */
+
+const background =
+  document.getElementById("background");
+
+let targetX = 0;
+let targetY = 0;
+
+let currentX = 0;
+let currentY = 0;
+
+document.addEventListener("mousemove", (event) => {
+
+  const x =
+    (event.clientX / window.innerWidth) - 0.5;
+
+  const y =
+    (event.clientY / window.innerHeight) - 0.5;
+
+  targetX = x * -5;
+  targetY = y * -3;
+
+});
+
+function moveBackground() {
+
+  currentX +=
+    (targetX - currentX) * 0.05;
+
+  currentY +=
+    (targetY - currentY) * 0.05;
+
+  background.style.transform =
+    `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+  requestAnimationFrame(moveBackground);
+
+}
+
+moveBackground();
+
+
+/* =========================================================
+   CURRENT TIME
+========================================================= */
+
+function updateTime() {
+
+  const now = new Date();
+
+  const time =
+    now.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+      timeZone: "Asia/Kolkata"
     });
 
+  const date =
+    now.toLocaleDateString("en-IN", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      timeZone: "Asia/Kolkata"
+    });
 
-    function moveCursorFollower() {
+  document.getElementById("currentTime").innerHTML =
+    `<div class="time-value">${time}</div>
+     <div>${date}</div>
+     <div>Mumbai / IST</div>`;
 
-      followerX +=
-        (cursorX - followerX) * 0.12;
+}
 
-      followerY +=
-        (cursorY - followerY) * 0.12;
+updateTime();
 
-
-      cursorFollower.style.transform =
-        `translate3d(${followerX}px, ${followerY}px, 0)`;
+setInterval(updateTime, 1000);
 
 
-      requestAnimationFrame(moveCursorFollower);
+/* =========================================================
+   WEATHER
+========================================================= */
+
+const latitude = 19.0760;
+const longitude = 72.8777;
+
+const weatherURL =
+  "https://api.open-meteo.com/v1/forecast" +
+  "?latitude=" + latitude +
+  "&longitude=" + longitude +
+  "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
+  "&hourly=precipitation_probability" +
+  "&forecast_days=1" +
+  "&timezone=auto";
+
+
+fetch(weatherURL)
+
+  .then(response => response.json())
+
+  .then(data => {
+
+    const current = data.current;
+
+    document.getElementById("temperature").textContent =
+      Math.round(current.temperature_2m) + "°C";
+
+    document.getElementById("weather-condition").textContent =
+      getWeatherDescription(current.weather_code);
+
+    const precipitation =
+      data.hourly &&
+      data.hourly.precipitation_probability;
+
+    if (
+      precipitation &&
+      precipitation.length
+    ) {
+
+      const values =
+        precipitation.slice(0, 13);
+
+      const max =
+        Math.max(...values, 1);
+
+      const points =
+        values
+          .map((value, index) => {
+
+            const x =
+              (index / (values.length - 1)) * 500;
+
+            const y =
+              100 - ((value / max) * 80);
+
+            return `${x},${y}`;
+
+          })
+          .join(" ");
+
+      document
+        .getElementById("weatherLine")
+        .setAttribute(
+          "points",
+          points
+        );
 
     }
 
-    moveCursorFollower();
+  })
+
+  .catch(() => {
+
+    document.getElementById("temperature")
+      .textContent = "Unavailable";
+
+    document.getElementById("weather-condition")
+      .textContent =
+        "Weather data couldn't be loaded.";
+
+  });
 
 
-    /* =========================
-       SUBTLE BACKGROUND MOVEMENT
-    ========================= */
+function getWeatherDescription(code) {
 
-    const background =
-      document.getElementById("background");
+  if (code === 0)
+    return "Clear sky";
 
-    let targetX = 0;
-    let targetY = 0;
+  if (code >= 1 && code <= 3)
+    return "Partly cloudy";
 
-    let currentX = 0;
-    let currentY = 0;
+  if (code >= 45 && code <= 48)
+    return "Foggy";
 
+  if (code >= 51 && code <= 67)
+    return "Rainy";
 
-    document.addEventListener("mousemove", (event) => {
+  if (code >= 71 && code <= 77)
+    return "Snowy";
 
-      const x =
-        (event.clientX / window.innerWidth) - 0.5;
+  if (code >= 80 && code <= 82)
+    return "Rain showers";
 
-      const y =
-        (event.clientY / window.innerHeight) - 0.5;
+  if (code >= 95)
+    return "Thunderstorm";
 
+  return "Unknown conditions";
 
-      targetX = x * -5;
-      targetY = y * -3;
-
-    });
-
-
-    function moveBackground() {
-
-      currentX +=
-        (targetX - currentX) * 0.05;
-
-      currentY +=
-        (targetY - currentY) * 0.05;
+}
 
 
-      background.style.transform =
-        `translate3d(${currentX}px, ${currentY}px, 0)`;
+/* =========================================================
+   NAVIGATION SEARCH
+========================================================= */
 
+const navSearch =
+  document.getElementById("navSearch");
 
-      requestAnimationFrame(moveBackground);
+navSearch.addEventListener(
+  "keydown",
+  (event) => {
 
-    }
+    if (event.key !== "Enter")
+      return;
 
-    moveBackground();
+    const query =
+      navSearch.value
+        .trim()
+        .toLowerCase();
 
+    const destinations = {
 
-    /* =========================
-       CURRENT TIME
-    ========================= */
+      home: "home",
 
-    function updateTime() {
+      about: "about",
+      "about me": "about",
 
-      const now = new Date();
+      journey: "journey",
 
-      const time =
-        now.toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true
+      projects:
+        "projects",
+
+      project:
+        "projects",
+
+      identity:
+        "identity",
+
+      keyur:
+        "identity"
+
+    };
+
+    if (destinations[query]) {
+
+      document
+        .getElementById(
+          destinations[query]
+        )
+        .scrollIntoView({
+          behavior: "smooth"
         });
 
-      const date =
-        now.toLocaleDateString("en-IN", {
-          weekday: "long",
-          day: "numeric",
-          month: "long"
-        });
-
-
-      document.getElementById("currentTime").innerHTML =
-        `<strong>${time}</strong><br>${date}`;
+      navSearch.value = "";
 
     }
 
-    updateTime();
-
-    setInterval(updateTime, 1000);
-
-
-    /* =========================
-       WEATHER
-    ========================= */
-
-    const latitude = 19.0760;
-    const longitude = 72.8777;
+  }
+);
 
 
-    const weatherURL =
-      "https://api.open-meteo.com/v1/forecast" +
-      "?latitude=" + latitude +
-      "&longitude=" + longitude +
-      "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
-      "&hourly=precipitation_probability" +
-      "&forecast_days=1" +
-      "&timezone=auto";
+/* =========================================================
+   ACTIVE NAV ICON
+========================================================= */
 
+const navButtons =
+  document.querySelectorAll(".nav-button");
 
-    fetch(weatherURL)
+const navSections = [
+  document.getElementById("identity"),
+  document.getElementById("about"),
+  document.getElementById("journey"),
+  document.getElementById("home"),
+  document.getElementById("projects")
+];
 
-      .then(response => response.json())
+function updateActiveNav() {
 
-      .then(data => {
+  let current =
+    navSections[0].id;
 
-        const current = data.current;
+  navSections.forEach(section => {
 
+    const rect =
+      section.getBoundingClientRect();
 
-        document.getElementById("temperature").textContent =
-          Math.round(current.temperature_2m) + "°C";
-
-
-        document.getElementById("weather-condition").textContent =
-          getWeatherDescription(
-            current.weather_code
-          );
-
-
-        const precipitation =
-          data.hourly &&
-          data.hourly.precipitation_probability;
-
-
-        if (precipitation && precipitation.length) {
-
-          const values =
-            precipitation.slice(0, 13);
-
-          const max =
-            Math.max(...values, 1);
-
-          const points =
-            values.map((value, index) => {
-
-              const x =
-                (index / (values.length - 1)) * 500;
-
-              const y =
-                100 - ((value / max) * 80);
-
-              return `${x},${y}`;
-
-            }).join(" ");
-
-
-          document.getElementById("weatherLine")
-            .setAttribute("points", points);
-
-        }
-
-      })
-
-
-      .catch(() => {
-
-        document.getElementById("temperature").textContent =
-          "Unavailable";
-
-        document.getElementById("weather-condition").textContent =
-          "Weather data couldn't be loaded.";
-
-      });
-
-
-    function getWeatherDescription(code) {
-
-      if (code === 0) {
-        return "Clear sky";
-      }
-
-      if (code >= 1 && code <= 3) {
-        return "Partly cloudy";
-      }
-
-      if (code >= 45 && code <= 48) {
-        return "Foggy";
-      }
-
-      if (code >= 51 && code <= 67) {
-        return "Rainy";
-      }
-
-      if (code >= 71 && code <= 77) {
-        return "Snowy";
-      }
-
-      if (code >= 80 && code <= 82) {
-        return "Rain showers";
-      }
-
-      if (code >= 95) {
-        return "Thunderstorm";
-      }
-
-      return "Unknown conditions";
-
+    if (rect.top <= window.innerHeight * 0.45) {
+      current = section.id;
     }
 
+  });
 
-    /* =========================
-       NAVIGATION SEARCH
-    ========================= */
+  navButtons.forEach(button => {
 
-    const navSearch =
-      document.getElementById("navSearch");
+    button.classList.remove("active");
 
+    if (
+      button.getAttribute("href") ===
+      "#" + current
+    ) {
+      button.classList.add("active");
+    }
 
-    navSearch.addEventListener("keydown", (event) => {
+  });
 
-      if (event.key !== "Enter") {
-        return;
-      }
+}
 
+window.addEventListener(
+  "scroll",
+  updateActiveNav
+);
 
-      const query =
-        navSearch.value
-          .trim()
-          .toLowerCase();
+updateActiveNav();
 
-
-      const destinations = {
-
-        home: "home",
-        about: "about",
-        "about me": "about",
-        projects: "projects",
-        project: "projects",
-        journey: "journey",
-        skills: "skills"
-
-      };
-
-
-      if (destinations[query]) {
-
-        document
-          .getElementById(destinations[query])
-          .scrollIntoView({
-            behavior: "smooth"
-          });
-
-      }
-
-    });
-
-  </script>
+</script>
 
 </body>
 </html>
-```
