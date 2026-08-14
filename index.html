@@ -44,9 +44,7 @@
         center / cover no-repeat;
 
       z-index: -2;
-
       transform: translate3d(0, 0, 0);
-
       will-change: transform;
     }
 
@@ -101,32 +99,31 @@
         opacity 0.2s ease;
     }
 
-    @media (max-width: 800px) {
-      .cursor-follower {
-        display: none;
-      }
-    }
-
 
     /* =========================
-       NAVIGATION
+       RIGHT-SIDE NAVIGATION
     ========================= */
 
     .nav {
       position: fixed;
-      top: 20px;
-      left: 20px;
+
+      top: 50%;
+      right: 22px;
+
+      transform: translateY(-50%);
 
       display: flex;
-      gap: 8px;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
 
-      padding: 8px;
+      padding: 9px;
 
       background: rgba(255, 255, 255, 0.08);
 
       border: 1px solid rgba(255, 255, 255, 0.28);
 
-      border-radius: 16px;
+      border-radius: 18px;
 
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -138,24 +135,76 @@
     }
 
     .nav a {
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       color: white;
       text-decoration: none;
 
-      padding: 10px 15px;
+      border-radius: 12px;
 
-      border-radius: 11px;
-
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 19px;
 
       transition:
         background 0.25s ease,
-        transform 0.25s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
     }
 
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateX(-3px);
+
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-divider {
+      width: 26px;
+      height: 1px;
+
+      margin: 3px 0;
+
+      background:
+        rgba(255, 255, 255, 0.28);
+    }
+
+    .nav-tooltip {
+      position: absolute;
+
+      right: 62px;
+
+      padding: 7px 11px;
+
+      border-radius: 9px;
+
+      background: rgba(20, 20, 20, 0.70);
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      backdrop-filter: blur(12px);
+
+      font-size: 12px;
+
+      white-space: nowrap;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transform: translateX(5px);
+
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .nav a:hover .nav-tooltip {
+      opacity: 1;
+      transform: translateX(0);
     }
 
 
@@ -368,63 +417,177 @@
 
 
     /* =========================
-       RIGHT NOW
+       HOME DASHBOARD
     ========================= */
 
-    .info-container {
-      max-width: 1100px;
+    #home {
+      padding-top: 100px;
+    }
+
+    .home-grid {
+      max-width: 1150px;
 
       margin: 0 auto;
 
       display: grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        minmax(0, 2.2fr)
+        minmax(250px, 0.9fr);
+
+      gap: 20px;
+
+      text-align: left;
+    }
+
+    .home-card {
+      background: rgba(255, 255, 255, 0.10);
+
+      border: 1px solid rgba(255, 255, 255, 0.28);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.20),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.25);
+
+      border-radius: 22px;
+    }
+
+
+    /* =========================
+       WEATHER PANEL
+    ========================= */
+
+    .weather-panel {
+      min-height: 410px;
+
+      padding: 32px;
+
+      overflow: hidden;
+    }
+
+    .weather-header {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: flex-start;
 
       gap: 20px;
     }
 
-    .info-card {
-      padding: 30px;
+    .weather-location {
+      font-size: 15px;
 
-      border-radius: 22px;
+      color: #bbb;
 
-      text-align: center;
-
-      position: relative;
-
-      min-height: 180px;
+      letter-spacing: 1px;
     }
 
-    .info-card h3 {
-      font-size: 25px;
-      margin: 0 0 20px;
-    }
+    .weather-temperature {
+      font-size: 58px;
 
-
-    /* =========================
-       WEATHER
-    ========================= */
-
-    .weather-main {
-      font-size: 42px;
       font-weight: bold;
-      margin: 15px 0;
+
+      margin-top: 8px;
     }
 
-    .weather-details {
+    .weather-condition {
+      font-size: 18px;
+
       color: #ddd;
+
+      margin-top: 5px;
+    }
+
+    .weather-extra {
+      text-align: right;
+
+      color: #ccc;
+
+      font-size: 14px;
+
       line-height: 1.8;
     }
 
+    .weather-chart-title {
+      margin-top: 30px;
+
+      font-size: 14px;
+
+      color: #aaa;
+
+      letter-spacing: 1px;
+    }
+
+    .weather-chart {
+      width: 100%;
+
+      height: 190px;
+
+      margin-top: 10px;
+
+      overflow: hidden;
+
+      border-radius: 15px;
+
+      background:
+        rgba(0, 0, 0, 0.08);
+    }
+
+    #weatherGraph {
+      width: 100%;
+      height: 100%;
+    }
+
+    .weather-times {
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 8px 10px 0;
+
+      color: rgba(255, 255, 255, 0.48);
+
+      font-size: 11px;
+    }
+
 
     /* =========================
-       COORDINATES
+       SIDE CARDS
     ========================= */
 
+    .home-side {
+      display: grid;
+
+      grid-template-rows: 1fr 1fr;
+
+      gap: 20px;
+    }
+
+    .side-card {
+      padding: 28px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+    }
+
+    .side-card h3 {
+      margin: 0 0 22px;
+
+      font-size: 22px;
+    }
+
     .coordinates {
-      font-size: 20px;
+      font-size: 18px;
+
       line-height: 1.9;
+
       color: #ddd;
     }
 
@@ -432,54 +595,108 @@
       color: white;
     }
 
+    .time-display {
+      font-size: 42px;
 
-    /* =========================
-       MUSIC
-    ========================= */
+      font-weight: bold;
 
-    .music-title {
-      font-size: 20px;
-      margin-bottom: 20px;
+      letter-spacing: 1px;
+
+      margin-bottom: 8px;
     }
 
-    .music-control {
-      width: 54px;
-      height: 54px;
+    .time-zone {
+      color: #bbb;
 
-      margin: 0 auto 22px;
+      font-size: 14px;
+    }
 
-      border-radius: 50%;
 
-      border: 1px solid rgba(255,255,255,0.40);
+    /* =========================
+       NOW PLAYING
+    ========================= */
 
-      background: rgba(255,255,255,0.10);
+    .now-playing {
+      max-width: 1150px;
+
+      margin: 20px auto 0;
+
+      padding: 30px;
+
+      text-align: left;
 
       display: flex;
+
+      align-items: center;
+
+      gap: 30px;
+    }
+
+    .album-symbol {
+      width: 72px;
+      height: 72px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
       justify-content: center;
       align-items: center;
 
-      font-size: 18px;
+      border-radius: 18px;
+
+      border: 1px solid rgba(255, 255, 255, 0.28);
+
+      background:
+        rgba(255, 255, 255, 0.08);
+
+      font-size: 28px;
 
       box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.25),
-        0 8px 20px rgba(0,0,0,0.20);
+        inset 0 1px 2px rgba(255,255,255,0.20),
+        0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .now-info {
+      min-width: 150px;
+    }
+
+    .now-label {
+      color: #aaa;
+
+      font-size: 12px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 6px;
+    }
+
+    .music-title {
+      font-size: 22px;
+
+      font-weight: bold;
     }
 
     .frequency {
-      width: 100%;
-      height: 38px;
+      flex: 1;
+
+      height: 55px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      gap: 3px;
+      gap: 4px;
 
       overflow: hidden;
     }
 
     .frequency span {
-      width: 3px;
+      width: 4px;
 
       background: rgba(255,255,255,0.55);
 
@@ -687,14 +904,49 @@
 
     /* =========================
        MOBILE
-       Desktop remains the priority.
     ========================= */
+
+    @media (max-width: 900px) {
+
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-side {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+      }
+
+    }
 
     @media (max-width: 800px) {
 
-      .info-container {
+      .cursor-follower {
+        display: none;
+      }
+
+      .nav {
+        top: auto;
+        bottom: 15px;
+        right: 50%;
+
+        transform: translateX(50%);
+
+        flex-direction: row;
+      }
+
+      .nav-divider {
+        width: 1px;
+        height: 26px;
+        margin: 0 3px;
+      }
+
+      .nav-tooltip {
+        display: none;
+      }
+
+      .home-side {
         grid-template-columns: 1fr;
-        max-width: 500px;
       }
 
       .norge-strip {
@@ -704,20 +956,6 @@
     }
 
     @media (max-width: 600px) {
-
-      .nav {
-        left: 10px;
-        top: 10px;
-
-        gap: 4px;
-
-        padding: 6px;
-      }
-
-      .nav a {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
 
       .glass {
         padding: 30px 35px;
@@ -731,13 +969,30 @@
         font-size: 38px;
       }
 
-      .glass-journey {
-        padding: 35px 25px;
+      .weather-panel {
+        padding: 23px;
       }
 
-      .glass-journey p,
-      .glass-journey li {
-        font-size: 18px;
+      .weather-temperature {
+        font-size: 45px;
+      }
+
+      .weather-header {
+        flex-direction: column;
+      }
+
+      .weather-extra {
+        text-align: left;
+      }
+
+      .now-playing {
+        padding: 22px;
+
+        gap: 18px;
+      }
+
+      .frequency {
+        display: none;
       }
 
       .background {
@@ -777,16 +1032,31 @@
 
   <nav class="nav">
 
-    <a href="#about">
-      About Me
+    <a href="#about" aria-label="About Me">
+      👤
+      <span class="nav-tooltip">About Me</span>
     </a>
 
-    <a href="#projects">
-      Projects
+    <a href="#home" aria-label="Home">
+      🏠
+      <span class="nav-tooltip">Home</span>
     </a>
 
-    <a href="#journey">
-      Journey
+    <a href="#journey" aria-label="Journey">
+      🛤
+      <span class="nav-tooltip">Journey</span>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <a href="#projects" aria-label="Projects">
+      ◉
+      <span class="nav-tooltip">Projects</span>
+    </a>
+
+    <a href="#skills" aria-label="Skills">
+      ✦
+      <span class="nav-tooltip">Skills</span>
     </a>
 
   </nav>
@@ -907,117 +1177,239 @@
 
 
   <!-- =========================
-       RIGHT NOW
+       HOME
   ========================= -->
 
-  <section id="information">
+  <section id="home">
 
     <h2>
-      Right Now
+      Home
     </h2>
 
-    <div class="info-container">
+
+    <div class="home-grid">
 
 
       <!-- WEATHER -->
 
-      <div class="info-card">
+      <div class="home-card weather-panel">
 
-        <h3>
-          Mumbai Weather
-        </h3>
+        <div class="weather-header">
+
+          <div>
+
+            <div class="weather-location">
+              MUMBAI, INDIA
+            </div>
+
+            <div
+              class="weather-temperature"
+              id="temperature"
+            >
+              Loading...
+            </div>
+
+            <div
+              class="weather-condition"
+              id="weather-condition"
+            >
+              Checking the sky...
+            </div>
+
+          </div>
+
+
+          <div class="weather-extra">
+
+            <div id="humidity">
+              Humidity: --
+            </div>
+
+            <div id="wind">
+              Wind: --
+            </div>
+
+            <div>
+              IST
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="weather-chart-title">
+          PRECIPITATION & TEMPERATURE
+        </div>
+
+
+        <div class="weather-chart">
+
+          <svg
+            id="weatherGraph"
+            viewBox="0 0 900 190"
+            preserveAspectRatio="none"
+          >
+
+            <defs>
+
+              <linearGradient
+                id="rainGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+
+                <stop
+                  offset="0%"
+                  stop-color="rgba(255,255,255,0.18)"
+                />
+
+                <stop
+                  offset="100%"
+                  stop-color="rgba(255,255,255,0)"
+                />
+
+              </linearGradient>
+
+            </defs>
+
+            <path
+              id="rainArea"
+              fill="url(#rainGradient)"
+              opacity="0.6"
+            ></path>
+
+            <polyline
+              id="rainLine"
+              fill="none"
+              stroke="rgba(255,255,255,0.65)"
+              stroke-width="2"
+            ></polyline>
+
+            <polyline
+              id="temperatureLine"
+              fill="none"
+              stroke="rgba(255,255,255,0.95)"
+              stroke-width="2.5"
+            ></polyline>
+
+          </svg>
+
+        </div>
+
 
         <div
-          class="weather-main"
-          id="temperature"
+          class="weather-times"
+          id="weatherTimes"
         >
-          Loading...
+          <span>Now</span>
+          <span>+3h</span>
+          <span>+6h</span>
+          <span>+9h</span>
+          <span>+12h</span>
+          <span>+15h</span>
         </div>
 
-        <div class="weather-details">
+      </div>
 
-          <div id="weather-condition">
-            Checking the sky...
+
+      <!-- COORDINATES + TIME -->
+
+      <div class="home-side">
+
+
+        <div class="home-card side-card">
+
+          <h3>
+            Coordinates
+          </h3>
+
+          <div class="coordinates">
+
+            <div>
+              Latitude:
+              <strong>
+                19.0760° N
+              </strong>
+            </div>
+
+            <div>
+              Longitude:
+              <strong>
+                72.8777° E
+              </strong>
+            </div>
+
+            <div>
+              Mumbai, India
+            </div>
+
           </div>
 
-          <div id="humidity">
-            Humidity: --
+        </div>
+
+
+        <div class="home-card side-card">
+
+          <h3>
+            Current Time
+          </h3>
+
+          <div
+            class="time-display"
+            id="currentTime"
+          >
+            --:--:--
           </div>
 
-          <div id="wind">
-            Wind: --
+          <div class="time-zone">
+            Mumbai • IST (UTC+5:30)
           </div>
 
         </div>
 
       </div>
 
+    </div>
 
-      <!-- COORDINATES -->
 
-      <div class="info-card">
+    <!-- NOW PLAYING -->
 
-        <h3>
-          Coordinates
-        </h3>
+    <div class="home-card now-playing">
 
-        <div class="coordinates">
-
-          <div>
-            Latitude:
-            <strong>
-              19.0760° N
-            </strong>
-          </div>
-
-          <div>
-            Longitude:
-            <strong>
-              72.8777° E
-            </strong>
-          </div>
-
-          <div>
-            Mumbai, India
-          </div>
-
-        </div>
-
+      <div class="album-symbol">
+        ♪
       </div>
 
+      <div class="now-info">
 
-      <!-- MUSIC -->
-
-      <div class="info-card">
-
-        <h3>
-          Music
-        </h3>
+        <div class="now-label">
+          Now Playing
+        </div>
 
         <div class="music-title">
           Golden Brown
         </div>
 
-        <div class="music-control">
-          ♪
-        </div>
+      </div>
 
-        <div class="frequency">
 
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="frequency">
 
-        </div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
 
       </div>
 
@@ -1152,8 +1544,6 @@
     <div class="projects-grid">
 
 
-      <!-- PROJECT ONE -->
-
       <div class="project-card">
 
         <h3>
@@ -1173,8 +1563,6 @@
 
       </div>
 
-
-      <!-- PROJECT TWO -->
 
       <div class="project-card">
 
@@ -1197,8 +1585,6 @@
 
       </div>
 
-
-      <!-- PROJECT THREE -->
 
       <div class="project-card">
 
@@ -1296,11 +1682,6 @@
         (event.clientY / window.innerHeight) - 0.5;
 
 
-      /*
-        Very subtle desktop movement.
-        The new landscape remains mostly stationary.
-      */
-
       targetX = x * -5;
       targetY = y * -3;
 
@@ -1328,6 +1709,37 @@
 
 
     /* =========================
+       LIVE CLOCK
+    ========================= */
+
+    function updateClock() {
+
+      const now =
+        new Date();
+
+      const formatter =
+        new Intl.DateTimeFormat(
+          "en-IN",
+          {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+          }
+        );
+
+      document.getElementById("currentTime").textContent =
+        formatter.format(now);
+
+    }
+
+    updateClock();
+
+    setInterval(updateClock, 1000);
+
+
+    /* =========================
        WEATHER
     ========================= */
 
@@ -1340,7 +1752,9 @@
       "?latitude=" + latitude +
       "&longitude=" + longitude +
       "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
-      "&timezone=auto";
+      "&hourly=temperature_2m,precipitation_probability,precipitation" +
+      "&forecast_days=2" +
+      "&timezone=Asia%2FKolkata";
 
 
     fetch(weatherURL)
@@ -1349,7 +1763,8 @@
 
       .then(data => {
 
-        const current = data.current;
+        const current =
+          data.current;
 
 
         document.getElementById("temperature").textContent =
@@ -1373,6 +1788,9 @@
             current.weather_code
           );
 
+
+        drawWeatherGraph(data);
+
       })
 
 
@@ -1386,6 +1804,212 @@
 
       });
 
+
+    /* =========================
+       WEATHER GRAPH
+    ========================= */
+
+    function drawWeatherGraph(data) {
+
+      const hourly =
+        data.hourly;
+
+      const now =
+        new Date();
+
+
+      let startIndex =
+        0;
+
+
+      for (
+        let i = 0;
+        i < hourly.time.length;
+        i++
+      ) {
+
+        if (
+          new Date(hourly.time[i]) >= now
+        ) {
+
+          startIndex = i;
+          break;
+
+        }
+
+      }
+
+
+      const points =
+        12;
+
+
+      const temperatures =
+        hourly.temperature_2m.slice(
+          startIndex,
+          startIndex + points
+        );
+
+
+      const precipitation =
+        hourly.precipitation_probability.slice(
+          startIndex,
+          startIndex + points
+        );
+
+
+      if (
+        temperatures.length < 2
+      ) {
+        return;
+      }
+
+
+      const width = 900;
+      const height = 190;
+
+
+      const padding = 15;
+
+
+      const minTemp =
+        Math.min(...temperatures) - 2;
+
+      const maxTemp =
+        Math.max(...temperatures) + 2;
+
+
+      function makePoints(values, min, max) {
+
+        return values.map(
+          (value, index) => {
+
+            const x =
+              padding +
+              (
+                index /
+                (values.length - 1)
+              ) *
+              (width - padding * 2);
+
+
+            const y =
+              height -
+              padding -
+              (
+                (value - min) /
+                (max - min)
+              ) *
+              (height - padding * 2);
+
+
+            return `${x},${y}`;
+
+          }
+        );
+
+      }
+
+
+      const tempPoints =
+        makePoints(
+          temperatures,
+          minTemp,
+          maxTemp
+        );
+
+
+      const rainPoints =
+        makePoints(
+          precipitation,
+          0,
+          100
+        );
+
+
+      document.getElementById(
+        "temperatureLine"
+      ).setAttribute(
+        "points",
+        tempPoints.join(" ")
+      );
+
+
+      document.getElementById(
+        "rainLine"
+      ).setAttribute(
+        "points",
+        rainPoints.join(" ")
+      );
+
+
+      const firstRain =
+        rainPoints[0].split(",");
+
+      const lastRain =
+        rainPoints[rainPoints.length - 1].split(",");
+
+
+      const rainArea =
+        rainPoints.join(" ") +
+        ` ${lastRain[0]},${height} ${firstRain[0]},${height}`;
+
+
+      document.getElementById(
+        "rainArea"
+      ).setAttribute(
+        "d",
+        `M ${rainArea.replaceAll(" ", " L ")}`
+      );
+
+
+      const times =
+        document.getElementById(
+          "weatherTimes"
+        );
+
+
+      times.innerHTML = "";
+
+
+      for (
+        let i = 0;
+        i < temperatures.length;
+        i += 2
+      ) {
+
+        const span =
+          document.createElement("span");
+
+
+        const date =
+          new Date(
+            hourly.time[startIndex + i]
+          );
+
+
+        span.textContent =
+          date.toLocaleTimeString(
+            "en-IN",
+            {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+              timeZone: "Asia/Kolkata"
+            }
+          );
+
+
+        times.appendChild(span);
+
+      }
+
+    }
+
+
+    /* =========================
+       WEATHER DESCRIPTION
+    ========================= */
 
     function getWeatherDescription(code) {
 
