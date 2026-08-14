@@ -66,6 +66,49 @@
 
 
     /* =========================
+       CURSOR FOLLOWER
+    ========================= */
+
+    .cursor-follower {
+      position: fixed;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.12);
+
+      border: 1px solid rgba(255, 255, 255, 0.45);
+
+      box-shadow:
+        0 0 14px rgba(255, 255, 255, 0.18),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+
+      pointer-events: none;
+
+      z-index: 9999;
+
+      transform:
+        translate3d(-50%, -50%, 0);
+
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+
+      transition:
+        width 0.2s ease,
+        height 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    @media (max-width: 800px) {
+      .cursor-follower {
+        display: none;
+      }
+    }
+
+
+    /* =========================
        NAVIGATION
     ========================= */
 
@@ -722,6 +765,13 @@
 
 
   <!-- =========================
+       CURSOR FOLLOWER
+  ========================= -->
+
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+
+  <!-- =========================
        NAVIGATION
   ========================= -->
 
@@ -1182,6 +1232,48 @@
 
 
     /* =========================
+       CURSOR FOLLOWER
+    ========================= */
+
+    const cursorFollower =
+      document.getElementById("cursorFollower");
+
+    let cursorX = 0;
+    let cursorY = 0;
+
+    let followerX = 0;
+    let followerY = 0;
+
+
+    document.addEventListener("mousemove", (event) => {
+
+      cursorX = event.clientX;
+      cursorY = event.clientY;
+
+    });
+
+
+    function moveCursorFollower() {
+
+      followerX +=
+        (cursorX - followerX) * 0.12;
+
+      followerY +=
+        (cursorY - followerY) * 0.12;
+
+
+      cursorFollower.style.transform =
+        `translate3d(${followerX}px, ${followerY}px, 0)`;
+
+
+      requestAnimationFrame(moveCursorFollower);
+
+    }
+
+    moveCursorFollower();
+
+
+    /* =========================
        SUBTLE BACKGROUND MOVEMENT
     ========================= */
 
@@ -1330,6 +1422,7 @@
     }
 
   </script>
+
 
 </body>
 </html>
