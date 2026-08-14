@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,11 +85,9 @@
         inset 0 1px 2px rgba(255, 255, 255, 0.25);
 
       pointer-events: none;
-
       z-index: 9999;
 
-      transform:
-        translate3d(-50%, -50%, 0);
+      transform: translate3d(-50%, -50%, 0);
 
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
@@ -101,21 +100,20 @@
 
 
     /* =========================
-       RIGHT-SIDE NAVIGATION
+       FIXED RIGHT NAVIGATION
     ========================= */
 
     .nav {
       position: fixed;
 
       top: 50%;
-      right: 22px;
+      right: 24px;
 
       transform: translateY(-50%);
 
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 7px;
+      gap: 8px;
 
       padding: 9px;
 
@@ -134,77 +132,57 @@
       z-index: 1000;
     }
 
-    .nav a {
-      width: 42px;
-      height: 42px;
+    .nav-search {
+      width: 145px;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 10px 12px;
+
+      box-sizing: border-box;
+
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 11px;
+
+      outline: none;
+
+      background: rgba(255,255,255,0.08);
 
       color: white;
-      text-decoration: none;
 
-      border-radius: 12px;
-
-      font-size: 19px;
+      font-size: 13px;
 
       transition:
         background 0.25s ease,
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+        border 0.25s ease;
+    }
+
+    .nav-search::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+
+    .nav-search:focus {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(255,255,255,0.42);
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+
+      padding: 10px 13px;
+
+      border-radius: 11px;
+
+      font-size: 13px;
+      font-weight: bold;
+
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease;
     }
 
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.15);
       transform: translateX(-3px);
-
-      box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.18);
-    }
-
-    .nav-divider {
-      width: 26px;
-      height: 1px;
-
-      margin: 3px 0;
-
-      background:
-        rgba(255, 255, 255, 0.28);
-    }
-
-    .nav-tooltip {
-      position: absolute;
-
-      right: 62px;
-
-      padding: 7px 11px;
-
-      border-radius: 9px;
-
-      background: rgba(20, 20, 20, 0.70);
-
-      border: 1px solid rgba(255, 255, 255, 0.18);
-
-      backdrop-filter: blur(12px);
-
-      font-size: 12px;
-
-      white-space: nowrap;
-
-      opacity: 0;
-      pointer-events: none;
-
-      transform: translateX(5px);
-
-      transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .nav a:hover .nav-tooltip {
-      opacity: 1;
-      transform: translateX(0);
     }
 
 
@@ -217,7 +195,8 @@
     .skill,
     .project-card,
     .glass-journey,
-    .norge-strip {
+    .norge-strip,
+    .now-playing {
 
       background: rgba(255, 255, 255, 0.10);
 
@@ -234,7 +213,7 @@
 
 
     /* =========================
-       HERO
+       HERO / HOME
     ========================= */
 
     .hero {
@@ -248,15 +227,20 @@
     }
 
     .glass {
-      padding: 42px 80px;
+      width: min(1050px, calc(100% - 100px));
 
-      border-radius: 22px;
+      padding: 48px 55px;
 
-      text-align: center;
+      border-radius: 25px;
 
       position: relative;
-
       z-index: 1;
+
+      box-sizing: border-box;
+    }
+
+    .hero-title {
+      text-align: center;
     }
 
     .glass h1 {
@@ -270,345 +254,193 @@
       margin: 10px 0 0;
     }
 
-
-    /* =========================
-       SCROLL ARROW
-    ========================= */
-
-    .scroll-down {
-      position: absolute;
-
-      bottom: 20px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      font-size: 30px;
-
-      color: white;
-
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-
-      40% {
-        transform: translateX(-50%) translateY(-12px);
-      }
-
-      60% {
-        transform: translateX(-50%) translateY(-6px);
-      }
-
-    }
-
-
-    /* =========================
-       NORGE CORE STRIP
-    ========================= */
-
-    .norge-strip {
-      position: relative;
-
-      width: 100%;
-
-      height: 54px;
-
+    .availability {
       display: flex;
       align-items: center;
+      justify-content: center;
 
-      overflow: hidden;
+      gap: 9px;
 
-      border-left: none;
-      border-right: none;
+      margin-top: 22px;
 
-      border-radius: 0;
+      color: rgba(255,255,255,0.78);
 
-      background:
-        rgba(255, 255, 255, 0.07);
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .availability-dot {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: #5cff72;
 
       box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.18),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.05),
-        0 12px 30px rgba(0, 0, 0, 0.20);
-    }
-
-    .norge-track {
-      display: flex;
-
-      width: max-content;
-
-      white-space: nowrap;
-
-      animation:
-        norgeScroll 24s linear infinite;
-
-      will-change: transform;
-    }
-
-    .norge-content {
-      display: flex;
-      align-items: center;
-
-      flex-shrink: 0;
-    }
-
-    .norge-content span {
-      display: inline-block;
-
-      margin: 0 34px;
-
-      font-size: 13px;
-
-      letter-spacing: 4px;
-
-      font-weight: bold;
-
-      color: rgba(255, 255, 255, 0.72);
-    }
-
-    .norge-content .separator {
-      margin: 0 4px;
-
-      font-size: 10px;
-
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    @keyframes norgeScroll {
-
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-
+        0 0 9px rgba(92,255,114,0.65);
     }
 
 
     /* =========================
-       SECTIONS
+       HOME WEATHER
     ========================= */
 
-    section {
-      padding: 100px 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    section h2 {
-      font-size: 50px;
-      margin-bottom: 25px;
-    }
-
-    section p {
-      font-size: 18px;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      color: #ddd;
-      line-height: 1.7;
-    }
-
-
-    /* =========================
-       HOME DASHBOARD
-    ========================= */
-
-    #home {
-      padding-top: 100px;
-    }
-
-    .home-grid {
-      max-width: 1150px;
-
-      margin: 0 auto;
+    .home-information {
+      margin-top: 45px;
 
       display: grid;
 
-      grid-template-columns:
-        minmax(0, 2.2fr)
-        minmax(250px, 0.9fr);
+      grid-template-columns: 2fr 1fr;
 
-      gap: 20px;
-
-      text-align: left;
+      gap: 18px;
     }
 
-    .home-card {
-      background: rgba(255, 255, 255, 0.10);
+    .home-weather {
+      min-height: 255px;
 
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 25px;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      box-sizing: border-box;
 
-      box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.20),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.05),
-        0 15px 40px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
 
-      border-radius: 22px;
+      background: rgba(255,255,255,0.065);
+
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
+    .home-weather h3,
+    .small-info h3 {
+      margin: 0 0 15px;
 
-    /* =========================
-       WEATHER PANEL
-    ========================= */
-
-    .weather-panel {
-      min-height: 410px;
-
-      padding: 32px;
-
-      overflow: hidden;
+      font-size: 20px;
     }
 
-    .weather-header {
+    .weather-top {
       display: flex;
-
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 20px;
     }
 
-    .weather-location {
-      font-size: 15px;
-
-      color: #bbb;
-
-      letter-spacing: 1px;
-    }
-
-    .weather-temperature {
-      font-size: 58px;
-
+    .weather-main {
+      font-size: 40px;
       font-weight: bold;
-
-      margin-top: 8px;
     }
 
     .weather-condition {
-      font-size: 18px;
-
       color: #ddd;
-
-      margin-top: 5px;
-    }
-
-    .weather-extra {
-      text-align: right;
-
-      color: #ccc;
-
-      font-size: 14px;
-
-      line-height: 1.8;
-    }
-
-    .weather-chart-title {
-      margin-top: 30px;
-
-      font-size: 14px;
-
-      color: #aaa;
-
-      letter-spacing: 1px;
+      margin-top: 4px;
     }
 
     .weather-chart {
-      width: 100%;
+      height: 115px;
 
-      height: 190px;
+      margin-top: 18px;
 
-      margin-top: 10px;
+      position: relative;
 
       overflow: hidden;
 
-      border-radius: 15px;
+      border-radius: 12px;
 
       background:
-        rgba(0, 0, 0, 0.08);
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.04),
+          rgba(255,255,255,0.015)
+        );
     }
 
-    #weatherGraph {
+    .weather-chart::before,
+    .weather-chart::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .weather-chart::before {
+      top: 35%;
+    }
+
+    .weather-chart::after {
+      top: 70%;
+    }
+
+    .rain-line {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      bottom: 0;
+
+      height: 100%;
+    }
+
+    .rain-line svg {
       width: 100%;
       height: 100%;
     }
 
-    .weather-times {
+    .rain-line polyline {
+      fill: none;
+
+      stroke: rgba(255,255,255,0.75);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .rain-labels {
       display: flex;
 
       justify-content: space-between;
 
-      padding: 8px 10px 0;
+      margin-top: 7px;
 
-      color: rgba(255, 255, 255, 0.48);
+      color: rgba(255,255,255,0.48);
 
-      font-size: 11px;
+      font-size: 10px;
     }
 
-
-    /* =========================
-       SIDE CARDS
-    ========================= */
-
-    .home-side {
+    .small-information {
       display: grid;
 
       grid-template-rows: 1fr 1fr;
 
-      gap: 20px;
+      gap: 18px;
     }
 
-    .side-card {
-      padding: 28px;
+    .small-info {
+      padding: 22px;
 
-      display: flex;
+      border-radius: 20px;
 
-      flex-direction: column;
+      background: rgba(255,255,255,0.065);
 
-      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.18);
+
+      box-sizing: border-box;
     }
 
-    .side-card h3 {
-      margin: 0 0 22px;
-
-      font-size: 22px;
-    }
-
-    .coordinates {
-      font-size: 18px;
-
-      line-height: 1.9;
-
+    .small-info-content {
       color: #ddd;
+
+      font-size: 16px;
+
+      line-height: 1.7;
     }
 
-    .coordinates strong {
+    .small-info strong {
       color: white;
-    }
-
-    .time-display {
-      font-size: 42px;
-
-      font-weight: bold;
-
-      letter-spacing: 1px;
-
-      margin-bottom: 8px;
-    }
-
-    .time-zone {
-      color: #bbb;
-
-      font-size: 14px;
     }
 
 
@@ -617,86 +449,75 @@
     ========================= */
 
     .now-playing {
-      max-width: 1150px;
+      margin-top: 18px;
 
-      margin: 20px auto 0;
+      padding: 24px 28px;
 
-      padding: 30px;
-
-      text-align: left;
+      border-radius: 20px;
 
       display: flex;
-
       align-items: center;
+      gap: 20px;
 
-      gap: 30px;
+      text-align: left;
     }
 
-    .album-symbol {
-      width: 72px;
-      height: 72px;
+    .music-control {
+      width: 56px;
+      height: 56px;
 
       flex-shrink: 0;
 
-      display: flex;
+      border-radius: 50%;
 
+      border: 1px solid rgba(255,255,255,0.40);
+
+      background: rgba(255,255,255,0.10);
+
+      display: flex;
       justify-content: center;
       align-items: center;
 
-      border-radius: 18px;
-
-      border: 1px solid rgba(255, 255, 255, 0.28);
-
-      background:
-        rgba(255, 255, 255, 0.08);
-
-      font-size: 28px;
+      font-size: 18px;
 
       box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.20),
-        0 8px 20px rgba(0,0,0,0.18);
+        inset 0 1px 2px rgba(255,255,255,0.25),
+        0 8px 20px rgba(0,0,0,0.20);
     }
 
-    .now-info {
-      min-width: 150px;
+    .playing-text {
+      flex: 1;
     }
 
-    .now-label {
-      color: #aaa;
-
-      font-size: 12px;
+    .playing-label {
+      font-size: 11px;
 
       letter-spacing: 2px;
 
-      text-transform: uppercase;
+      color: rgba(255,255,255,0.48);
 
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .music-title {
-      font-size: 22px;
-
-      font-weight: bold;
+      font-size: 19px;
     }
 
     .frequency {
-      flex: 1;
-
-      height: 55px;
+      width: 150px;
+      height: 38px;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
-      gap: 4px;
+      gap: 3px;
 
       overflow: hidden;
     }
 
     .frequency span {
-      width: 4px;
+      width: 3px;
 
       background: rgba(255,255,255,0.55);
 
@@ -756,18 +577,7 @@
       animation-delay: 1s;
     }
 
-    .frequency span:nth-child(11) {
-      height: 14px;
-      animation-delay: 1.1s;
-    }
-
-    .frequency span:nth-child(12) {
-      height: 22px;
-      animation-delay: 1.2s;
-    }
-
     @keyframes frequency {
-
       from {
         transform: scaleY(0.55);
         opacity: 0.55;
@@ -777,7 +587,145 @@
         transform: scaleY(1);
         opacity: 0.9;
       }
+    }
 
+
+    /* =========================
+       SCROLL ARROW
+    ========================= */
+
+    .scroll-down {
+      position: absolute;
+
+      bottom: 20px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      font-size: 30px;
+
+      color: white;
+
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      40% {
+        transform: translateX(-50%) translateY(-12px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(-6px);
+      }
+    }
+
+
+    /* =========================
+       NORGE CORE STRIP
+    ========================= */
+
+    .norge-strip {
+      position: relative;
+
+      width: 100%;
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      border-left: none;
+      border-right: none;
+
+      border-radius: 0;
+
+      background: rgba(255,255,255,0.07);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.18),
+        inset 0 -1px 1px rgba(0,0,0,0.05),
+        0 12px 30px rgba(0,0,0,0.20);
+    }
+
+    .norge-track {
+      display: flex;
+
+      width: max-content;
+
+      white-space: nowrap;
+
+      animation:
+        norgeScroll 24s linear infinite;
+
+      will-change: transform;
+    }
+
+    .norge-content {
+      display: flex;
+      align-items: center;
+
+      flex-shrink: 0;
+    }
+
+    .norge-content span {
+      display: inline-block;
+
+      margin: 0 34px;
+
+      font-size: 13px;
+
+      letter-spacing: 4px;
+
+      font-weight: bold;
+
+      color: rgba(255,255,255,0.72);
+    }
+
+    .norge-content .separator {
+      margin: 0 4px;
+
+      font-size: 10px;
+
+      color: rgba(255,255,255,0.35);
+    }
+
+    @keyframes norgeScroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2 {
+      font-size: 50px;
+      margin-bottom: 25px;
+    }
+
+    section p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: #ddd;
+      line-height: 1.7;
     }
 
 
@@ -908,91 +856,85 @@
 
     @media (max-width: 900px) {
 
-      .home-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .home-side {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-      }
-
-    }
-
-    @media (max-width: 800px) {
-
-      .cursor-follower {
-        display: none;
-      }
-
       .nav {
-        top: auto;
-        bottom: 15px;
-        right: 50%;
-
-        transform: translateX(50%);
-
-        flex-direction: row;
+        right: 12px;
       }
 
-      .nav-divider {
-        width: 1px;
-        height: 26px;
-        margin: 0 3px;
+      .glass {
+        width: calc(100% - 70px);
       }
 
-      .nav-tooltip {
-        display: none;
-      }
-
-      .home-side {
+      .home-information {
         grid-template-columns: 1fr;
       }
 
-      .norge-strip {
-        height: 48px;
+      .small-information {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
       }
 
     }
 
     @media (max-width: 600px) {
 
+      .cursor-follower {
+        display: none;
+      }
+
+      .nav {
+        right: 10px;
+
+        top: 50%;
+
+        padding: 6px;
+      }
+
+      .nav-search {
+        width: 115px;
+      }
+
+      .nav a {
+        padding: 8px 9px;
+        font-size: 11px;
+      }
+
       .glass {
-        padding: 30px 35px;
+        width: calc(100% - 35px);
+
+        padding: 32px 22px;
       }
 
       .glass h1 {
         font-size: 45px;
       }
 
+      .home-information {
+        margin-top: 30px;
+      }
+
+      .small-information {
+        grid-template-columns: 1fr;
+      }
+
+      .now-playing {
+        flex-wrap: wrap;
+      }
+
+      .frequency {
+        width: 100%;
+      }
+
       section h2 {
         font-size: 38px;
       }
 
-      .weather-panel {
-        padding: 23px;
+      .glass-journey {
+        padding: 35px 25px;
       }
 
-      .weather-temperature {
-        font-size: 45px;
-      }
-
-      .weather-header {
-        flex-direction: column;
-      }
-
-      .weather-extra {
-        text-align: left;
-      }
-
-      .now-playing {
-        padding: 22px;
-
-        gap: 18px;
-      }
-
-      .frequency {
-        display: none;
+      .glass-journey p,
+      .glass-journey li {
+        font-size: 18px;
       }
 
       .background {
@@ -1008,7 +950,6 @@
 
 
 <body>
-
 
   <!-- =========================
        BACKGROUND
@@ -1027,58 +968,233 @@
 
 
   <!-- =========================
-       NAVIGATION
+       FIXED NAVIGATION
   ========================= -->
 
   <nav class="nav">
 
-    <a href="#about" aria-label="About Me">
-      👤
-      <span class="nav-tooltip">About Me</span>
-    </a>
+    <input
+      class="nav-search"
+      id="navSearch"
+      type="text"
+      placeholder="Search..."
+      aria-label="Search"
+    >
 
-    <a href="#home" aria-label="Home">
-      🏠
-      <span class="nav-tooltip">Home</span>
-    </a>
+    <a href="#home">Home</a>
 
-    <a href="#journey" aria-label="Journey">
-      🛤
-      <span class="nav-tooltip">Journey</span>
-    </a>
+    <a href="#about">About</a>
 
-    <div class="nav-divider"></div>
+    <a href="#projects">Projects</a>
 
-    <a href="#projects" aria-label="Projects">
-      ◉
-      <span class="nav-tooltip">Projects</span>
-    </a>
+    <a href="#journey">Journey</a>
 
-    <a href="#skills" aria-label="Skills">
-      ✦
-      <span class="nav-tooltip">Skills</span>
-    </a>
+    <a href="#skills">Skills</a>
 
   </nav>
 
 
   <!-- =========================
-       HERO
+       HOME
   ========================= -->
 
-  <section class="hero">
+  <section class="hero" id="home">
 
     <div class="glass">
 
-      <h1>
-        KEYUR
-      </h1>
+      <div class="hero-title">
 
-      <p>
-        Creative Developer
-      </p>
+        <h1>
+          KEYUR
+        </h1>
+
+        <p>
+          Creative Developer
+        </p>
+
+        <div class="availability">
+
+          <span class="availability-dot"></span>
+
+          <span>
+            Available for restoration
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           HOME INFORMATION
+      ========================= -->
+
+      <div class="home-information">
+
+
+        <!-- WEATHER -->
+
+        <div class="home-weather">
+
+          <h3>
+            Mumbai Weather
+          </h3>
+
+          <div class="weather-top">
+
+            <div>
+
+              <div
+                class="weather-main"
+                id="temperature"
+              >
+                Loading...
+              </div>
+
+              <div
+                class="weather-condition"
+                id="weather-condition"
+              >
+                Checking the sky...
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="weather-chart">
+
+            <div class="rain-line">
+
+              <svg
+                viewBox="0 0 500 115"
+                preserveAspectRatio="none"
+              >
+
+                <polyline
+                  id="weatherLine"
+                  points="0,80 70,65 140,75 210,45 280,60 350,35 420,55 500,25"
+                />
+
+              </svg>
+
+            </div>
+
+          </div>
+
+          <div class="rain-labels">
+
+            <span>Now</span>
+            <span>+3h</span>
+            <span>+6h</span>
+            <span>+9h</span>
+            <span>+12h</span>
+
+          </div>
+
+        </div>
+
+
+        <!-- SMALL CARDS -->
+
+        <div class="small-information">
+
+
+          <!-- COORDINATES -->
+
+          <div class="small-info">
+
+            <h3>
+              Coordinates
+            </h3>
+
+            <div class="small-info-content">
+
+              Latitude:
+              <strong>
+                19.0760° N
+              </strong>
+
+              <br>
+
+              Longitude:
+              <strong>
+                72.8777° E
+              </strong>
+
+              <br>
+
+              Mumbai, India
+
+            </div>
+
+          </div>
+
+
+          <!-- TIME -->
+
+          <div class="small-info">
+
+            <h3>
+              Current Time
+            </h3>
+
+            <div
+              class="small-info-content"
+              id="currentTime"
+            >
+              Loading...
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           NOW PLAYING
+      ========================= -->
+
+      <div class="now-playing">
+
+        <div class="music-control">
+          ♪
+        </div>
+
+        <div class="playing-text">
+
+          <div class="playing-label">
+            NOW PLAYING
+          </div>
+
+          <div class="music-title">
+            Golden Brown
+          </div>
+
+        </div>
+
+        <div class="frequency">
+
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+      </div>
 
     </div>
+
 
     <div class="scroll-down">
       ↓
@@ -1177,248 +1293,6 @@
 
 
   <!-- =========================
-       HOME
-  ========================= -->
-
-  <section id="home">
-
-    <h2>
-      Home
-    </h2>
-
-
-    <div class="home-grid">
-
-
-      <!-- WEATHER -->
-
-      <div class="home-card weather-panel">
-
-        <div class="weather-header">
-
-          <div>
-
-            <div class="weather-location">
-              MUMBAI, INDIA
-            </div>
-
-            <div
-              class="weather-temperature"
-              id="temperature"
-            >
-              Loading...
-            </div>
-
-            <div
-              class="weather-condition"
-              id="weather-condition"
-            >
-              Checking the sky...
-            </div>
-
-          </div>
-
-
-          <div class="weather-extra">
-
-            <div id="humidity">
-              Humidity: --
-            </div>
-
-            <div id="wind">
-              Wind: --
-            </div>
-
-            <div>
-              IST
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="weather-chart-title">
-          PRECIPITATION & TEMPERATURE
-        </div>
-
-
-        <div class="weather-chart">
-
-          <svg
-            id="weatherGraph"
-            viewBox="0 0 900 190"
-            preserveAspectRatio="none"
-          >
-
-            <defs>
-
-              <linearGradient
-                id="rainGradient"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-
-                <stop
-                  offset="0%"
-                  stop-color="rgba(255,255,255,0.18)"
-                />
-
-                <stop
-                  offset="100%"
-                  stop-color="rgba(255,255,255,0)"
-                />
-
-              </linearGradient>
-
-            </defs>
-
-            <path
-              id="rainArea"
-              fill="url(#rainGradient)"
-              opacity="0.6"
-            ></path>
-
-            <polyline
-              id="rainLine"
-              fill="none"
-              stroke="rgba(255,255,255,0.65)"
-              stroke-width="2"
-            ></polyline>
-
-            <polyline
-              id="temperatureLine"
-              fill="none"
-              stroke="rgba(255,255,255,0.95)"
-              stroke-width="2.5"
-            ></polyline>
-
-          </svg>
-
-        </div>
-
-
-        <div
-          class="weather-times"
-          id="weatherTimes"
-        >
-          <span>Now</span>
-          <span>+3h</span>
-          <span>+6h</span>
-          <span>+9h</span>
-          <span>+12h</span>
-          <span>+15h</span>
-        </div>
-
-      </div>
-
-
-      <!-- COORDINATES + TIME -->
-
-      <div class="home-side">
-
-
-        <div class="home-card side-card">
-
-          <h3>
-            Coordinates
-          </h3>
-
-          <div class="coordinates">
-
-            <div>
-              Latitude:
-              <strong>
-                19.0760° N
-              </strong>
-            </div>
-
-            <div>
-              Longitude:
-              <strong>
-                72.8777° E
-              </strong>
-            </div>
-
-            <div>
-              Mumbai, India
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="home-card side-card">
-
-          <h3>
-            Current Time
-          </h3>
-
-          <div
-            class="time-display"
-            id="currentTime"
-          >
-            --:--:--
-          </div>
-
-          <div class="time-zone">
-            Mumbai • IST (UTC+5:30)
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- NOW PLAYING -->
-
-    <div class="home-card now-playing">
-
-      <div class="album-symbol">
-        ♪
-      </div>
-
-      <div class="now-info">
-
-        <div class="now-label">
-          Now Playing
-        </div>
-
-        <div class="music-title">
-          Golden Brown
-        </div>
-
-      </div>
-
-
-      <div class="frequency">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
        MY JOURNEY
   ========================= -->
 
@@ -1440,47 +1314,27 @@
       <ul>
 
         <li>
-
-          <strong>
-            AGE 10:
-          </strong>
-
+          <strong>AGE 10:</strong>
           I started exploring physics,
           clearly unknown and all that,
           still fresh.
-
         </li>
 
         <li>
-
-          <strong>
-            AGE 11:
-          </strong>
-
+          <strong>AGE 11:</strong>
           I started dreaming of making a website
           introducing me to anyone who passes by.
-
         </li>
 
         <li>
-
-          <strong>
-            AGE 12:
-          </strong>
-
+          <strong>AGE 12:</strong>
           Started learning computerology.
-
         </li>
 
         <li>
-
-          <strong>
-            AGE 13:
-          </strong>
-
+          <strong>AGE 13:</strong>
           Made my first site
           (&gt; , &lt;) — hope you like it.
-
         </li>
 
       </ul>
@@ -1543,7 +1397,6 @@
 
     <div class="projects-grid">
 
-
       <div class="project-card">
 
         <h3>
@@ -1603,7 +1456,6 @@
         </p>
 
       </div>
-
 
     </div>
 
@@ -1709,34 +1561,37 @@
 
 
     /* =========================
-       LIVE CLOCK
+       CURRENT TIME
     ========================= */
 
-    function updateClock() {
+    function updateTime() {
 
-      const now =
-        new Date();
+      const now = new Date();
 
-      const formatter =
-        new Intl.DateTimeFormat(
-          "en-IN",
-          {
-            timeZone: "Asia/Kolkata",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false
-          }
-        );
+      const time =
+        now.toLocaleTimeString("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        });
 
-      document.getElementById("currentTime").textContent =
-        formatter.format(now);
+      const date =
+        now.toLocaleDateString("en-IN", {
+          weekday: "long",
+          day: "numeric",
+          month: "long"
+        });
+
+
+      document.getElementById("currentTime").innerHTML =
+        `<strong>${time}</strong><br>${date}`;
 
     }
 
-    updateClock();
+    updateTime();
 
-    setInterval(updateClock, 1000);
+    setInterval(updateTime, 1000);
 
 
     /* =========================
@@ -1752,9 +1607,9 @@
       "?latitude=" + latitude +
       "&longitude=" + longitude +
       "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
-      "&hourly=temperature_2m,precipitation_probability,precipitation" +
-      "&forecast_days=2" +
-      "&timezone=Asia%2FKolkata";
+      "&hourly=precipitation_probability" +
+      "&forecast_days=1" +
+      "&timezone=auto";
 
 
     fetch(weatherURL)
@@ -1763,24 +1618,11 @@
 
       .then(data => {
 
-        const current =
-          data.current;
+        const current = data.current;
 
 
         document.getElementById("temperature").textContent =
           Math.round(current.temperature_2m) + "°C";
-
-
-        document.getElementById("humidity").textContent =
-          "Humidity: " +
-          current.relative_humidity_2m +
-          "%";
-
-
-        document.getElementById("wind").textContent =
-          "Wind: " +
-          current.wind_speed_10m +
-          " km/h";
 
 
         document.getElementById("weather-condition").textContent =
@@ -1789,7 +1631,37 @@
           );
 
 
-        drawWeatherGraph(data);
+        const precipitation =
+          data.hourly &&
+          data.hourly.precipitation_probability;
+
+
+        if (precipitation && precipitation.length) {
+
+          const values =
+            precipitation.slice(0, 13);
+
+          const max =
+            Math.max(...values, 1);
+
+          const points =
+            values.map((value, index) => {
+
+              const x =
+                (index / (values.length - 1)) * 500;
+
+              const y =
+                100 - ((value / max) * 80);
+
+              return `${x},${y}`;
+
+            }).join(" ");
+
+
+          document.getElementById("weatherLine")
+            .setAttribute("points", points);
+
+        }
 
       })
 
@@ -1804,212 +1676,6 @@
 
       });
 
-
-    /* =========================
-       WEATHER GRAPH
-    ========================= */
-
-    function drawWeatherGraph(data) {
-
-      const hourly =
-        data.hourly;
-
-      const now =
-        new Date();
-
-
-      let startIndex =
-        0;
-
-
-      for (
-        let i = 0;
-        i < hourly.time.length;
-        i++
-      ) {
-
-        if (
-          new Date(hourly.time[i]) >= now
-        ) {
-
-          startIndex = i;
-          break;
-
-        }
-
-      }
-
-
-      const points =
-        12;
-
-
-      const temperatures =
-        hourly.temperature_2m.slice(
-          startIndex,
-          startIndex + points
-        );
-
-
-      const precipitation =
-        hourly.precipitation_probability.slice(
-          startIndex,
-          startIndex + points
-        );
-
-
-      if (
-        temperatures.length < 2
-      ) {
-        return;
-      }
-
-
-      const width = 900;
-      const height = 190;
-
-
-      const padding = 15;
-
-
-      const minTemp =
-        Math.min(...temperatures) - 2;
-
-      const maxTemp =
-        Math.max(...temperatures) + 2;
-
-
-      function makePoints(values, min, max) {
-
-        return values.map(
-          (value, index) => {
-
-            const x =
-              padding +
-              (
-                index /
-                (values.length - 1)
-              ) *
-              (width - padding * 2);
-
-
-            const y =
-              height -
-              padding -
-              (
-                (value - min) /
-                (max - min)
-              ) *
-              (height - padding * 2);
-
-
-            return `${x},${y}`;
-
-          }
-        );
-
-      }
-
-
-      const tempPoints =
-        makePoints(
-          temperatures,
-          minTemp,
-          maxTemp
-        );
-
-
-      const rainPoints =
-        makePoints(
-          precipitation,
-          0,
-          100
-        );
-
-
-      document.getElementById(
-        "temperatureLine"
-      ).setAttribute(
-        "points",
-        tempPoints.join(" ")
-      );
-
-
-      document.getElementById(
-        "rainLine"
-      ).setAttribute(
-        "points",
-        rainPoints.join(" ")
-      );
-
-
-      const firstRain =
-        rainPoints[0].split(",");
-
-      const lastRain =
-        rainPoints[rainPoints.length - 1].split(",");
-
-
-      const rainArea =
-        rainPoints.join(" ") +
-        ` ${lastRain[0]},${height} ${firstRain[0]},${height}`;
-
-
-      document.getElementById(
-        "rainArea"
-      ).setAttribute(
-        "d",
-        `M ${rainArea.replaceAll(" ", " L ")}`
-      );
-
-
-      const times =
-        document.getElementById(
-          "weatherTimes"
-        );
-
-
-      times.innerHTML = "";
-
-
-      for (
-        let i = 0;
-        i < temperatures.length;
-        i += 2
-      ) {
-
-        const span =
-          document.createElement("span");
-
-
-        const date =
-          new Date(
-            hourly.time[startIndex + i]
-          );
-
-
-        span.textContent =
-          date.toLocaleTimeString(
-            "en-IN",
-            {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-              timeZone: "Asia/Kolkata"
-            }
-          );
-
-
-        times.appendChild(span);
-
-      }
-
-    }
-
-
-    /* =========================
-       WEATHER DESCRIPTION
-    ========================= */
 
     function getWeatherDescription(code) {
 
@@ -2045,8 +1711,55 @@
 
     }
 
-  </script>
 
+    /* =========================
+       NAVIGATION SEARCH
+    ========================= */
+
+    const navSearch =
+      document.getElementById("navSearch");
+
+
+    navSearch.addEventListener("keydown", (event) => {
+
+      if (event.key !== "Enter") {
+        return;
+      }
+
+
+      const query =
+        navSearch.value
+          .trim()
+          .toLowerCase();
+
+
+      const destinations = {
+
+        home: "home",
+        about: "about",
+        "about me": "about",
+        projects: "projects",
+        project: "projects",
+        journey: "journey",
+        skills: "skills"
+
+      };
+
+
+      if (destinations[query]) {
+
+        document
+          .getElementById(destinations[query])
+          .scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }
+
+    });
+
+  </script>
 
 </body>
 </html>
+```
