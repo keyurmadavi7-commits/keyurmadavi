@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,8 +56,7 @@ section {
 
   will-change: transform;
 
-  transition:
-    filter 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
 .background-overlay {
@@ -140,8 +140,6 @@ section {
     0 10px 30px rgba(0,0,0,0.22);
 
   z-index: 1000;
-
-  box-sizing: border-box;
 }
 
 .nav-search {
@@ -235,17 +233,18 @@ section {
 
 
 /* =========================================================
-   GLASS
+   GLOBAL GLASS SECTOR SYSTEM — 1.2.2.9
 ========================================================= */
 
-.glass,
-.glass-journey,
-.project-card,
-.home-weather,
-.small-info,
-.now-playing {
+.glass-sector {
+  position: relative;
 
-  background: rgba(255,255,255,0.10);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.13),
+      rgba(255,255,255,0.07)
+    );
 
   border: 1px solid rgba(255,255,255,0.28);
 
@@ -258,9 +257,10 @@ section {
     0 15px 40px rgba(0,0,0,0.25);
 
   transform:
-    perspective(900px)
+    perspective(1100px)
     rotateX(0deg)
-    rotateY(0deg);
+    rotateY(0deg)
+    translate3d(0,0,0);
 
   transform-origin: center center;
 
@@ -269,82 +269,57 @@ section {
     box-shadow;
 
   transition:
-    transform 0.35s cubic-bezier(.22,.61,.36,1),
-    box-shadow 0.35s ease,
-    background 0.35s ease;
+    transform 0.16s cubic-bezier(.18,.72,.28,1),
+    box-shadow 0.2s ease,
+    background 0.3s ease;
+
+  overflow: hidden;
+}
+
+
+/* Subtle glass highlight */
+
+.glass-sector::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,0.09),
+      transparent 28%,
+      transparent 72%,
+      rgba(255,255,255,0.035)
+    );
+
+  opacity: 0.7;
+
+  z-index: 0;
+}
+
+
+/* Keep panel content above the highlight */
+
+.glass-sector > * {
+  position: relative;
+  z-index: 1;
 }
 
 
 /* =========================================================
-   GLASS CORNER DIPPING
+   GLASS SECTOR — DYNAMIC MOTION STATES
 ========================================================= */
 
-.glass.dip-top-left,
-.glass-journey.dip-top-left,
-.project-card.dip-top-left,
-.home-weather.dip-top-left,
-.small-info.dip-top-left,
-.now-playing.dip-top-left {
-  transform:
-    perspective(900px)
-    rotateX(1.7deg)
-    rotateY(-1.7deg);
-
+.glass-sector.motion-active {
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.24),
-    inset 0 -1px 1px rgba(0,0,0,0.05),
-    0 19px 44px rgba(0,0,0,0.29);
-}
-
-.glass.dip-top-right,
-.glass-journey.dip-top-right,
-.project-card.dip-top-right,
-.home-weather.dip-top-right,
-.small-info.dip-top-right,
-.now-playing.dip-top-right {
-  transform:
-    perspective(900px)
-    rotateX(1.7deg)
-    rotateY(1.7deg);
-
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.24),
-    inset 0 -1px 1px rgba(0,0,0,0.05),
-    0 19px 44px rgba(0,0,0,0.29);
-}
-
-.glass.dip-bottom-left,
-.glass-journey.dip-bottom-left,
-.project-card.dip-bottom-left,
-.home-weather.dip-bottom-left,
-.small-info.dip-bottom-left,
-.now-playing.dip-bottom-left {
-  transform:
-    perspective(900px)
-    rotateX(-1.7deg)
-    rotateY(-1.7deg);
-
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.24),
-    inset 0 -1px 1px rgba(0,0,0,0.05),
-    0 19px 44px rgba(0,0,0,0.29);
-}
-
-.glass.dip-bottom-right,
-.glass-journey.dip-bottom-right,
-.project-card.dip-bottom-right,
-.home-weather.dip-bottom-right,
-.small-info.dip-bottom-right,
-.now-playing.dip-bottom-right {
-  transform:
-    perspective(900px)
-    rotateX(-1.7deg)
-    rotateY(1.7deg);
-
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.24),
-    inset 0 -1px 1px rgba(0,0,0,0.05),
-    0 19px 44px rgba(0,0,0,0.29);
+    inset 0 1px 1px rgba(255,255,255,0.27),
+    inset 0 -1px 1px rgba(0,0,0,0.07),
+    0 22px 52px rgba(0,0,0,0.34);
 }
 
 
@@ -375,6 +350,11 @@ section {
 
   box-sizing: border-box;
 }
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
 
 .hero-title h1 {
   margin: 0;
@@ -909,10 +889,7 @@ section {
 
   border-radius: 20px;
 
-  transition:
-    transform 0.35s cubic-bezier(.22,.61,.36,1),
-    background 0.3s ease,
-    box-shadow 0.35s ease;
+  box-sizing: border-box;
 }
 
 .project-card:hover {
@@ -1110,12 +1087,7 @@ section {
     animation: none;
   }
 
-  .glass,
-  .glass-journey,
-  .project-card,
-  .home-weather,
-  .small-info,
-  .now-playing {
+  .glass-sector {
     transition: none;
   }
 
@@ -1266,7 +1238,7 @@ section {
   id="identity"
 >
 
-  <div class="glass hero-card">
+  <div class="glass-sector hero-card">
 
     <div class="hero-title">
 
@@ -1371,23 +1343,27 @@ section {
       About Me
     </h2>
 
-    <p class="about-text">
+    <div class="glass-sector about-panel">
 
-      Hi! I’m Keyur, founder of KEYUR™.
-      I build thoughtful digital experiences and creative projects
-      that make people feel hyped, inspired, and sometimes even emotional.
+      <p class="about-text">
 
-      I love mixing creativity with problem-solving, exploring tech and art,
-      and turning ideas into things people actually enjoy.
+        Hi! I’m Keyur, founder of KEYUR™.
+        I build thoughtful digital experiences and creative projects
+        that make people feel hyped, inspired, and sometimes even emotional.
 
-      From content creation to web development, every project I take on
-      is made with intention, attention to detail, and a little bit of chaos
-      that makes it fun.
+        I love mixing creativity with problem-solving, exploring tech and art,
+        and turning ideas into things people actually enjoy.
 
-      My goal? To leave a small mark in the digital world that makes people
-      think, feel, or just go “woah, that’s cool.”
+        From content creation to web development, every project I take on
+        is made with intention, attention to detail, and a little bit of chaos
+        that makes it fun.
 
-    </p>
+        My goal? To leave a small mark in the digital world that makes people
+        think, feel, or just go “woah, that’s cool.”
+
+      </p>
+
+    </div>
 
   </div>
 
@@ -1403,7 +1379,7 @@ section {
   id="journey"
 >
 
-  <div class="glass-journey">
+  <div class="glass-sector glass-journey">
 
     <h2>
       My Journey
@@ -1480,7 +1456,7 @@ section {
 
       <!-- WEATHER -->
 
-      <div class="home-weather">
+      <div class="glass-sector home-weather">
 
         <h3>
           Weather
@@ -1546,7 +1522,7 @@ section {
 
         <!-- COORDINATES -->
 
-        <div class="small-info">
+        <div class="glass-sector small-info">
 
           <h3>
             Coordinates
@@ -1577,7 +1553,7 @@ section {
 
         <!-- CURRENT TIME -->
 
-        <div class="small-info">
+        <div class="glass-sector small-info">
 
           <h3>
             Current Time
@@ -1599,7 +1575,7 @@ section {
 
     <!-- NOW PLAYING -->
 
-    <div class="now-playing">
+    <div class="glass-sector now-playing">
 
       <div class="playing-text">
 
@@ -1655,7 +1631,7 @@ section {
     <div class="projects-grid">
 
 
-      <div class="project-card">
+      <div class="glass-sector project-card">
 
         <h3>
           Project One — Universe Simulation
@@ -1675,7 +1651,7 @@ section {
       </div>
 
 
-      <div class="project-card">
+      <div class="glass-sector project-card">
 
         <h3>
           Project Two — Collab With My Friend
@@ -1697,7 +1673,7 @@ section {
       </div>
 
 
-      <div class="project-card">
+      <div class="glass-sector project-card">
 
         <h3>
           Project Three — Ultima Scanner
@@ -1725,7 +1701,7 @@ section {
 
 <!-- =====================================================
      JAVASCRIPT
-===================================================== -->
+========================================================= -->
 
 <script>
 
@@ -1750,6 +1726,7 @@ document.addEventListener("mousemove", (event) => {
 
 });
 
+
 function moveCursorFollower() {
 
   followerX +=
@@ -1759,9 +1736,15 @@ function moveCursorFollower() {
     (cursorY - followerY) * 0.12;
 
   cursorFollower.style.transform =
-    `translate3d(${followerX}px, ${followerY}px, 0)`;
+    `translate3d(
+      ${followerX}px,
+      ${followerY}px,
+      0
+    )`;
 
-  requestAnimationFrame(moveCursorFollower);
+  requestAnimationFrame(
+    moveCursorFollower
+  );
 
 }
 
@@ -1769,8 +1752,7 @@ moveCursorFollower();
 
 
 /* =========================================================
-   BACKGROUND PARALLAX
-   DESKTOP + MOBILE TOUCH
+   BACKGROUND PARALLAX — 1.2.2.9
 ========================================================= */
 
 const background =
@@ -1793,13 +1775,17 @@ document.addEventListener("mousemove", (event) => {
   const y =
     (event.clientY / window.innerHeight) - 0.5;
 
-  targetX = x * -7;
-  targetY = y * -5;
+
+  targetX =
+    x * -11;
+
+  targetY =
+    y * -8;
 
 });
 
 
-/* MOBILE */
+/* MOBILE / TABLET */
 
 document.addEventListener(
   "touchmove",
@@ -1808,8 +1794,10 @@ document.addEventListener(
     if (!event.touches.length)
       return;
 
+
     const touch =
       event.touches[0];
+
 
     const x =
       (touch.clientX / window.innerWidth) - 0.5;
@@ -1817,8 +1805,12 @@ document.addEventListener(
     const y =
       (touch.clientY / window.innerHeight) - 0.5;
 
-    targetX = x * -7;
-    targetY = y * -5;
+
+    targetX =
+      x * -11;
+
+    targetY =
+      y * -8;
 
   },
   {
@@ -1827,7 +1819,7 @@ document.addEventListener(
 );
 
 
-/* RETURN TO CENTER WHEN TOUCH ENDS */
+/* RETURN TO CENTER */
 
 document.addEventListener(
   "touchend",
@@ -1843,15 +1835,23 @@ document.addEventListener(
 function moveBackground() {
 
   currentX +=
-    (targetX - currentX) * 0.055;
+    (targetX - currentX) * 0.075;
 
   currentY +=
-    (targetY - currentY) * 0.055;
+    (targetY - currentY) * 0.075;
+
 
   background.style.transform =
-    `translate3d(${currentX}px, ${currentY}px, 0) scale(1.025)`;
+    `translate3d(
+      ${currentX}px,
+      ${currentY}px,
+      0
+    ) scale(1.025)`;
 
-  requestAnimationFrame(moveBackground);
+
+  requestAnimationFrame(
+    moveBackground
+  );
 
 }
 
@@ -1859,35 +1859,74 @@ moveBackground();
 
 
 /* =========================================================
-   GLASS CORNER DIPPING
+   GLOBAL GLASS SECTOR MOTION
+   1.2.2.9
 ========================================================= */
 
-const glassPanels =
+const glassSectors =
   document.querySelectorAll(
-    ".glass, .glass-journey, .project-card, .home-weather, .small-info, .now-playing"
+    ".glass-sector"
   );
 
 
-function clearGlassDip(panel) {
-
-  panel.classList.remove(
-    "dip-top-left",
-    "dip-top-right",
-    "dip-bottom-left",
-    "dip-bottom-right"
-  );
-
-}
+const sectorStates =
+  new WeakMap();
 
 
-function updateGlassDip(
-  panel,
+/*
+   Each sector gets its own motion state.
+
+   This means the entire website can use
+   the same glass physics system without
+   manually creating dip-top-left,
+   dip-bottom-right, etc.
+*/
+
+glassSectors.forEach(
+  (sector) => {
+
+    sectorStates.set(
+      sector,
+      {
+        targetRotateX: 0,
+        targetRotateY: 0,
+
+        currentRotateX: 0,
+        currentRotateY: 0,
+
+        targetZ: 0,
+        currentZ: 0,
+
+        active: false
+      }
+    );
+
+  }
+);
+
+
+/*
+   Calculate the panel's response
+   to the pointer position.
+*/
+
+function updateSectorMotion(
+  sector,
   clientX,
   clientY
 ) {
 
   const rect =
-    panel.getBoundingClientRect();
+    sector.getBoundingClientRect();
+
+
+  const state =
+    sectorStates.get(sector);
+
+
+  if (!state)
+    return;
+
 
   const x =
     clientX - rect.left;
@@ -1895,96 +1934,187 @@ function updateGlassDip(
   const y =
     clientY - rect.top;
 
-  const centerX =
-    rect.width / 2;
 
-  const centerY =
-    rect.height / 2;
+  /*
+     Normalize pointer position
+     from -1 to +1.
+  */
 
+  const normalizedX =
+    (x / rect.width - 0.5) * 2;
 
-  clearGlassDip(panel);
+  const normalizedY =
+    (y / rect.height - 0.5) * 2;
 
 
   /*
-     Determine which of the four corners
-     is closest to the cursor/finger.
+     Main glass tilt.
+
+     The further from the center,
+     the stronger the motion.
   */
 
-  const distances = {
+  const tiltStrength =
+    4.2;
 
-    "dip-top-left":
+
+  state.targetRotateY =
+    normalizedX * tiltStrength;
+
+  state.targetRotateX =
+    normalizedY * -tiltStrength;
+
+
+  /*
+     Distance from the panel center.
+
+     Used to create additional depth.
+  */
+
+  const distance =
+    Math.min(
+      1,
       Math.hypot(
-        x,
-        y
-      ),
-
-    "dip-top-right":
-      Math.hypot(
-        rect.width - x,
-        y
-      ),
-
-    "dip-bottom-left":
-      Math.hypot(
-        x,
-        rect.height - y
-      ),
-
-    "dip-bottom-right":
-      Math.hypot(
-        rect.width - x,
-        rect.height - y
-      )
-
-  };
-
-
-  let closestCorner =
-    "dip-top-left";
-
-  let closestDistance =
-    Infinity;
-
-
-  Object.entries(distances)
-    .forEach(
-      ([corner, distance]) => {
-
-        if (
-          distance <
-          closestDistance
-        ) {
-
-          closestDistance =
-            distance;
-
-          closestCorner =
-            corner;
-
-        }
-
-      }
+        normalizedX,
+        normalizedY
+      ) / 1.414
     );
 
 
-  panel.classList.add(
-    closestCorner
+  state.targetZ =
+    distance * 4;
+
+
+  state.active = true;
+
+
+  sector.classList.add(
+    "motion-active"
   );
 
 }
 
 
-/* DESKTOP POINTER */
+/*
+   Smoothly return a sector to neutral.
+*/
 
-glassPanels.forEach(
-  (panel) => {
+function resetSectorMotion(
+  sector
+) {
 
-    panel.addEventListener(
+  const state =
+    sectorStates.get(sector);
+
+
+  if (!state)
+    return;
+
+
+  state.targetRotateX = 0;
+  state.targetRotateY = 0;
+  state.targetZ = 0;
+
+  state.active = false;
+
+  sector.classList.remove(
+    "motion-active"
+  );
+
+}
+
+
+/*
+   Render every sector continuously.
+
+   This is what makes the movement feel
+   physical instead of snapping between states.
+*/
+
+function animateGlassSectors() {
+
+  glassSectors.forEach(
+    (sector) => {
+
+      const state =
+        sectorStates.get(sector);
+
+
+      if (!state)
+        return;
+
+
+      state.currentRotateX +=
+        (
+          state.targetRotateX -
+          state.currentRotateX
+        ) * 0.14;
+
+
+      state.currentRotateY +=
+        (
+          state.targetRotateY -
+          state.currentRotateY
+        ) * 0.14;
+
+
+      state.currentZ +=
+        (
+          state.targetZ -
+          state.currentZ
+        ) * 0.14;
+
+
+      sector.style.transform =
+        `perspective(1100px)
+         rotateX(${state.currentRotateX}deg)
+         rotateY(${state.currentRotateY}deg)
+         translate3d(0,0,${state.currentZ}px)`;
+
+
+      /*
+         Keep animating until the values are
+         effectively neutral.
+      */
+
+      if (
+        !state.active &&
+        Math.abs(state.currentRotateX) < 0.01 &&
+        Math.abs(state.currentRotateY) < 0.01 &&
+        Math.abs(state.currentZ) < 0.01
+      ) {
+
+        sector.style.transform =
+          "perspective(1100px) rotateX(0deg) rotateY(0deg) translate3d(0,0,0)";
+
+      }
+
+    }
+  );
+
+
+  requestAnimationFrame(
+    animateGlassSectors
+  );
+
+}
+
+animateGlassSectors();
+
+
+/* =========================================================
+   DESKTOP GLASS INPUT
+========================================================= */
+
+glassSectors.forEach(
+  (sector) => {
+
+    sector.addEventListener(
       "mousemove",
       (event) => {
 
-        updateGlassDip(
-          panel,
+        updateSectorMotion(
+          sector,
           event.clientX,
           event.clientY
         );
@@ -1993,30 +2123,36 @@ glassPanels.forEach(
     );
 
 
-    panel.addEventListener(
+    sector.addEventListener(
       "mouseleave",
       () => {
 
-        clearGlassDip(panel);
+        resetSectorMotion(
+          sector
+        );
 
       }
     );
 
 
-    /* MOBILE TOUCH */
+    /* =====================================================
+       MOBILE / TABLET TOUCH
+    ===================================================== */
 
-    panel.addEventListener(
+    sector.addEventListener(
       "touchstart",
       (event) => {
 
         if (!event.touches.length)
           return;
 
+
         const touch =
           event.touches[0];
 
-        updateGlassDip(
-          panel,
+
+        updateSectorMotion(
+          sector,
           touch.clientX,
           touch.clientY
         );
@@ -2028,18 +2164,20 @@ glassPanels.forEach(
     );
 
 
-    panel.addEventListener(
+    sector.addEventListener(
       "touchmove",
       (event) => {
 
         if (!event.touches.length)
           return;
 
+
         const touch =
           event.touches[0];
 
-        updateGlassDip(
-          panel,
+
+        updateSectorMotion(
+          sector,
           touch.clientX,
           touch.clientY
         );
@@ -2051,21 +2189,25 @@ glassPanels.forEach(
     );
 
 
-    panel.addEventListener(
+    sector.addEventListener(
       "touchend",
       () => {
 
-        clearGlassDip(panel);
+        resetSectorMotion(
+          sector
+        );
 
       }
     );
 
 
-    panel.addEventListener(
+    sector.addEventListener(
       "touchcancel",
       () => {
 
-        clearGlassDip(panel);
+        resetSectorMotion(
+          sector
+        );
 
       }
     );
@@ -2083,6 +2225,7 @@ function updateTime() {
   const now =
     new Date();
 
+
   const time =
     now.toLocaleTimeString(
       "en-IN",
@@ -2095,6 +2238,7 @@ function updateTime() {
       }
     );
 
+
   const date =
     now.toLocaleDateString(
       "en-IN",
@@ -2106,14 +2250,24 @@ function updateTime() {
       }
     );
 
+
   document.getElementById(
     "currentTime"
   ).innerHTML =
-    `<div class="time-value">${time}</div>
-     <div>${date}</div>
-     <div>Mumbai / IST</div>`;
+    `<div class="time-value">
+       ${time}
+     </div>
+
+     <div>
+       ${date}
+     </div>
+
+     <div>
+       Mumbai / IST
+     </div>`;
 
 }
+
 
 updateTime();
 
@@ -2132,6 +2286,7 @@ const latitude =
 
 const longitude =
   72.8777;
+
 
 const weatherURL =
   "https://api.open-meteo.com/v1/forecast" +
@@ -2156,6 +2311,7 @@ fetch(weatherURL)
       const current =
         data.current;
 
+
       document.getElementById(
         "temperature"
       ).textContent =
@@ -2174,8 +2330,7 @@ fetch(weatherURL)
 
       const precipitation =
         data.hourly &&
-        data.hourly
-          .precipitation_probability;
+        data.hourly.precipitation_probability;
 
 
       if (
@@ -2208,12 +2363,14 @@ fetch(weatherURL)
                     (values.length - 1)
                   ) * 500;
 
+
                 const y =
                   100 -
                   (
                     (value / max) *
                     80
                   );
+
 
                 return `${x},${y}`;
 
@@ -2258,7 +2415,9 @@ fetch(weatherURL)
   );
 
 
-function getWeatherDescription(code) {
+function getWeatherDescription(
+  code
+) {
 
   if (code === 0)
     return "Clear sky";
@@ -2479,3 +2638,4 @@ updateActiveNav();
 
 </body>
 </html>
+```
