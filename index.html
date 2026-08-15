@@ -41,15 +41,22 @@ section {
 
   background:
     linear-gradient(
-      rgba(0,0,0,0.22),
-      rgba(0,0,0,0.32)
+      rgba(0,0,0,0.38),
+      rgba(0,0,0,0.50)
     ),
     url("https://images.unsplash.com/photo-1573326008737-a215597aac86?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
     center / cover no-repeat;
 
   z-index: -2;
-  transform: translate3d(0,0,0);
+
+  transform:
+    translate3d(0,0,0)
+    scale(1.025);
+
   will-change: transform;
+
+  transition:
+    filter 0.3s ease;
 }
 
 .background-overlay {
@@ -58,8 +65,8 @@ section {
 
   background:
     linear-gradient(
-      rgba(0,0,0,0.12),
-      rgba(0,0,0,0.22)
+      rgba(0,0,0,0.16),
+      rgba(0,0,0,0.30)
     );
 
   pointer-events: none;
@@ -90,7 +97,8 @@ section {
   pointer-events: none;
   z-index: 9999;
 
-  transform: translate3d(-50%,-50%,0);
+  transform:
+    translate3d(-50%,-50%,0);
 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -248,6 +256,95 @@ section {
     inset 0 1px 1px rgba(255,255,255,0.20),
     inset 0 -1px 1px rgba(0,0,0,0.05),
     0 15px 40px rgba(0,0,0,0.25);
+
+  transform:
+    perspective(900px)
+    rotateX(0deg)
+    rotateY(0deg);
+
+  transform-origin: center center;
+
+  will-change:
+    transform,
+    box-shadow;
+
+  transition:
+    transform 0.35s cubic-bezier(.22,.61,.36,1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+
+/* =========================================================
+   GLASS CORNER DIPPING
+========================================================= */
+
+.glass.dip-top-left,
+.glass-journey.dip-top-left,
+.project-card.dip-top-left,
+.home-weather.dip-top-left,
+.small-info.dip-top-left,
+.now-playing.dip-top-left {
+  transform:
+    perspective(900px)
+    rotateX(1.7deg)
+    rotateY(-1.7deg);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.24),
+    inset 0 -1px 1px rgba(0,0,0,0.05),
+    0 19px 44px rgba(0,0,0,0.29);
+}
+
+.glass.dip-top-right,
+.glass-journey.dip-top-right,
+.project-card.dip-top-right,
+.home-weather.dip-top-right,
+.small-info.dip-top-right,
+.now-playing.dip-top-right {
+  transform:
+    perspective(900px)
+    rotateX(1.7deg)
+    rotateY(1.7deg);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.24),
+    inset 0 -1px 1px rgba(0,0,0,0.05),
+    0 19px 44px rgba(0,0,0,0.29);
+}
+
+.glass.dip-bottom-left,
+.glass-journey.dip-bottom-left,
+.project-card.dip-bottom-left,
+.home-weather.dip-bottom-left,
+.small-info.dip-bottom-left,
+.now-playing.dip-bottom-left {
+  transform:
+    perspective(900px)
+    rotateX(-1.7deg)
+    rotateY(-1.7deg);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.24),
+    inset 0 -1px 1px rgba(0,0,0,0.05),
+    0 19px 44px rgba(0,0,0,0.29);
+}
+
+.glass.dip-bottom-right,
+.glass-journey.dip-bottom-right,
+.project-card.dip-bottom-right,
+.home-weather.dip-bottom-right,
+.small-info.dip-bottom-right,
+.now-playing.dip-bottom-right {
+  transform:
+    perspective(900px)
+    rotateX(-1.7deg)
+    rotateY(1.7deg);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.24),
+    inset 0 -1px 1px rgba(0,0,0,0.05),
+    0 19px 44px rgba(0,0,0,0.29);
 }
 
 
@@ -504,7 +601,9 @@ section {
 }
 
 
-/* WEATHER + RIGHT COLUMN */
+/* =========================================================
+   WEATHER + RIGHT COLUMN
+========================================================= */
 
 .home-information {
   display: grid;
@@ -625,7 +724,9 @@ section {
 }
 
 
-/* RIGHT SIDE */
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
 
 .small-information {
   display: grid;
@@ -662,7 +763,9 @@ section {
 }
 
 
-/* NOW PLAYING */
+/* =========================================================
+   NOW PLAYING
+========================================================= */
 
 .now-playing {
   margin-top: 18px;
@@ -725,16 +828,55 @@ section {
     frequency 1.2s ease-in-out infinite alternate;
 }
 
-.frequency span:nth-child(1) { height: 10px; animation-delay: .1s; }
-.frequency span:nth-child(2) { height: 18px; animation-delay: .2s; }
-.frequency span:nth-child(3) { height: 26px; animation-delay: .3s; }
-.frequency span:nth-child(4) { height: 15px; animation-delay: .4s; }
-.frequency span:nth-child(5) { height: 30px; animation-delay: .5s; }
-.frequency span:nth-child(6) { height: 20px; animation-delay: .6s; }
-.frequency span:nth-child(7) { height: 12px; animation-delay: .7s; }
-.frequency span:nth-child(8) { height: 25px; animation-delay: .8s; }
-.frequency span:nth-child(9) { height: 17px; animation-delay: .9s; }
-.frequency span:nth-child(10) { height: 28px; animation-delay: 1s; }
+.frequency span:nth-child(1) {
+  height: 10px;
+  animation-delay: .1s;
+}
+
+.frequency span:nth-child(2) {
+  height: 18px;
+  animation-delay: .2s;
+}
+
+.frequency span:nth-child(3) {
+  height: 26px;
+  animation-delay: .3s;
+}
+
+.frequency span:nth-child(4) {
+  height: 15px;
+  animation-delay: .4s;
+}
+
+.frequency span:nth-child(5) {
+  height: 30px;
+  animation-delay: .5s;
+}
+
+.frequency span:nth-child(6) {
+  height: 20px;
+  animation-delay: .6s;
+}
+
+.frequency span:nth-child(7) {
+  height: 12px;
+  animation-delay: .7s;
+}
+
+.frequency span:nth-child(8) {
+  height: 25px;
+  animation-delay: .8s;
+}
+
+.frequency span:nth-child(9) {
+  height: 17px;
+  animation-delay: .9s;
+}
+
+.frequency span:nth-child(10) {
+  height: 28px;
+  animation-delay: 1s;
+}
 
 @keyframes frequency {
   from {
@@ -768,13 +910,12 @@ section {
   border-radius: 20px;
 
   transition:
-    transform 0.3s ease,
-    background 0.3s ease;
+    transform 0.35s cubic-bezier(.22,.61,.36,1),
+    background 0.3s ease,
+    box-shadow 0.35s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-
   background:
     rgba(255,255,255,0.14);
 }
@@ -944,10 +1085,38 @@ section {
   }
 
   .background {
-    inset: -2%;
+    inset: -4%;
 
-    width: 104%;
-    height: 104%;
+    width: 108%;
+    height: 108%;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .norge-track,
+  .frequency span,
+  .scroll-down {
+    animation: none;
+  }
+
+  .glass,
+  .glass-journey,
+  .project-card,
+  .home-weather,
+  .small-info,
+  .now-playing {
+    transition: none;
   }
 
 }
@@ -1600,7 +1769,8 @@ moveCursorFollower();
 
 
 /* =========================================================
-   BACKGROUND MOVEMENT
+   BACKGROUND PARALLAX
+   DESKTOP + MOBILE TOUCH
 ========================================================= */
 
 const background =
@@ -1612,6 +1782,9 @@ let targetY = 0;
 let currentX = 0;
 let currentY = 0;
 
+
+/* DESKTOP */
+
 document.addEventListener("mousemove", (event) => {
 
   const x =
@@ -1620,21 +1793,63 @@ document.addEventListener("mousemove", (event) => {
   const y =
     (event.clientY / window.innerHeight) - 0.5;
 
-  targetX = x * -5;
-  targetY = y * -3;
+  targetX = x * -7;
+  targetY = y * -5;
 
 });
+
+
+/* MOBILE */
+
+document.addEventListener(
+  "touchmove",
+  (event) => {
+
+    if (!event.touches.length)
+      return;
+
+    const touch =
+      event.touches[0];
+
+    const x =
+      (touch.clientX / window.innerWidth) - 0.5;
+
+    const y =
+      (touch.clientY / window.innerHeight) - 0.5;
+
+    targetX = x * -7;
+    targetY = y * -5;
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+/* RETURN TO CENTER WHEN TOUCH ENDS */
+
+document.addEventListener(
+  "touchend",
+  () => {
+
+    targetX = 0;
+    targetY = 0;
+
+  }
+);
+
 
 function moveBackground() {
 
   currentX +=
-    (targetX - currentX) * 0.05;
+    (targetX - currentX) * 0.055;
 
   currentY +=
-    (targetY - currentY) * 0.05;
+    (targetY - currentY) * 0.055;
 
   background.style.transform =
-    `translate3d(${currentX}px, ${currentY}px, 0)`;
+    `translate3d(${currentX}px, ${currentY}px, 0) scale(1.025)`;
 
   requestAnimationFrame(moveBackground);
 
@@ -1644,31 +1859,256 @@ moveBackground();
 
 
 /* =========================================================
+   GLASS CORNER DIPPING
+========================================================= */
+
+const glassPanels =
+  document.querySelectorAll(
+    ".glass, .glass-journey, .project-card, .home-weather, .small-info, .now-playing"
+  );
+
+
+function clearGlassDip(panel) {
+
+  panel.classList.remove(
+    "dip-top-left",
+    "dip-top-right",
+    "dip-bottom-left",
+    "dip-bottom-right"
+  );
+
+}
+
+
+function updateGlassDip(
+  panel,
+  clientX,
+  clientY
+) {
+
+  const rect =
+    panel.getBoundingClientRect();
+
+  const x =
+    clientX - rect.left;
+
+  const y =
+    clientY - rect.top;
+
+  const centerX =
+    rect.width / 2;
+
+  const centerY =
+    rect.height / 2;
+
+
+  clearGlassDip(panel);
+
+
+  /*
+     Determine which of the four corners
+     is closest to the cursor/finger.
+  */
+
+  const distances = {
+
+    "dip-top-left":
+      Math.hypot(
+        x,
+        y
+      ),
+
+    "dip-top-right":
+      Math.hypot(
+        rect.width - x,
+        y
+      ),
+
+    "dip-bottom-left":
+      Math.hypot(
+        x,
+        rect.height - y
+      ),
+
+    "dip-bottom-right":
+      Math.hypot(
+        rect.width - x,
+        rect.height - y
+      )
+
+  };
+
+
+  let closestCorner =
+    "dip-top-left";
+
+  let closestDistance =
+    Infinity;
+
+
+  Object.entries(distances)
+    .forEach(
+      ([corner, distance]) => {
+
+        if (
+          distance <
+          closestDistance
+        ) {
+
+          closestDistance =
+            distance;
+
+          closestCorner =
+            corner;
+
+        }
+
+      }
+    );
+
+
+  panel.classList.add(
+    closestCorner
+  );
+
+}
+
+
+/* DESKTOP POINTER */
+
+glassPanels.forEach(
+  (panel) => {
+
+    panel.addEventListener(
+      "mousemove",
+      (event) => {
+
+        updateGlassDip(
+          panel,
+          event.clientX,
+          event.clientY
+        );
+
+      }
+    );
+
+
+    panel.addEventListener(
+      "mouseleave",
+      () => {
+
+        clearGlassDip(panel);
+
+      }
+    );
+
+
+    /* MOBILE TOUCH */
+
+    panel.addEventListener(
+      "touchstart",
+      (event) => {
+
+        if (!event.touches.length)
+          return;
+
+        const touch =
+          event.touches[0];
+
+        updateGlassDip(
+          panel,
+          touch.clientX,
+          touch.clientY
+        );
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    panel.addEventListener(
+      "touchmove",
+      (event) => {
+
+        if (!event.touches.length)
+          return;
+
+        const touch =
+          event.touches[0];
+
+        updateGlassDip(
+          panel,
+          touch.clientX,
+          touch.clientY
+        );
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    panel.addEventListener(
+      "touchend",
+      () => {
+
+        clearGlassDip(panel);
+
+      }
+    );
+
+
+    panel.addEventListener(
+      "touchcancel",
+      () => {
+
+        clearGlassDip(panel);
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
    CURRENT TIME
 ========================================================= */
 
 function updateTime() {
 
-  const now = new Date();
+  const now =
+    new Date();
 
   const time =
-    now.toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-      timeZone: "Asia/Kolkata"
-    });
+    now.toLocaleTimeString(
+      "en-IN",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata"
+      }
+    );
 
   const date =
-    now.toLocaleDateString("en-IN", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      timeZone: "Asia/Kolkata"
-    });
+    now.toLocaleDateString(
+      "en-IN",
+      {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        timeZone: "Asia/Kolkata"
+      }
+    );
 
-  document.getElementById("currentTime").innerHTML =
+  document.getElementById(
+    "currentTime"
+  ).innerHTML =
     `<div class="time-value">${time}</div>
      <div>${date}</div>
      <div>Mumbai / IST</div>`;
@@ -1677,15 +2117,21 @@ function updateTime() {
 
 updateTime();
 
-setInterval(updateTime, 1000);
+setInterval(
+  updateTime,
+  1000
+);
 
 
 /* =========================================================
    WEATHER
 ========================================================= */
 
-const latitude = 19.0760;
-const longitude = 72.8777;
+const latitude =
+  19.0760;
+
+const longitude =
+  72.8777;
 
 const weatherURL =
   "https://api.open-meteo.com/v1/forecast" +
@@ -1699,69 +2145,117 @@ const weatherURL =
 
 fetch(weatherURL)
 
-  .then(response => response.json())
+  .then(
+    response =>
+      response.json()
+  )
 
-  .then(data => {
+  .then(
+    data => {
 
-    const current = data.current;
+      const current =
+        data.current;
 
-    document.getElementById("temperature").textContent =
-      Math.round(current.temperature_2m) + "°C";
+      document.getElementById(
+        "temperature"
+      ).textContent =
+        Math.round(
+          current.temperature_2m
+        ) + "°C";
 
-    document.getElementById("weather-condition").textContent =
-      getWeatherDescription(current.weather_code);
 
-    const precipitation =
-      data.hourly &&
-      data.hourly.precipitation_probability;
-
-    if (
-      precipitation &&
-      precipitation.length
-    ) {
-
-      const values =
-        precipitation.slice(0, 13);
-
-      const max =
-        Math.max(...values, 1);
-
-      const points =
-        values
-          .map((value, index) => {
-
-            const x =
-              (index / (values.length - 1)) * 500;
-
-            const y =
-              100 - ((value / max) * 80);
-
-            return `${x},${y}`;
-
-          })
-          .join(" ");
-
-      document
-        .getElementById("weatherLine")
-        .setAttribute(
-          "points",
-          points
+      document.getElementById(
+        "weather-condition"
+      ).textContent =
+        getWeatherDescription(
+          current.weather_code
         );
 
+
+      const precipitation =
+        data.hourly &&
+        data.hourly
+          .precipitation_probability;
+
+
+      if (
+        precipitation &&
+        precipitation.length
+      ) {
+
+        const values =
+          precipitation.slice(
+            0,
+            13
+          );
+
+
+        const max =
+          Math.max(
+            ...values,
+            1
+          );
+
+
+        const points =
+          values
+            .map(
+              (value, index) => {
+
+                const x =
+                  (
+                    index /
+                    (values.length - 1)
+                  ) * 500;
+
+                const y =
+                  100 -
+                  (
+                    (value / max) *
+                    80
+                  );
+
+                return `${x},${y}`;
+
+              }
+            )
+            .join(" ");
+
+
+        document
+          .getElementById(
+            "weatherLine"
+          )
+          .setAttribute(
+            "points",
+            points
+          );
+
+      }
+
     }
+  )
 
-  })
+  .catch(
+    () => {
 
-  .catch(() => {
+      document
+        .getElementById(
+          "temperature"
+        )
+        .textContent =
+        "Unavailable";
 
-    document.getElementById("temperature")
-      .textContent = "Unavailable";
 
-    document.getElementById("weather-condition")
-      .textContent =
+      document
+        .getElementById(
+          "weather-condition"
+        )
+        .textContent =
         "Weather data couldn't be loaded.";
 
-  });
+    }
+  );
 
 
 function getWeatherDescription(code) {
@@ -1769,19 +2263,34 @@ function getWeatherDescription(code) {
   if (code === 0)
     return "Clear sky";
 
-  if (code >= 1 && code <= 3)
+  if (
+    code >= 1 &&
+    code <= 3
+  )
     return "Partly cloudy";
 
-  if (code >= 45 && code <= 48)
+  if (
+    code >= 45 &&
+    code <= 48
+  )
     return "Foggy";
 
-  if (code >= 51 && code <= 67)
+  if (
+    code >= 51 &&
+    code <= 67
+  )
     return "Rainy";
 
-  if (code >= 71 && code <= 77)
+  if (
+    code >= 71 &&
+    code <= 77
+  )
     return "Snowy";
 
-  if (code >= 80 && code <= 82)
+  if (
+    code >= 80 &&
+    code <= 82
+  )
     return "Rain showers";
 
   if (code >= 95)
@@ -1797,28 +2306,40 @@ function getWeatherDescription(code) {
 ========================================================= */
 
 const navSearch =
-  document.getElementById("navSearch");
+  document.getElementById(
+    "navSearch"
+  );
+
 
 navSearch.addEventListener(
   "keydown",
   (event) => {
 
-    if (event.key !== "Enter")
+    if (
+      event.key !== "Enter"
+    )
       return;
+
 
     const query =
       navSearch.value
         .trim()
         .toLowerCase();
 
+
     const destinations = {
 
-      home: "home",
+      home:
+        "home",
 
-      about: "about",
-      "about me": "about",
+      about:
+        "about",
 
-      journey: "journey",
+      "about me":
+        "about",
+
+      journey:
+        "journey",
 
       projects:
         "projects",
@@ -1834,7 +2355,10 @@ navSearch.addEventListener(
 
     };
 
-    if (destinations[query]) {
+
+    if (
+      destinations[query]
+    ) {
 
       document
         .getElementById(
@@ -1844,7 +2368,9 @@ navSearch.addEventListener(
           behavior: "smooth"
         });
 
-      navSearch.value = "";
+
+      navSearch.value =
+        "";
 
     }
 
@@ -1857,46 +2383,89 @@ navSearch.addEventListener(
 ========================================================= */
 
 const navButtons =
-  document.querySelectorAll(".nav-button");
+  document.querySelectorAll(
+    ".nav-button"
+  );
+
 
 const navSections = [
-  document.getElementById("identity"),
-  document.getElementById("about"),
-  document.getElementById("journey"),
-  document.getElementById("home"),
-  document.getElementById("projects")
+
+  document.getElementById(
+    "identity"
+  ),
+
+  document.getElementById(
+    "about"
+  ),
+
+  document.getElementById(
+    "journey"
+  ),
+
+  document.getElementById(
+    "home"
+  ),
+
+  document.getElementById(
+    "projects"
+  )
+
 ];
+
 
 function updateActiveNav() {
 
   let current =
     navSections[0].id;
 
-  navSections.forEach(section => {
 
-    const rect =
-      section.getBoundingClientRect();
+  navSections.forEach(
+    section => {
 
-    if (rect.top <= window.innerHeight * 0.45) {
-      current = section.id;
+      const rect =
+        section.getBoundingClientRect();
+
+
+      if (
+        rect.top <=
+        window.innerHeight * 0.45
+      ) {
+
+        current =
+          section.id;
+
+      }
+
     }
+  );
 
-  });
 
-  navButtons.forEach(button => {
+  navButtons.forEach(
+    button => {
 
-    button.classList.remove("active");
+      button.classList.remove(
+        "active"
+      );
 
-    if (
-      button.getAttribute("href") ===
-      "#" + current
-    ) {
-      button.classList.add("active");
+
+      if (
+        button.getAttribute(
+          "href"
+        ) ===
+        "#" + current
+      ) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
     }
-
-  });
+  );
 
 }
+
 
 window.addEventListener(
   "scroll",
@@ -1904,6 +2473,7 @@ window.addEventListener(
 );
 
 updateActiveNav();
+
 
 </script>
 
