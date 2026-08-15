@@ -30,7 +30,7 @@ section {
 
 
 /* =========================================================
-   BACKGROUND
+   BACKGROUND — 1.2.3
 ========================================================= */
 
 .background {
@@ -44,7 +44,7 @@ section {
       rgba(0,0,0,0.38),
       rgba(0,0,0,0.50)
     ),
-    url("https://images.unsplash.com/photo-1573326008737-a215597aac86?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
     center / cover no-repeat;
 
   z-index: -2;
@@ -232,7 +232,7 @@ section {
 
 
 /* =========================================================
-   GLOBAL GLASS SECTOR SYSTEM — 1.2.2.9
+   GLOBAL GLASS SECTOR SYSTEM — 1.2.3
 ========================================================= */
 
 .glass-sector {
@@ -276,7 +276,9 @@ section {
 }
 
 
-/* Subtle glass highlight */
+/* =========================================================
+   GLASS HIGHLIGHT
+========================================================= */
 
 .glass-sector::before {
   content: "";
@@ -301,9 +303,6 @@ section {
   z-index: 0;
 }
 
-
-/* Keep panel content above the highlight */
-
 .glass-sector > * {
   position: relative;
   z-index: 1;
@@ -311,7 +310,7 @@ section {
 
 
 /* =========================================================
-   GLASS SECTOR — DYNAMIC MOTION STATES
+   GLASS MOTION STATE
 ========================================================= */
 
 .glass-sector.motion-active {
@@ -516,6 +515,14 @@ section {
   color: #ddd;
 
   margin: 0;
+
+  padding: 45px 50px;
+
+  box-sizing: border-box;
+}
+
+.about-panel {
+  border-radius: 25px;
 }
 
 
@@ -975,7 +982,6 @@ section {
 
   .small-information {
     grid-template-columns: 1fr 1fr;
-
     grid-template-rows: none;
   }
 
@@ -1161,6 +1167,7 @@ section {
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9"></circle>
       <path d="M12 10v6"></path>
+
       <circle
         cx="12"
         cy="7"
@@ -1168,6 +1175,7 @@ section {
         fill="currentColor"
         stroke="none"
       ></circle>
+
     </svg>
 
   </a>
@@ -1700,7 +1708,7 @@ section {
 
 <!-- =====================================================
      JAVASCRIPT
-========================================================= -->
+===================================================== -->
 
 <script>
 
@@ -1751,7 +1759,7 @@ moveCursorFollower();
 
 
 /* =========================================================
-   BACKGROUND PARALLAX — 1.2.2.9
+   BACKGROUND PARALLAX — 1.2.3
 ========================================================= */
 
 const background =
@@ -1859,7 +1867,7 @@ moveBackground();
 
 /* =========================================================
    GLOBAL GLASS SECTOR MOTION
-   1.2.2.9
+   1.2.3
 ========================================================= */
 
 const glassSectors =
@@ -1871,15 +1879,6 @@ const glassSectors =
 const sectorStates =
   new WeakMap();
 
-
-/*
-   Each sector gets its own motion state.
-
-   This means the entire website can use
-   the same glass physics system without
-   manually creating dip-top-left,
-   dip-bottom-right, etc.
-*/
 
 glassSectors.forEach(
   (sector) => {
@@ -1904,10 +1903,9 @@ glassSectors.forEach(
 );
 
 
-/*
-   Calculate the panel's response
-   to the pointer position.
-*/
+/* =========================================================
+   PANEL MOTION CALCULATION
+========================================================= */
 
 function updateSectorMotion(
   sector,
@@ -1934,24 +1932,12 @@ function updateSectorMotion(
     clientY - rect.top;
 
 
-  /*
-     Normalize pointer position
-     from -1 to +1.
-  */
-
   const normalizedX =
     (x / rect.width - 0.5) * 2;
 
   const normalizedY =
     (y / rect.height - 0.5) * 2;
 
-
-  /*
-     Main glass tilt.
-
-     The further from the center,
-     the stronger the motion.
-  */
 
   const tiltStrength =
     4.2;
@@ -1963,12 +1949,6 @@ function updateSectorMotion(
   state.targetRotateX =
     normalizedY * -tiltStrength;
 
-
-  /*
-     Distance from the panel center.
-
-     Used to create additional depth.
-  */
 
   const distance =
     Math.min(
@@ -1994,9 +1974,9 @@ function updateSectorMotion(
 }
 
 
-/*
-   Smoothly return a sector to neutral.
-*/
+/* =========================================================
+   RESET PANEL MOTION
+========================================================= */
 
 function resetSectorMotion(
   sector
@@ -2023,12 +2003,9 @@ function resetSectorMotion(
 }
 
 
-/*
-   Render every sector continuously.
-
-   This is what makes the movement feel
-   physical instead of snapping between states.
-*/
+/* =========================================================
+   PANEL ANIMATION LOOP
+========================================================= */
 
 function animateGlassSectors() {
 
@@ -2070,11 +2047,6 @@ function animateGlassSectors() {
          rotateY(${state.currentRotateY}deg)
          translate3d(0,0,${state.currentZ}px)`;
 
-
-      /*
-         Keep animating until the values are
-         effectively neutral.
-      */
 
       if (
         !state.active &&
@@ -2134,9 +2106,7 @@ glassSectors.forEach(
     );
 
 
-    /* =====================================================
-       MOBILE / TABLET TOUCH
-    ===================================================== */
+    /* MOBILE / TABLET TOUCH */
 
     sector.addEventListener(
       "touchstart",
