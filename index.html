@@ -30,7 +30,7 @@ section {
 
 
 /* =========================================================
-   BACKGROUND — 1.2.3
+   BACKGROUND — 1.2.3.1
 ========================================================= */
 
 .background {
@@ -44,7 +44,7 @@ section {
       rgba(0,0,0,0.38),
       rgba(0,0,0,0.50)
     ),
-    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaGdlfDB8fHx8fA%3D%3D")
     center / cover no-repeat;
 
   z-index: -2;
@@ -232,7 +232,8 @@ section {
 
 
 /* =========================================================
-   GLOBAL GLASS SECTOR SYSTEM — 1.2.3
+   GLOBAL GLASS SECTOR SYSTEM — 1.2.3.1
+   CLEAR / FROZEN GLASS
 ========================================================= */
 
 .glass-sector {
@@ -241,19 +242,24 @@ section {
   background:
     linear-gradient(
       135deg,
-      rgba(255,255,255,0.13),
-      rgba(255,255,255,0.07)
+      rgba(255,255,255,0.075),
+      rgba(255,255,255,0.025)
     );
 
-  border: 1px solid rgba(255,255,255,0.28);
+  border: 1px solid rgba(255,255,255,0.30);
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter:
+    blur(12px)
+    saturate(125%);
+
+  -webkit-backdrop-filter:
+    blur(12px)
+    saturate(125%);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.20),
-    inset 0 -1px 1px rgba(0,0,0,0.05),
-    0 15px 40px rgba(0,0,0,0.25);
+    inset 0 1px 1px rgba(255,255,255,0.28),
+    inset 0 -1px 1px rgba(255,255,255,0.04),
+    0 12px 35px rgba(0,0,0,0.20);
 
   transform:
     perspective(1100px)
@@ -270,14 +276,15 @@ section {
   transition:
     transform 0.16s cubic-bezier(.18,.72,.28,1),
     box-shadow 0.2s ease,
-    background 0.3s ease;
+    background 0.3s ease,
+    border-color 0.3s ease;
 
   overflow: hidden;
 }
 
 
 /* =========================================================
-   GLASS HIGHLIGHT
+   NATURAL GLASS LIGHT REFLECTION
 ========================================================= */
 
 .glass-sector::before {
@@ -292,16 +299,44 @@ section {
   background:
     linear-gradient(
       115deg,
-      rgba(255,255,255,0.09),
-      transparent 28%,
-      transparent 72%,
-      rgba(255,255,255,0.035)
+      rgba(255,255,255,0.13) 0%,
+      rgba(255,255,255,0.045) 18%,
+      transparent 38%,
+      transparent 70%,
+      rgba(255,255,255,0.035) 100%
     );
 
-  opacity: 0.7;
+  opacity: 0.72;
 
   z-index: 0;
 }
+
+
+/* =========================================================
+   SUBTLE GLASS EDGE
+========================================================= */
+
+.glass-sector::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  border-radius: inherit;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.045);
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   GLASS CONTENT
+========================================================= */
 
 .glass-sector > * {
   position: relative;
@@ -314,10 +349,20 @@ section {
 ========================================================= */
 
 .glass-sector.motion-active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.095),
+      rgba(255,255,255,0.035)
+    );
+
+  border-color:
+    rgba(255,255,255,0.36);
+
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.27),
-    inset 0 -1px 1px rgba(0,0,0,0.07),
-    0 22px 52px rgba(0,0,0,0.34);
+    inset 0 1px 1px rgba(255,255,255,0.32),
+    inset 0 -1px 1px rgba(255,255,255,0.05),
+    0 20px 48px rgba(0,0,0,0.28);
 }
 
 
@@ -1138,8 +1183,6 @@ section {
   <div class="nav-divider"></div>
 
 
-  <!-- IDENTITY -->
-
   <a
     class="nav-button"
     href="#identity"
@@ -1154,8 +1197,6 @@ section {
 
   </a>
 
-
-  <!-- ABOUT -->
 
   <a
     class="nav-button"
@@ -1181,8 +1222,6 @@ section {
   </a>
 
 
-  <!-- JOURNEY -->
-
   <a
     class="nav-button"
     href="#journey"
@@ -1199,8 +1238,6 @@ section {
   </a>
 
 
-  <!-- HOME -->
-
   <a
     class="nav-button"
     href="#home"
@@ -1216,8 +1253,6 @@ section {
 
   </a>
 
-
-  <!-- PROJECTS -->
 
   <a
     class="nav-button"
@@ -1455,8 +1490,6 @@ section {
       Home
     </h2>
 
-
-    <!-- WEATHER / COORDINATES / TIME -->
 
     <div class="home-information">
 
@@ -1712,7 +1745,6 @@ section {
 
 <script>
 
-
 /* =========================================================
    CURSOR FOLLOWER
 ========================================================= */
@@ -1759,7 +1791,7 @@ moveCursorFollower();
 
 
 /* =========================================================
-   BACKGROUND PARALLAX — 1.2.3
+   BACKGROUND PARALLAX — 1.2.3.1
 ========================================================= */
 
 const background =
@@ -1772,8 +1804,6 @@ let currentX = 0;
 let currentY = 0;
 
 
-/* DESKTOP */
-
 document.addEventListener("mousemove", (event) => {
 
   const x =
@@ -1781,7 +1811,6 @@ document.addEventListener("mousemove", (event) => {
 
   const y =
     (event.clientY / window.innerHeight) - 0.5;
-
 
   targetX =
     x * -11;
@@ -1792,8 +1821,6 @@ document.addEventListener("mousemove", (event) => {
 });
 
 
-/* MOBILE / TABLET */
-
 document.addEventListener(
   "touchmove",
   (event) => {
@@ -1801,17 +1828,14 @@ document.addEventListener(
     if (!event.touches.length)
       return;
 
-
     const touch =
       event.touches[0];
-
 
     const x =
       (touch.clientX / window.innerWidth) - 0.5;
 
     const y =
       (touch.clientY / window.innerHeight) - 0.5;
-
 
     targetX =
       x * -11;
@@ -1825,8 +1849,6 @@ document.addEventListener(
   }
 );
 
-
-/* RETURN TO CENTER */
 
 document.addEventListener(
   "touchend",
@@ -1847,14 +1869,12 @@ function moveBackground() {
   currentY +=
     (targetY - currentY) * 0.075;
 
-
   background.style.transform =
     `translate3d(
       ${currentX}px,
       ${currentY}px,
       0
     ) scale(1.025)`;
-
 
   requestAnimationFrame(
     moveBackground
@@ -1867,14 +1887,12 @@ moveBackground();
 
 /* =========================================================
    GLOBAL GLASS SECTOR MOTION
-   1.2.3
 ========================================================= */
 
 const glassSectors =
   document.querySelectorAll(
     ".glass-sector"
   );
-
 
 const sectorStates =
   new WeakMap();
@@ -1916,14 +1934,11 @@ function updateSectorMotion(
   const rect =
     sector.getBoundingClientRect();
 
-
   const state =
     sectorStates.get(sector);
 
-
   if (!state)
     return;
-
 
   const x =
     clientX - rect.left;
@@ -1931,24 +1946,20 @@ function updateSectorMotion(
   const y =
     clientY - rect.top;
 
-
   const normalizedX =
     (x / rect.width - 0.5) * 2;
 
   const normalizedY =
     (y / rect.height - 0.5) * 2;
 
-
   const tiltStrength =
     4.2;
-
 
   state.targetRotateY =
     normalizedX * tiltStrength;
 
   state.targetRotateX =
     normalizedY * -tiltStrength;
-
 
   const distance =
     Math.min(
@@ -1959,13 +1970,10 @@ function updateSectorMotion(
       ) / 1.414
     );
 
-
   state.targetZ =
     distance * 4;
 
-
   state.active = true;
-
 
   sector.classList.add(
     "motion-active"
@@ -1985,10 +1993,8 @@ function resetSectorMotion(
   const state =
     sectorStates.get(sector);
 
-
   if (!state)
     return;
-
 
   state.targetRotateX = 0;
   state.targetRotateY = 0;
@@ -2015,10 +2021,8 @@ function animateGlassSectors() {
       const state =
         sectorStates.get(sector);
 
-
       if (!state)
         return;
-
 
       state.currentRotateX +=
         (
@@ -2026,13 +2030,11 @@ function animateGlassSectors() {
           state.currentRotateX
         ) * 0.14;
 
-
       state.currentRotateY +=
         (
           state.targetRotateY -
           state.currentRotateY
         ) * 0.14;
-
 
       state.currentZ +=
         (
@@ -2040,13 +2042,11 @@ function animateGlassSectors() {
           state.currentZ
         ) * 0.14;
 
-
       sector.style.transform =
         `perspective(1100px)
          rotateX(${state.currentRotateX}deg)
          rotateY(${state.currentRotateY}deg)
          translate3d(0,0,${state.currentZ}px)`;
-
 
       if (
         !state.active &&
@@ -2063,7 +2063,6 @@ function animateGlassSectors() {
     }
   );
 
-
   requestAnimationFrame(
     animateGlassSectors
   );
@@ -2074,7 +2073,7 @@ animateGlassSectors();
 
 
 /* =========================================================
-   DESKTOP GLASS INPUT
+   DESKTOP + MOBILE GLASS INPUT
 ========================================================= */
 
 glassSectors.forEach(
@@ -2106,8 +2105,6 @@ glassSectors.forEach(
     );
 
 
-    /* MOBILE / TABLET TOUCH */
-
     sector.addEventListener(
       "touchstart",
       (event) => {
@@ -2115,10 +2112,8 @@ glassSectors.forEach(
         if (!event.touches.length)
           return;
 
-
         const touch =
           event.touches[0];
-
 
         updateSectorMotion(
           sector,
@@ -2140,10 +2135,8 @@ glassSectors.forEach(
         if (!event.touches.length)
           return;
 
-
         const touch =
           event.touches[0];
-
 
         updateSectorMotion(
           sector,
@@ -2194,7 +2187,6 @@ function updateTime() {
   const now =
     new Date();
 
-
   const time =
     now.toLocaleTimeString(
       "en-IN",
@@ -2207,7 +2199,6 @@ function updateTime() {
       }
     );
 
-
   const date =
     now.toLocaleDateString(
       "en-IN",
@@ -2218,7 +2209,6 @@ function updateTime() {
         timeZone: "Asia/Kolkata"
       }
     );
-
 
   document.getElementById(
     "currentTime"
@@ -2237,7 +2227,6 @@ function updateTime() {
 
 }
 
-
 updateTime();
 
 setInterval(
@@ -2255,7 +2244,6 @@ const latitude =
 
 const longitude =
   72.8777;
-
 
 const weatherURL =
   "https://api.open-meteo.com/v1/forecast" +
@@ -2280,14 +2268,12 @@ fetch(weatherURL)
       const current =
         data.current;
 
-
       document.getElementById(
         "temperature"
       ).textContent =
         Math.round(
           current.temperature_2m
         ) + "°C";
-
 
       document.getElementById(
         "weather-condition"
@@ -2296,11 +2282,9 @@ fetch(weatherURL)
           current.weather_code
         );
 
-
       const precipitation =
         data.hourly &&
         data.hourly.precipitation_probability;
-
 
       if (
         precipitation &&
@@ -2313,13 +2297,11 @@ fetch(weatherURL)
             13
           );
 
-
         const max =
           Math.max(
             ...values,
             1
           );
-
 
         const points =
           values
@@ -2332,7 +2314,6 @@ fetch(weatherURL)
                     (values.length - 1)
                   ) * 500;
 
-
                 const y =
                   100 -
                   (
@@ -2340,13 +2321,11 @@ fetch(weatherURL)
                     80
                   );
 
-
                 return `${x},${y}`;
 
               }
             )
             .join(" ");
-
 
         document
           .getElementById(
@@ -2371,7 +2350,6 @@ fetch(weatherURL)
         )
         .textContent =
         "Unavailable";
-
 
       document
         .getElementById(
@@ -2448,12 +2426,10 @@ navSearch.addEventListener(
     )
       return;
 
-
     const query =
       navSearch.value
         .trim()
         .toLowerCase();
-
 
     const destinations = {
 
@@ -2483,7 +2459,6 @@ navSearch.addEventListener(
 
     };
 
-
     if (
       destinations[query]
     ) {
@@ -2495,7 +2470,6 @@ navSearch.addEventListener(
         .scrollIntoView({
           behavior: "smooth"
         });
-
 
       navSearch.value =
         "";
@@ -2546,13 +2520,11 @@ function updateActiveNav() {
   let current =
     navSections[0].id;
 
-
   navSections.forEach(
     section => {
 
       const rect =
         section.getBoundingClientRect();
-
 
       if (
         rect.top <=
@@ -2567,14 +2539,12 @@ function updateActiveNav() {
     }
   );
 
-
   navButtons.forEach(
     button => {
 
       button.classList.remove(
         "active"
       );
-
 
       if (
         button.getAttribute(
@@ -2601,7 +2571,6 @@ window.addEventListener(
 );
 
 updateActiveNav();
-
 
 </script>
 
