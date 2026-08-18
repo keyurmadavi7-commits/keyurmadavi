@@ -30,7 +30,7 @@ section {
 
 
 /* =========================================================
-   BACKGROUND — 1.2.3.1
+   BACKGROUND
 ========================================================= */
 
 .background {
@@ -44,7 +44,7 @@ section {
       rgba(0,0,0,0.38),
       rgba(0,0,0,0.50)
     ),
-    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop")
+    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaGdlfDB8fHx8fA%3D%3D")
     center / cover no-repeat;
 
   z-index: -2;
@@ -85,7 +85,7 @@ section {
 
   border-radius: 50%;
 
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.12);
 
   border: 1px solid rgba(255,255,255,0.45);
 
@@ -126,17 +126,16 @@ section {
 
   padding: 9px;
 
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.08);
 
   border: 1px solid rgba(255,255,255,0.28);
 
   border-radius: 18px;
 
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.16),
     0 10px 30px rgba(0,0,0,0.22);
 
   z-index: 1000;
@@ -155,7 +154,7 @@ section {
 
   outline: none;
 
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.08);
 
   color: white;
 
@@ -173,7 +172,7 @@ section {
 }
 
 .nav-search:focus {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.14);
   border-color: rgba(255,255,255,0.42);
 }
 
@@ -233,42 +232,38 @@ section {
 
 
 /* =========================================================
-   GLOBAL GLASS SYSTEM — 1.2.3.1
-   CLEAR / FROZEN GLASS
+   GLOBAL GLASS SYSTEM — 1.2.3.2
+   CLEAN FROZEN GLASS + MICRO DOT TEXTURE
+
+   NOTE:
+   The NORGE CORE strip does NOT use this system.
+   Its original glass design remains untouched.
 ========================================================= */
 
 .glass-sector {
   position: relative;
 
-  /*
-     IMPORTANT:
-     Much more transparent than the previous version.
-     The background should visibly show THROUGH the panel.
-  */
-
   background:
     linear-gradient(
       135deg,
       rgba(255,255,255,0.075),
-      rgba(255,255,255,0.018)
+      rgba(255,255,255,0.028)
     );
 
-  border: 1px solid rgba(255,255,255,0.32);
+  border: 1px solid rgba(255,255,255,0.24);
 
   backdrop-filter:
-    blur(9px)
-    saturate(145%)
-    brightness(1.08);
+    blur(12px)
+    saturate(118%);
 
   -webkit-backdrop-filter:
-    blur(9px)
-    saturate(145%)
-    brightness(1.08);
+    blur(12px)
+    saturate(118%);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.30),
+    inset 0 1px 1px rgba(255,255,255,0.20),
     inset 0 -1px 1px rgba(255,255,255,0.035),
-    0 12px 35px rgba(0,0,0,0.20);
+    0 12px 30px rgba(0,0,0,0.20);
 
   transform:
     perspective(1100px)
@@ -293,7 +288,7 @@ section {
 
 
 /* =========================================================
-   NATURAL GLASS LIGHT REFLECTION
+   MICRO DOT GLASS TEXTURE
 ========================================================= */
 
 .glass-sector::before {
@@ -306,23 +301,22 @@ section {
   pointer-events: none;
 
   background:
-    linear-gradient(
-      115deg,
-      rgba(255,255,255,0.16) 0%,
-      rgba(255,255,255,0.045) 17%,
-      transparent 38%,
-      transparent 70%,
-      rgba(255,255,255,0.025) 100%
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.075) 0.65px,
+      transparent 0.8px
     );
 
-  opacity: 0.72;
+  background-size: 7px 7px;
+
+  opacity: 0.22;
 
   z-index: 0;
 }
 
 
 /* =========================================================
-   GLASS EDGE
+   NATURAL GLASS REFLECTION
 ========================================================= */
 
 .glass-sector::after {
@@ -334,12 +328,22 @@ section {
 
   pointer-events: none;
 
-  border-radius: inherit;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,0.095) 0%,
+      rgba(255,255,255,0.032) 18%,
+      transparent 38%,
+      transparent 72%,
+      rgba(255,255,255,0.025) 100%
+    );
 
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.055);
+  opacity: 0.72;
 
   z-index: 0;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.035);
 }
 
 
@@ -361,17 +365,17 @@ section {
   background:
     linear-gradient(
       135deg,
-      rgba(255,255,255,0.095),
-      rgba(255,255,255,0.025)
+      rgba(255,255,255,0.088),
+      rgba(255,255,255,0.034)
     );
 
   border-color:
-    rgba(255,255,255,0.40);
+    rgba(255,255,255,0.30);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.34),
-    inset 0 -1px 1px rgba(255,255,255,0.05),
-    0 20px 48px rgba(0,0,0,0.28);
+    inset 0 1px 1px rgba(255,255,255,0.24),
+    inset 0 -1px 1px rgba(255,255,255,0.04),
+    0 18px 42px rgba(0,0,0,0.26);
 }
 
 
@@ -454,6 +458,7 @@ section {
 
 /* =========================================================
    NORGE CORE STRIP
+   ORIGINAL DESIGN — UNTOUCHED
 ========================================================= */
 
 .norge-strip {
@@ -467,13 +472,10 @@ section {
 
   overflow: hidden;
 
-  background: rgba(255,255,255,0.045);
+  background: rgba(255,255,255,0.07);
 
   border-top: 1px solid rgba(255,255,255,0.18);
   border-bottom: 1px solid rgba(255,255,255,0.18);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,0.18),
@@ -708,10 +710,8 @@ section {
     linear-gradient(
       to bottom,
       rgba(255,255,255,0.04),
-      rgba(255,255,255,0.012)
+      rgba(255,255,255,0.015)
     );
-
-  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .weather-chart::before,
@@ -937,10 +937,10 @@ section {
 
 
 /* =========================================================
-   PANEL 5 — BRANCHES
+   PANEL 5 — PROJECTS
 ========================================================= */
 
-.branches-grid {
+.projects-grid {
   display: grid;
 
   grid-template-columns:
@@ -949,7 +949,7 @@ section {
   gap: 20px;
 }
 
-.branch-card {
+.project-card {
   padding: 28px;
 
   border-radius: 20px;
@@ -957,18 +957,18 @@ section {
   box-sizing: border-box;
 }
 
-.branch-card:hover {
+.project-card:hover {
   background:
-    rgba(255,255,255,0.11);
+    rgba(255,255,255,0.12);
 }
 
-.branch-card h3 {
+.project-card h3 {
   font-size: 21px;
 
   margin-top: 0;
 }
 
-.branch-card p {
+.project-card p {
   font-size: 16px;
 
   line-height: 1.65;
@@ -1270,9 +1270,9 @@ section {
 
   <a
     class="nav-button"
-    href="#branches"
-    aria-label="Branches"
-    title="Branches"
+    href="#projects"
+    aria-label="Projects"
+    title="Projects"
   >
 
     <svg viewBox="0 0 24 24">
@@ -1474,6 +1474,12 @@ section {
         (&gt; , &lt;) — hope you like it.
       </li>
 
+      <li>
+        <strong>AGE 14:</strong>
+        Continued building, experimenting,
+        and turning more of my ideas into reality.
+      </li>
+
     </ul>
 
     <p>
@@ -1667,28 +1673,28 @@ section {
 
 
 <!-- =====================================================
-     PANEL 5 — BRANCHES
+     PANEL 5 — PROJECTS
 ===================================================== -->
 
 <section
   class="content-section"
-  id="branches"
+  id="projects"
 >
 
   <div class="section-inner">
 
     <h2 class="section-title">
-      Branches
+      Projects
     </h2>
 
 
-    <div class="branches-grid">
+    <div class="projects-grid">
 
 
-      <div class="glass-sector branch-card">
+      <div class="glass-sector project-card">
 
         <h3>
-          Branch One — Universe Simulation
+          Project One — Universe Simulation
         </h3>
 
         <p>
@@ -1705,10 +1711,10 @@ section {
       </div>
 
 
-      <div class="glass-sector branch-card">
+      <div class="glass-sector project-card">
 
         <h3>
-          Branch Two — Collab With My Friend
+          Project Two — Collab With My Friend
         </h3>
 
         <p>
@@ -1727,10 +1733,10 @@ section {
       </div>
 
 
-      <div class="glass-sector branch-card">
+      <div class="glass-sector project-card">
 
         <h3>
-          Branch Three — Ultima Scanner
+          Project Three — Ultima Scanner
         </h3>
 
         <p>
@@ -1758,7 +1764,6 @@ section {
 ===================================================== -->
 
 <script>
-
 
 /* =========================================================
    CURSOR FOLLOWER
@@ -2460,17 +2465,11 @@ navSearch.addEventListener(
       journey:
         "journey",
 
-      branches:
-        "branches",
-
-      branch:
-        "branches",
-
       projects:
-        "branches",
+        "projects",
 
       project:
-        "branches",
+        "projects",
 
       identity:
         "identity",
@@ -2530,7 +2529,7 @@ const navSections = [
   ),
 
   document.getElementById(
-    "branches"
+    "projects"
   )
 
 ];
