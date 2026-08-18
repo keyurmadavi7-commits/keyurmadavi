@@ -44,7 +44,7 @@ section {
       rgba(0,0,0,0.38),
       rgba(0,0,0,0.50)
     ),
-    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop")
+    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaGdlfDB8fHx8fA%3D%3D")
     center / cover no-repeat;
 
   z-index: -2;
@@ -94,7 +94,8 @@ section {
   pointer-events: none;
   z-index: 9999;
 
-  transform: translate3d(-50%,-50%,0);
+  transform:
+    translate3d(-50%,-50%,0);
 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -229,41 +230,21 @@ section {
 
 
 /* =========================================================
-   GLOBAL GLASS SYSTEM — 1.2.3.2
-   STRONG FROZEN / CLEAR GLASS
+   GLASS SECTOR — 1.2.3.2.3
+   FULL TRANSPARENT TEST
 ========================================================= */
 
 .glass-sector {
   position: relative;
 
-  background:
-    radial-gradient(
-      circle at 20% 15%,
-      rgba(255,255,255,0.14),
-      transparent 34%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.12),
-      rgba(255,255,255,0.035) 55%,
-      rgba(255,255,255,0.075)
-    );
+  background: transparent;
 
-  border: 1px solid rgba(255,255,255,0.42);
+  border: 1px solid rgba(255,255,255,0.32);
 
-  backdrop-filter:
-    blur(20px)
-    saturate(145%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 
-  -webkit-backdrop-filter:
-    blur(20px)
-    saturate(145%);
-
-  box-shadow:
-    inset 0 1px 2px rgba(255,255,255,0.38),
-    inset 0 -1px 2px rgba(255,255,255,0.08),
-    inset 0 0 24px rgba(255,255,255,0.035),
-    0 18px 50px rgba(0,0,0,0.28);
+  box-shadow: none;
 
   transform:
     perspective(1100px)
@@ -274,13 +255,10 @@ section {
   transform-origin: center center;
 
   will-change:
-    transform,
-    box-shadow;
+    transform;
 
   transition:
     transform 0.16s cubic-bezier(.18,.72,.28,1),
-    box-shadow 0.2s ease,
-    background 0.3s ease,
     border-color 0.3s ease;
 
   overflow: hidden;
@@ -288,59 +266,12 @@ section {
 
 
 /* =========================================================
-   STRONG GLASS REFLECTION
+   NO GLASS EFFECTS
 ========================================================= */
 
-.glass-sector::before {
-  content: "";
-
-  position: absolute;
-  inset: -20%;
-
-  background:
-    linear-gradient(
-      115deg,
-      rgba(255,255,255,0.20) 0%,
-      rgba(255,255,255,0.075) 16%,
-      transparent 34%,
-      transparent 68%,
-      rgba(255,255,255,0.06) 100%
-    );
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-
-/* =========================================================
-   MICRO GLASS TEXTURE
-========================================================= */
-
+.glass-sector::before,
 .glass-sector::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,0.07) 0.55px,
-      transparent 0.8px
-    );
-
-  background-size: 12px 12px;
-
-  opacity: 0.28;
-
-  mix-blend-mode: screen;
-
-  pointer-events: none;
-
-  z-index: 0;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.08);
+  display: none;
 }
 
 
@@ -355,31 +286,16 @@ section {
 
 
 /* =========================================================
-   GLASS MOTION STATE
+   MOTION STATE
 ========================================================= */
 
 .glass-sector.motion-active {
-  background:
-    radial-gradient(
-      circle at 20% 15%,
-      rgba(255,255,255,0.18),
-      transparent 34%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.15),
-      rgba(255,255,255,0.045) 55%,
-      rgba(255,255,255,0.09)
-    );
+  background: transparent;
 
   border-color:
-    rgba(255,255,255,0.48);
+    rgba(255,255,255,0.42);
 
-  box-shadow:
-    inset 0 1px 2px rgba(255,255,255,0.42),
-    inset 0 -1px 2px rgba(255,255,255,0.09),
-    inset 0 0 28px rgba(255,255,255,0.045),
-    0 24px 58px rgba(0,0,0,0.34);
+  box-shadow: none;
 }
 
 
@@ -410,6 +326,11 @@ section {
 
   box-sizing: border-box;
 }
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
 
 .hero-title h1 {
   margin: 0;
@@ -457,7 +378,7 @@ section {
 
 /* =========================================================
    NORGE CORE STRIP
-   INTENTIONALLY UNCHANGED
+   UNTOUCHED
 ========================================================= */
 
 .norge-strip {
@@ -586,7 +507,6 @@ section {
 
 /* =========================================================
    PANEL 3 — MY JOURNEY
-   1.2.3.2 — NO TIMELINE YET
 ========================================================= */
 
 .glass-journey {
@@ -958,8 +878,7 @@ section {
 }
 
 .project-card:hover {
-  background:
-    rgba(255,255,255,0.14);
+  background: transparent;
 }
 
 .project-card h3 {
@@ -1853,6 +1772,7 @@ moveBackground();
 
 /* =========================================================
    GLOBAL GLASS SECTOR MOTION
+   MOTION KEPT IN 1.2.3.2.3
 ========================================================= */
 
 const glassSectors =
