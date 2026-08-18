@@ -44,7 +44,7 @@ section {
       rgba(0,0,0,0.38),
       rgba(0,0,0,0.50)
     ),
-    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaGdlfDB8fHx8fA%3D%3D")
+    url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=1170&auto=format&fit=crop")
     center / cover no-repeat;
 
   z-index: -2;
@@ -85,7 +85,7 @@ section {
 
   border-radius: 50%;
 
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.10);
 
   border: 1px solid rgba(255,255,255,0.45);
 
@@ -126,16 +126,17 @@ section {
 
   padding: 9px;
 
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
 
   border: 1px solid rgba(255,255,255,0.28);
 
   border-radius: 18px;
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
 
   box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.16),
     0 10px 30px rgba(0,0,0,0.22);
 
   z-index: 1000;
@@ -154,7 +155,7 @@ section {
 
   outline: none;
 
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
 
   color: white;
 
@@ -172,7 +173,7 @@ section {
 }
 
 .nav-search:focus {
-  background: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.12);
   border-color: rgba(255,255,255,0.42);
 }
 
@@ -232,33 +233,41 @@ section {
 
 
 /* =========================================================
-   GLOBAL GLASS SECTOR SYSTEM — 1.2.3.1
+   GLOBAL GLASS SYSTEM — 1.2.3.1
    CLEAR / FROZEN GLASS
 ========================================================= */
 
 .glass-sector {
   position: relative;
 
+  /*
+     IMPORTANT:
+     Much more transparent than the previous version.
+     The background should visibly show THROUGH the panel.
+  */
+
   background:
     linear-gradient(
       135deg,
       rgba(255,255,255,0.075),
-      rgba(255,255,255,0.025)
+      rgba(255,255,255,0.018)
     );
 
-  border: 1px solid rgba(255,255,255,0.30);
+  border: 1px solid rgba(255,255,255,0.32);
 
   backdrop-filter:
-    blur(12px)
-    saturate(125%);
+    blur(9px)
+    saturate(145%)
+    brightness(1.08);
 
   -webkit-backdrop-filter:
-    blur(12px)
-    saturate(125%);
+    blur(9px)
+    saturate(145%)
+    brightness(1.08);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.28),
-    inset 0 -1px 1px rgba(255,255,255,0.04),
+    inset 0 1px 1px rgba(255,255,255,0.30),
+    inset 0 -1px 1px rgba(255,255,255,0.035),
     0 12px 35px rgba(0,0,0,0.20);
 
   transform:
@@ -299,11 +308,11 @@ section {
   background:
     linear-gradient(
       115deg,
-      rgba(255,255,255,0.13) 0%,
-      rgba(255,255,255,0.045) 18%,
+      rgba(255,255,255,0.16) 0%,
+      rgba(255,255,255,0.045) 17%,
       transparent 38%,
       transparent 70%,
-      rgba(255,255,255,0.035) 100%
+      rgba(255,255,255,0.025) 100%
     );
 
   opacity: 0.72;
@@ -313,7 +322,7 @@ section {
 
 
 /* =========================================================
-   SUBTLE GLASS EDGE
+   GLASS EDGE
 ========================================================= */
 
 .glass-sector::after {
@@ -328,7 +337,7 @@ section {
   border-radius: inherit;
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.045);
+    inset 0 0 0 1px rgba(255,255,255,0.055);
 
   z-index: 0;
 }
@@ -353,14 +362,14 @@ section {
     linear-gradient(
       135deg,
       rgba(255,255,255,0.095),
-      rgba(255,255,255,0.035)
+      rgba(255,255,255,0.025)
     );
 
   border-color:
-    rgba(255,255,255,0.36);
+    rgba(255,255,255,0.40);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.32),
+    inset 0 1px 1px rgba(255,255,255,0.34),
     inset 0 -1px 1px rgba(255,255,255,0.05),
     0 20px 48px rgba(0,0,0,0.28);
 }
@@ -458,10 +467,13 @@ section {
 
   overflow: hidden;
 
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.045);
 
   border-top: 1px solid rgba(255,255,255,0.18);
   border-bottom: 1px solid rgba(255,255,255,0.18);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,0.18),
@@ -696,8 +708,10 @@ section {
     linear-gradient(
       to bottom,
       rgba(255,255,255,0.04),
-      rgba(255,255,255,0.015)
+      rgba(255,255,255,0.012)
     );
+
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .weather-chart::before,
@@ -923,10 +937,10 @@ section {
 
 
 /* =========================================================
-   PANEL 5 — PROJECTS
+   PANEL 5 — BRANCHES
 ========================================================= */
 
-.projects-grid {
+.branches-grid {
   display: grid;
 
   grid-template-columns:
@@ -935,7 +949,7 @@ section {
   gap: 20px;
 }
 
-.project-card {
+.branch-card {
   padding: 28px;
 
   border-radius: 20px;
@@ -943,18 +957,18 @@ section {
   box-sizing: border-box;
 }
 
-.project-card:hover {
+.branch-card:hover {
   background:
-    rgba(255,255,255,0.14);
+    rgba(255,255,255,0.11);
 }
 
-.project-card h3 {
+.branch-card h3 {
   font-size: 21px;
 
   margin-top: 0;
 }
 
-.project-card p {
+.branch-card p {
   font-size: 16px;
 
   line-height: 1.65;
@@ -1256,9 +1270,9 @@ section {
 
   <a
     class="nav-button"
-    href="#projects"
-    aria-label="Projects"
-    title="Projects"
+    href="#branches"
+    aria-label="Branches"
+    title="Branches"
   >
 
     <svg viewBox="0 0 24 24">
@@ -1653,28 +1667,28 @@ section {
 
 
 <!-- =====================================================
-     PANEL 5 — PROJECTS
+     PANEL 5 — BRANCHES
 ===================================================== -->
 
 <section
   class="content-section"
-  id="projects"
+  id="branches"
 >
 
   <div class="section-inner">
 
     <h2 class="section-title">
-      Projects
+      Branches
     </h2>
 
 
-    <div class="projects-grid">
+    <div class="branches-grid">
 
 
-      <div class="glass-sector project-card">
+      <div class="glass-sector branch-card">
 
         <h3>
-          Project One — Universe Simulation
+          Branch One — Universe Simulation
         </h3>
 
         <p>
@@ -1691,10 +1705,10 @@ section {
       </div>
 
 
-      <div class="glass-sector project-card">
+      <div class="glass-sector branch-card">
 
         <h3>
-          Project Two — Collab With My Friend
+          Branch Two — Collab With My Friend
         </h3>
 
         <p>
@@ -1713,10 +1727,10 @@ section {
       </div>
 
 
-      <div class="glass-sector project-card">
+      <div class="glass-sector branch-card">
 
         <h3>
-          Project Three — Ultima Scanner
+          Branch Three — Ultima Scanner
         </h3>
 
         <p>
@@ -1744,6 +1758,7 @@ section {
 ===================================================== -->
 
 <script>
+
 
 /* =========================================================
    CURSOR FOLLOWER
@@ -1791,7 +1806,7 @@ moveCursorFollower();
 
 
 /* =========================================================
-   BACKGROUND PARALLAX — 1.2.3.1
+   BACKGROUND PARALLAX
 ========================================================= */
 
 const background =
@@ -2445,11 +2460,17 @@ navSearch.addEventListener(
       journey:
         "journey",
 
+      branches:
+        "branches",
+
+      branch:
+        "branches",
+
       projects:
-        "projects",
+        "branches",
 
       project:
-        "projects",
+        "branches",
 
       identity:
         "identity",
@@ -2509,7 +2530,7 @@ const navSections = [
   ),
 
   document.getElementById(
-    "projects"
+    "branches"
   )
 
 ];
