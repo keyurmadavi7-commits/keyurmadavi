@@ -231,8 +231,7 @@ section {
 
 /* =========================================================
    GLASS SECTOR
-   1.2.3.3 TRANSPARENT GLASS
-   + SUBTLE ANCIENT GLASS TEXTURE
+   1.2.3.3 / TRANSPARENT GLASS FOUNDATION
 ========================================================= */
 
 .glass-sector {
@@ -264,112 +263,15 @@ section {
   overflow: hidden;
 }
 
-
-/* =========================================================
-   ANCIENT GLASS TEXTURE
-   SUBTLE / SPARSE
-========================================================= */
-
-.glass-sector::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background-image:
-    radial-gradient(
-      circle at 17% 24%,
-      rgba(255,255,255,0.12) 0 0.7px,
-      transparent 1.4px
-    ),
-    radial-gradient(
-      circle at 73% 18%,
-      rgba(255,255,255,0.09) 0 0.6px,
-      transparent 1.3px
-    ),
-    radial-gradient(
-      circle at 41% 69%,
-      rgba(255,255,255,0.08) 0 0.65px,
-      transparent 1.35px
-    ),
-    radial-gradient(
-      circle at 86% 76%,
-      rgba(255,255,255,0.10) 0 0.55px,
-      transparent 1.25px
-    ),
-    radial-gradient(
-      circle at 29% 88%,
-      rgba(255,255,255,0.07) 0 0.5px,
-      transparent 1.2px
-    ),
-    linear-gradient(
-      118deg,
-      transparent 0%,
-      rgba(255,255,255,0.025) 42%,
-      transparent 43%,
-      transparent 71%,
-      rgba(255,255,255,0.018) 72%,
-      transparent 73%
-    );
-
-  background-size:
-    170px 150px,
-    220px 190px,
-    190px 170px,
-    240px 210px,
-    210px 180px,
-    100% 100%;
-
-  opacity: 0.55;
-
-  mix-blend-mode: screen;
-
-  z-index: 0;
-}
-
-
-/* Very subtle glass edge variation */
-
+.glass-sector::before,
 .glass-sector::after {
-  content: "";
-
-  position: absolute;
-  inset: 1px;
-
-  pointer-events: none;
-
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      115deg,
-      rgba(255,255,255,0.035),
-      transparent 28%,
-      transparent 72%,
-      rgba(255,255,255,0.018)
-    );
-
-  opacity: 0.65;
-
-  z-index: 0;
+  display: none;
 }
-
-
-/* =========================================================
-   GLASS CONTENT
-========================================================= */
 
 .glass-sector > * {
   position: relative;
   z-index: 1;
 }
-
-
-/* =========================================================
-   MOTION STATE
-========================================================= */
 
 .glass-sector.motion-active {
   background: transparent;
@@ -589,26 +491,25 @@ section {
 
 /* =========================================================
    PANEL 3 — MY JOURNEY
-   1.2.3.4 — HORIZONTAL
+   1.2.3.4 — HORIZONTAL VERSION
 ========================================================= */
 
 .journey-wrapper {
   width: 100%;
-
   overflow-x: auto;
-  overflow-y: hidden;
 
-  padding:
-    15px 0 30px;
+  padding: 10px 4px 28px;
+
+  box-sizing: border-box;
 
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(255,255,255,0.28)
+    rgba(255,255,255,0.25)
     transparent;
 }
 
 .journey-wrapper::-webkit-scrollbar {
-  height: 5px;
+  height: 6px;
 }
 
 .journey-wrapper::-webkit-scrollbar-track {
@@ -616,162 +517,147 @@ section {
 }
 
 .journey-wrapper::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.24);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 10px;
 }
 
-.journey-timeline {
-  position: relative;
+.glass-journey {
+  width: max-content;
+  min-width: 100%;
 
-  min-width: 1080px;
+  padding: 55px 60px 70px;
 
-  padding:
-    85px 25px 45px;
-
-  display: flex;
-  align-items: flex-start;
+  border-radius: 30px;
 
   box-sizing: border-box;
+
+  overflow: hidden;
 }
 
+.glass-journey h2 {
+  margin: 0 0 25px;
 
-/* Main horizontal line */
+  font-size: 50px;
+}
 
-.journey-line {
+.glass-journey > p {
+  max-width: 900px;
+
+  margin: 0 0 45px;
+
+  font-size: 19px;
+
+  line-height: 1.7;
+
+  color: #ddd;
+}
+
+.journey-track {
+  display: flex;
+
+  align-items: stretch;
+
+  gap: 24px;
+
+  width: max-content;
+
+  position: relative;
+
+  padding: 35px 5px 20px;
+}
+
+.journey-track::before {
+  content: "";
+
   position: absolute;
 
-  left: 25px;
-  right: 25px;
-
-  top: 107px;
+  top: 13px;
+  left: 20px;
+  right: 20px;
 
   height: 1px;
 
   background:
-    rgba(255,255,255,0.35);
-
-  box-shadow:
-    0 0 8px rgba(255,255,255,0.08);
+    rgba(255,255,255,0.22);
 }
-
-
-/* Timeline entries */
 
 .journey-entry {
   position: relative;
 
-  flex: 1;
+  width: 190px;
+  min-height: 210px;
 
-  min-width: 180px;
-
-  text-align: center;
-
-  padding: 0 12px;
+  padding: 28px 24px;
 
   box-sizing: border-box;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  border-radius: 22px;
+
+  background: transparent;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
+.journey-entry:hover {
+  transform: translateY(-5px);
 
-/* White timeline dot */
+  border-color:
+    rgba(255,255,255,0.38);
+
+  background:
+    rgba(255,255,255,0.025);
+}
 
 .journey-dot {
   position: absolute;
 
-  top: 14px;
-  left: 50%;
-
-  width: 9px;
-  height: 9px;
-
-  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
 
   border-radius: 50%;
 
-  background: rgba(255,255,255,0.82);
+  top: -22px;
+  left: 50%;
 
-  border:
-    1px solid rgba(255,255,255,0.6);
+  transform: translateX(-50%);
+
+  background: white;
 
   box-shadow:
-    0 0 9px rgba(255,255,255,0.18);
-
-  z-index: 2;
+    0 0 10px rgba(255,255,255,0.35);
 }
 
+.journey-entry h3 {
+  margin: 0 0 14px;
 
-/* Vertical connector */
-
-.journey-connector {
-  position: absolute;
-
-  top: 23px;
-  left: 50%;
-
-  width: 1px;
-  height: 47px;
-
-  transform: translateX(-50%);
-
-  background:
-    rgba(255,255,255,0.23);
-}
-
-
-/* Year */
-
-.journey-age {
-  position: absolute;
-
-  top: -55px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  white-space: nowrap;
-
-  font-size: 12px;
-
-  letter-spacing: 2px;
-
-  color:
-    rgba(255,255,255,0.55);
-}
-
-
-/* Entry glass content */
-
-.journey-entry-card {
-  margin-top: 70px;
-
-  min-height: 220px;
-
-  padding: 27px 22px;
-
-  border-radius: 18px;
-
-  box-sizing: border-box;
-
-  text-align: left;
-
-  transition:
-    border-color 0.25s ease,
-    transform 0.25s ease;
-}
-
-.journey-entry-card h3 {
-  margin: 0 0 12px;
-
-  font-size: 19px;
+  font-size: 20px;
 
   letter-spacing: 0.5px;
 }
 
-.journey-entry-card p {
+.journey-entry p {
   margin: 0;
 
   font-size: 15px;
 
   line-height: 1.65;
+
+  color: #ddd;
+}
+
+.journey-ending {
+  max-width: 900px;
+
+  margin: 45px 0 0;
+
+  font-size: 19px;
+
+  line-height: 1.7;
 
   color: #ddd;
 }
@@ -1129,7 +1015,7 @@ section {
 
 
 /* =========================================================
-   MOBILE / TABLET
+   MOBILE
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1153,9 +1039,10 @@ section {
     grid-template-rows: none;
   }
 
-  .journey-wrapper {
-    margin-right: -5px;
+  .glass-journey {
+    min-width: 900px;
   }
+
 }
 
 
@@ -1217,38 +1104,29 @@ section {
     font-size: 38px;
   }
 
-  /* Horizontal journey remains horizontal,
-     but becomes comfortably scrollable */
+  .glass-journey {
+    min-width: 820px;
 
-  .journey-wrapper {
-    width: 100%;
+    padding:
+      40px
+      35px
+      65px;
 
-    margin: 0;
-
-    padding-bottom: 25px;
+    border-radius: 28px;
   }
 
-  .journey-timeline {
-    min-width: 980px;
-
-    padding-left: 20px;
-    padding-right: 20px;
+  .glass-journey h2 {
+    font-size: 38px;
   }
 
-  .journey-line {
-    left: 20px;
-    right: 20px;
+  .glass-journey > p,
+  .journey-ending {
+    font-size: 17px;
   }
 
   .journey-entry {
-    min-width: 185px;
-  }
-
-  .journey-entry-card {
-    min-height: 235px;
-
-    padding:
-      25px 20px;
+    width: 170px;
+    min-height: 220px;
   }
 
   .small-information {
@@ -1269,6 +1147,7 @@ section {
     width: 108%;
     height: 108%;
   }
+
 }
 
 
@@ -1290,6 +1169,7 @@ section {
   .glass-sector {
     transition: none;
   }
+
 }
 
 </style>
@@ -1338,12 +1218,10 @@ section {
     aria-label="Identity"
     title="Identity"
   >
-
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="8" r="3"></circle>
       <path d="M5 20c1.5-4 4-6 7-6s5.5 2 7 6"></path>
     </svg>
-
   </a>
 
 
@@ -1353,7 +1231,6 @@ section {
     aria-label="About"
     title="About"
   >
-
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9"></circle>
       <path d="M12 10v6"></path>
@@ -1365,9 +1242,7 @@ section {
         fill="currentColor"
         stroke="none"
       ></circle>
-
     </svg>
-
   </a>
 
 
@@ -1377,13 +1252,11 @@ section {
     aria-label="Journey"
     title="Journey"
   >
-
     <svg viewBox="0 0 24 24">
       <path d="M5 19c4-7 5-10 14-14"></path>
       <circle cx="5" cy="19" r="2"></circle>
       <circle cx="19" cy="5" r="2"></circle>
     </svg>
-
   </a>
 
 
@@ -1393,13 +1266,11 @@ section {
     aria-label="Home"
     title="Home"
   >
-
     <svg viewBox="0 0 24 24">
       <path d="M4 11.5 12 5l8 6.5"></path>
       <path d="M6.5 10.5V19h11v-8.5"></path>
       <path d="M10 19v-5h4v5"></path>
     </svg>
-
   </a>
 
 
@@ -1409,12 +1280,10 @@ section {
     aria-label="Projects"
     title="Projects"
   >
-
     <svg viewBox="0 0 24 24">
       <path d="M4 7h6l2 2h8v10H4z"></path>
       <path d="M4 7V5h6l2 2"></path>
     </svg>
-
   </a>
 
 </nav>
@@ -1558,7 +1427,7 @@ section {
 
 <!-- =====================================================
      PANEL 3 — MY JOURNEY
-     1.2.3.4 — HORIZONTAL JOURNEY
+     1.2.3.4 — HORIZONTAL + AGE 14
 ===================================================== -->
 
 <section
@@ -1568,178 +1437,108 @@ section {
 
   <div class="section-inner">
 
-    <h2 class="section-title">
-      My Journey
-    </h2>
+    <div class="journey-wrapper">
 
-    <div class="glass-sector glass-journey">
+      <div class="glass-sector glass-journey">
 
-      <p>
-        This is my first ever website, and to whoever just watches by it,
-        I hope you like it. I'm new in all this stuff, and here are all my phases:
-      </p>
+        <h2>
+          My Journey
+        </h2>
 
-      <div class="journey-wrapper">
+        <p>
 
-        <div class="journey-timeline">
+          This is my first ever website, and to whoever just watches by it,
+          I hope you like it. I'm new in all this stuff, and here are all my phases:
 
-          <div class="journey-line"></div>
+        </p>
 
 
-          <!-- AGE 10 -->
+        <div class="journey-track">
+
 
           <div class="journey-entry">
 
-            <div class="journey-age">
-              AGE 10
-            </div>
+            <span class="journey-dot"></span>
 
-            <div class="journey-dot"></div>
+            <h3>AGE 10</h3>
 
-            <div class="journey-connector"></div>
-
-            <div class="glass-sector journey-entry-card">
-
-              <h3>
-                Physics
-              </h3>
-
-              <p>
-                I started exploring physics,
-                clearly unknown and all that,
-                still fresh.
-              </p>
-
-            </div>
+            <p>
+              I started exploring physics,
+              clearly unknown and all that,
+              still fresh.
+            </p>
 
           </div>
 
 
-          <!-- AGE 11 -->
-
           <div class="journey-entry">
 
-            <div class="journey-age">
-              AGE 11
-            </div>
+            <span class="journey-dot"></span>
 
-            <div class="journey-dot"></div>
+            <h3>AGE 11</h3>
 
-            <div class="journey-connector"></div>
-
-            <div class="glass-sector journey-entry-card">
-
-              <h3>
-                The Dream
-              </h3>
-
-              <p>
-                I started dreaming of making a website
-                introducing me to anyone who passes by.
-              </p>
-
-            </div>
+            <p>
+              I started dreaming of making a website
+              introducing me to anyone who passes by.
+            </p>
 
           </div>
 
 
-          <!-- AGE 12 -->
-
           <div class="journey-entry">
 
-            <div class="journey-age">
-              AGE 12
-            </div>
+            <span class="journey-dot"></span>
 
-            <div class="journey-dot"></div>
+            <h3>AGE 12</h3>
 
-            <div class="journey-connector"></div>
-
-            <div class="glass-sector journey-entry-card">
-
-              <h3>
-                Computerology
-              </h3>
-
-              <p>
-                Started learning computerology
-                and exploring how computers and
-                technology actually worked.
-              </p>
-
-            </div>
+            <p>
+              Started learning computerology.
+            </p>
 
           </div>
 
 
-          <!-- AGE 13 -->
-
           <div class="journey-entry">
 
-            <div class="journey-age">
-              AGE 13
-            </div>
+            <span class="journey-dot"></span>
 
-            <div class="journey-dot"></div>
+            <h3>AGE 13</h3>
 
-            <div class="journey-connector"></div>
-
-            <div class="glass-sector journey-entry-card">
-
-              <h3>
-                First Site
-              </h3>
-
-              <p>
-                Made my first site
-                (&gt; , &lt;) — hope you like it.
-              </p>
-
-            </div>
+            <p>
+              Made my first site
+              (&gt; , &lt;) — hope you like it.
+            </p>
 
           </div>
 
 
-          <!-- AGE 14 -->
-
           <div class="journey-entry">
 
-            <div class="journey-age">
-              AGE 14
-            </div>
+            <span class="journey-dot"></span>
 
-            <div class="journey-dot"></div>
+            <h3>AGE 14</h3>
 
-            <div class="journey-connector"></div>
-
-            <div class="glass-sector journey-entry-card">
-
-              <h3>
-                The Next Phase
-              </h3>
-
-              <p>
-                Still building, still learning,
-                and taking everything I've explored
-                into bigger ideas and projects.
-              </p>
-
-            </div>
+            <p>
+              Continued building,
+              experimenting with technology,
+              and turning bigger ideas into actual projects.
+            </p>
 
           </div>
+
 
         </div>
 
+
+        <p class="journey-ending">
+
+          And thus, I actually hope you like it.
+          I know it's not so good,
+          and thank you for being a visitor.
+
+        </p>
+
       </div>
-
-
-      <p>
-
-        And thus, I actually hope you like it.
-        I know it's not so good,
-        and thank you for being a visitor.
-
-      </p>
 
     </div>
 
@@ -2014,7 +1813,7 @@ section {
 
 <!-- =====================================================
      JAVASCRIPT
-========================================================= -->
+===================================================== -->
 
 <script>
 
