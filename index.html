@@ -230,8 +230,9 @@ section {
 
 
 /* =========================================================
-   GLASS SECTOR — 1.2.3.2.3 BASE
-   COMPLETELY TRANSPARENT
+   GLASS SECTOR
+   1.2.3.3 TRANSPARENT GLASS
+   + SUBTLE ANCIENT GLASS TEXTURE
 ========================================================= */
 
 .glass-sector {
@@ -265,12 +266,94 @@ section {
 
 
 /* =========================================================
-   NO GLASS EFFECTS
+   ANCIENT GLASS TEXTURE
+   SUBTLE / SPARSE
 ========================================================= */
 
-.glass-sector::before,
+.glass-sector::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle at 17% 24%,
+      rgba(255,255,255,0.12) 0 0.7px,
+      transparent 1.4px
+    ),
+    radial-gradient(
+      circle at 73% 18%,
+      rgba(255,255,255,0.09) 0 0.6px,
+      transparent 1.3px
+    ),
+    radial-gradient(
+      circle at 41% 69%,
+      rgba(255,255,255,0.08) 0 0.65px,
+      transparent 1.35px
+    ),
+    radial-gradient(
+      circle at 86% 76%,
+      rgba(255,255,255,0.10) 0 0.55px,
+      transparent 1.25px
+    ),
+    radial-gradient(
+      circle at 29% 88%,
+      rgba(255,255,255,0.07) 0 0.5px,
+      transparent 1.2px
+    ),
+    linear-gradient(
+      118deg,
+      transparent 0%,
+      rgba(255,255,255,0.025) 42%,
+      transparent 43%,
+      transparent 71%,
+      rgba(255,255,255,0.018) 72%,
+      transparent 73%
+    );
+
+  background-size:
+    170px 150px,
+    220px 190px,
+    190px 170px,
+    240px 210px,
+    210px 180px,
+    100% 100%;
+
+  opacity: 0.55;
+
+  mix-blend-mode: screen;
+
+  z-index: 0;
+}
+
+
+/* Very subtle glass edge variation */
+
 .glass-sector::after {
-  display: none;
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  pointer-events: none;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,0.035),
+      transparent 28%,
+      transparent 72%,
+      rgba(255,255,255,0.018)
+    );
+
+  opacity: 0.65;
+
+  z-index: 0;
 }
 
 
@@ -506,179 +589,191 @@ section {
 
 /* =========================================================
    PANEL 3 — MY JOURNEY
-   1.2.3.3 HORIZONTAL PROGRESS SYSTEM
+   1.2.3.4 — HORIZONTAL
 ========================================================= */
 
-.glass-journey {
-  max-width: 900px;
+.journey-wrapper {
+  width: 100%;
 
-  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  padding: 50px 60px;
+  padding:
+    15px 0 30px;
 
-  border-radius: 25px;
-
-  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(255,255,255,0.28)
+    transparent;
 }
 
-.glass-journey h2 {
-  margin: 0 0 25px;
-
-  font-size: 50px;
+.journey-wrapper::-webkit-scrollbar {
+  height: 5px;
 }
 
-.glass-journey p,
-.glass-journey li {
-  font-size: 19px;
-
-  line-height: 1.7;
-
-  color: #ddd;
+.journey-wrapper::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.glass-journey ul {
-  padding-left: 22px;
+.journey-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.24);
+  border-radius: 20px;
 }
 
-.glass-journey li {
-  margin-bottom: 17px;
-}
-
-
-/* =========================================================
-   HORIZONTAL JOURNEY PROGRESS BAR
-========================================================= */
-
-.journey-progress {
+.journey-timeline {
   position: relative;
 
-  width: 100%;
-  height: 46px;
+  min-width: 1080px;
+
+  padding:
+    85px 25px 45px;
 
   display: flex;
-  align-items: center;
-
-  margin: 0 0 34px;
+  align-items: flex-start;
 
   box-sizing: border-box;
-
-  user-select: none;
 }
 
-.journey-progress-line {
+
+/* Main horizontal line */
+
+.journey-line {
   position: absolute;
 
-  left: 0;
-  right: 0;
+  left: 25px;
+  right: 25px;
 
-  top: 50%;
+  top: 107px;
 
   height: 1px;
 
   background:
-    rgba(255,255,255,0.30);
+    rgba(255,255,255,0.35);
 
-  transform:
-    translateY(-50%);
-
-  pointer-events: none;
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.08);
 }
 
-.journey-progress-entry {
+
+/* Timeline entries */
+
+.journey-entry {
   position: relative;
 
   flex: 1;
 
-  height: 100%;
+  min-width: 180px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 
-  cursor: pointer;
+  padding: 0 12px;
+
+  box-sizing: border-box;
+}
+
+
+/* White timeline dot */
+
+.journey-dot {
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+
+  width: 9px;
+  height: 9px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.82);
+
+  border:
+    1px solid rgba(255,255,255,0.6);
+
+  box-shadow:
+    0 0 9px rgba(255,255,255,0.18);
 
   z-index: 2;
 }
 
 
-/* =========================================================
-   WHITE JOURNEY DOT
-========================================================= */
+/* Vertical connector */
 
-.journey-progress-dot {
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(255,255,255,0.90);
-
-  box-shadow:
-    0 0 7px rgba(255,255,255,0.16);
-
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease;
-}
-
-
-/* =========================================================
-   BLUE FOCUS DOT
-   ABOVE THE WHITE DOT
-========================================================= */
-
-.journey-progress-entry::before {
-  content: "";
-
+.journey-connector {
   position: absolute;
 
+  top: 23px;
   left: 50%;
-  top: 4px;
 
-  width: 5px;
-  height: 5px;
+  width: 1px;
+  height: 47px;
 
-  border-radius: 50%;
+  transform: translateX(-50%);
 
   background:
-    #4da6ff;
+    rgba(255,255,255,0.23);
+}
 
-  box-shadow:
-    0 0 8px rgba(77,166,255,0.72),
-    0 0 17px rgba(77,166,255,0.22);
 
-  transform:
-    translate(-50%, -4px)
-    scale(0);
+/* Year */
 
-  opacity: 0;
+.journey-age {
+  position: absolute;
+
+  top: -55px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  color:
+    rgba(255,255,255,0.55);
+}
+
+
+/* Entry glass content */
+
+.journey-entry-card {
+  margin-top: 70px;
+
+  min-height: 220px;
+
+  padding: 27px 22px;
+
+  border-radius: 18px;
+
+  box-sizing: border-box;
+
+  text-align: left;
 
   transition:
-    transform 0.18s cubic-bezier(.18,.72,.28,1),
-    opacity 0.18s ease;
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
+.journey-entry-card h3 {
+  margin: 0 0 12px;
 
-/* =========================================================
-   FOCUSED JOURNEY ENTRY
-========================================================= */
+  font-size: 19px;
 
-.journey-progress-entry.focused::before {
-  transform:
-    translate(-50%, 0)
-    scale(1);
-
-  opacity: 1;
+  letter-spacing: 0.5px;
 }
 
-.journey-progress-entry.focused
-.journey-progress-dot {
-  transform:
-    scale(1.25);
+.journey-entry-card p {
+  margin: 0;
 
-  box-shadow:
-    0 0 9px rgba(255,255,255,0.28);
+  font-size: 15px;
+
+  line-height: 1.65;
+
+  color: #ddd;
 }
 
 
@@ -780,8 +875,7 @@ section {
   left: 0;
   right: 0;
 
-  border-top:
-    1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
 .weather-chart::before {
@@ -806,8 +900,7 @@ section {
 .rain-line polyline {
   fill: none;
 
-  stroke:
-    rgba(255,255,255,0.75);
+  stroke: rgba(255,255,255,0.75);
 
   stroke-width: 2;
 
@@ -822,8 +915,7 @@ section {
 
   margin-top: 7px;
 
-  color:
-    rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.48);
 
   font-size: 10px;
 }
@@ -899,8 +991,7 @@ section {
 
   letter-spacing: 2px;
 
-  color:
-    rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.48);
 
   margin-bottom: 7px;
 }
@@ -926,8 +1017,7 @@ section {
 .frequency span {
   width: 3px;
 
-  background:
-    rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.55);
 
   border-radius: 5px;
 
@@ -1039,7 +1129,7 @@ section {
 
 
 /* =========================================================
-   MOBILE
+   MOBILE / TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1063,6 +1153,9 @@ section {
     grid-template-rows: none;
   }
 
+  .journey-wrapper {
+    margin-right: -5px;
+  }
 }
 
 
@@ -1124,16 +1217,38 @@ section {
     font-size: 38px;
   }
 
-  .glass-journey {
-    padding: 35px 25px;
+  /* Horizontal journey remains horizontal,
+     but becomes comfortably scrollable */
+
+  .journey-wrapper {
+    width: 100%;
+
+    margin: 0;
+
+    padding-bottom: 25px;
   }
 
-  .glass-journey h2 {
-    font-size: 38px;
+  .journey-timeline {
+    min-width: 980px;
+
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .journey-progress {
-    margin-bottom: 28px;
+  .journey-line {
+    left: 20px;
+    right: 20px;
+  }
+
+  .journey-entry {
+    min-width: 185px;
+  }
+
+  .journey-entry-card {
+    min-height: 235px;
+
+    padding:
+      25px 20px;
   }
 
   .small-information {
@@ -1154,7 +1269,6 @@ section {
     width: 108%;
     height: 108%;
   }
-
 }
 
 
@@ -1176,12 +1290,6 @@ section {
   .glass-sector {
     transition: none;
   }
-
-  .journey-progress-entry::before,
-  .journey-progress-dot {
-    transition: none;
-  }
-
 }
 
 </style>
@@ -1195,10 +1303,7 @@ section {
      BACKGROUND
 ===================================================== -->
 
-<div
-  class="background"
-  id="background">
-</div>
+<div class="background" id="background"></div>
 
 <div class="background-overlay"></div>
 
@@ -1207,10 +1312,7 @@ section {
      CURSOR
 ===================================================== -->
 
-<div
-  class="cursor-follower"
-  id="cursorFollower">
-</div>
+<div class="cursor-follower" id="cursorFollower"></div>
 
 
 <!-- =====================================================
@@ -1238,15 +1340,8 @@ section {
   >
 
     <svg viewBox="0 0 24 24">
-      <circle
-        cx="12"
-        cy="8"
-        r="3">
-      </circle>
-
-      <path
-        d="M5 20c1.5-4 4-6 7-6s5.5 2 7 6">
-      </path>
+      <circle cx="12" cy="8" r="3"></circle>
+      <path d="M5 20c1.5-4 4-6 7-6s5.5 2 7 6"></path>
     </svg>
 
   </a>
@@ -1260,24 +1355,16 @@ section {
   >
 
     <svg viewBox="0 0 24 24">
-
-      <circle
-        cx="12"
-        cy="12"
-        r="9">
-      </circle>
-
-      <path
-        d="M12 10v6">
-      </path>
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 10v6"></path>
 
       <circle
         cx="12"
         cy="7"
         r=".7"
         fill="currentColor"
-        stroke="none">
-      </circle>
+        stroke="none"
+      ></circle>
 
     </svg>
 
@@ -1292,23 +1379,9 @@ section {
   >
 
     <svg viewBox="0 0 24 24">
-
-      <path
-        d="M5 19c4-7 5-10 14-14">
-      </path>
-
-      <circle
-        cx="5"
-        cy="19"
-        r="2">
-      </circle>
-
-      <circle
-        cx="19"
-        cy="5"
-        r="2">
-      </circle>
-
+      <path d="M5 19c4-7 5-10 14-14"></path>
+      <circle cx="5" cy="19" r="2"></circle>
+      <circle cx="19" cy="5" r="2"></circle>
     </svg>
 
   </a>
@@ -1322,19 +1395,9 @@ section {
   >
 
     <svg viewBox="0 0 24 24">
-
-      <path
-        d="M4 11.5 12 5l8 6.5">
-      </path>
-
-      <path
-        d="M6.5 10.5V19h11v-8.5">
-      </path>
-
-      <path
-        d="M10 19v-5h4v5">
-      </path>
-
+      <path d="M4 11.5 12 5l8 6.5"></path>
+      <path d="M6.5 10.5V19h11v-8.5"></path>
+      <path d="M10 19v-5h4v5"></path>
     </svg>
 
   </a>
@@ -1348,15 +1411,8 @@ section {
   >
 
     <svg viewBox="0 0 24 24">
-
-      <path
-        d="M4 7h6l2 2h8v10H4z">
-      </path>
-
-      <path
-        d="M4 7V5h6l2 2">
-      </path>
-
+      <path d="M4 7h6l2 2h8v10H4z"></path>
+      <path d="M4 7V5h6l2 2"></path>
     </svg>
 
   </a>
@@ -1377,9 +1433,7 @@ section {
 
     <div class="hero-title">
 
-      <h1>
-        KEYUR
-      </h1>
+      <h1>KEYUR</h1>
 
       <p>
         Creative Developer
@@ -1387,9 +1441,7 @@ section {
 
       <div class="availability">
 
-        <span
-          class="availability-dot">
-        </span>
+        <span class="availability-dot"></span>
 
         <span>
           Available for Restoration
@@ -1506,7 +1558,7 @@ section {
 
 <!-- =====================================================
      PANEL 3 — MY JOURNEY
-     1.2.3.3 HORIZONTAL JOURNEY
+     1.2.3.4 — HORIZONTAL JOURNEY
 ===================================================== -->
 
 <section
@@ -1514,154 +1566,182 @@ section {
   id="journey"
 >
 
-  <div class="glass-sector glass-journey">
+  <div class="section-inner">
 
-
-    <!-- =================================================
-         HORIZONTAL JOURNEY PROGRESS
-    ================================================== -->
-
-    <div
-      class="journey-progress"
-      id="journeyProgress"
-      aria-label="Journey progress"
-    >
-
-      <div class="journey-progress-line"></div>
-
-
-      <div
-        class="journey-progress-entry"
-        data-target="journey-start"
-        aria-label="Journey beginning"
-      >
-
-        <span
-          class="journey-progress-dot">
-        </span>
-
-      </div>
-
-
-      <div
-        class="journey-progress-entry"
-        data-target="journey-physics"
-        aria-label="Age 10"
-      >
-
-        <span
-          class="journey-progress-dot">
-        </span>
-
-      </div>
-
-
-      <div
-        class="journey-progress-entry"
-        data-target="journey-website"
-        aria-label="Age 11"
-      >
-
-        <span
-          class="journey-progress-dot">
-        </span>
-
-      </div>
-
-
-      <div
-        class="journey-progress-entry"
-        data-target="journey-coding"
-        aria-label="Age 12"
-      >
-
-        <span
-          class="journey-progress-dot">
-        </span>
-
-      </div>
-
-
-      <div
-        class="journey-progress-entry"
-        data-target="journey-now"
-        aria-label="Age 13"
-      >
-
-        <span
-          class="journey-progress-dot">
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <!-- =================================================
-         JOURNEY CONTENT
-    ================================================== -->
-
-    <h2>
+    <h2 class="section-title">
       My Journey
     </h2>
 
-    <p id="journey-start">
+    <div class="glass-sector glass-journey">
 
-      This is my first ever website, and to whoever just watches by it,
-      I hope you like it. I'm new in all this stuff, and here are all my phases:
+      <p>
+        This is my first ever website, and to whoever just watches by it,
+        I hope you like it. I'm new in all this stuff, and here are all my phases:
+      </p>
 
-    </p>
+      <div class="journey-wrapper">
 
-    <ul>
+        <div class="journey-timeline">
 
-      <li id="journey-physics">
-
-        <strong>AGE 10:</strong>
-
-        I started exploring physics,
-        clearly unknown and all that,
-        still fresh.
-
-      </li>
+          <div class="journey-line"></div>
 
 
-      <li id="journey-website">
+          <!-- AGE 10 -->
 
-        <strong>AGE 11:</strong>
+          <div class="journey-entry">
 
-        I started dreaming of making a website
-        introducing me to anyone who passes by.
+            <div class="journey-age">
+              AGE 10
+            </div>
 
-      </li>
+            <div class="journey-dot"></div>
+
+            <div class="journey-connector"></div>
+
+            <div class="glass-sector journey-entry-card">
+
+              <h3>
+                Physics
+              </h3>
+
+              <p>
+                I started exploring physics,
+                clearly unknown and all that,
+                still fresh.
+              </p>
+
+            </div>
+
+          </div>
 
 
-      <li id="journey-coding">
+          <!-- AGE 11 -->
 
-        <strong>AGE 12:</strong>
+          <div class="journey-entry">
 
-        Started learning computerology.
+            <div class="journey-age">
+              AGE 11
+            </div>
 
-      </li>
+            <div class="journey-dot"></div>
+
+            <div class="journey-connector"></div>
+
+            <div class="glass-sector journey-entry-card">
+
+              <h3>
+                The Dream
+              </h3>
+
+              <p>
+                I started dreaming of making a website
+                introducing me to anyone who passes by.
+              </p>
+
+            </div>
+
+          </div>
 
 
-      <li>
+          <!-- AGE 12 -->
 
-        <strong>AGE 13:</strong>
+          <div class="journey-entry">
 
-        Made my first site
-        (&gt; , &lt;) — hope you like it.
+            <div class="journey-age">
+              AGE 12
+            </div>
 
-      </li>
+            <div class="journey-dot"></div>
 
-    </ul>
+            <div class="journey-connector"></div>
 
-    <p id="journey-now">
+            <div class="glass-sector journey-entry-card">
 
-      And thus, I actually hope you like it.
-      I know it's not so good,
-      and thank you for being a visitor.
+              <h3>
+                Computerology
+              </h3>
 
-    </p>
+              <p>
+                Started learning computerology
+                and exploring how computers and
+                technology actually worked.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- AGE 13 -->
+
+          <div class="journey-entry">
+
+            <div class="journey-age">
+              AGE 13
+            </div>
+
+            <div class="journey-dot"></div>
+
+            <div class="journey-connector"></div>
+
+            <div class="glass-sector journey-entry-card">
+
+              <h3>
+                First Site
+              </h3>
+
+              <p>
+                Made my first site
+                (&gt; , &lt;) — hope you like it.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- AGE 14 -->
+
+          <div class="journey-entry">
+
+            <div class="journey-age">
+              AGE 14
+            </div>
+
+            <div class="journey-dot"></div>
+
+            <div class="journey-connector"></div>
+
+            <div class="glass-sector journey-entry-card">
+
+              <h3>
+                The Next Phase
+              </h3>
+
+              <p>
+                Still building, still learning,
+                and taking everything I've explored
+                into bigger ideas and projects.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <p>
+
+        And thus, I actually hope you like it.
+        I know it's not so good,
+        and thank you for being a visitor.
+
+      </p>
+
+    </div>
 
   </div>
 
@@ -1764,7 +1844,6 @@ section {
           <div class="small-info-content">
 
             Latitude:
-
             <strong>
               19.0760° N
             </strong>
@@ -1772,7 +1851,6 @@ section {
             <br>
 
             Longitude:
-
             <strong>
               72.8777° E
             </strong>
@@ -1938,7 +2016,6 @@ section {
      JAVASCRIPT
 ========================================================= -->
 
-
 <script>
 
 /* =========================================================
@@ -1954,19 +2031,12 @@ let cursorY = 0;
 let followerX = 0;
 let followerY = 0;
 
+document.addEventListener("mousemove", (event) => {
 
-document.addEventListener(
-  "mousemove",
-  (event) => {
+  cursorX = event.clientX;
+  cursorY = event.clientY;
 
-    cursorX =
-      event.clientX;
-
-    cursorY =
-      event.clientY;
-
-  }
-);
+});
 
 
 function moveCursorFollower() {
@@ -2007,26 +2077,21 @@ let currentX = 0;
 let currentY = 0;
 
 
-document.addEventListener(
-  "mousemove",
-  (event) => {
+document.addEventListener("mousemove", (event) => {
 
-    const x =
-      (event.clientX /
-        window.innerWidth) - 0.5;
+  const x =
+    (event.clientX / window.innerWidth) - 0.5;
 
-    const y =
-      (event.clientY /
-        window.innerHeight) - 0.5;
+  const y =
+    (event.clientY / window.innerHeight) - 0.5;
 
-    targetX =
-      x * -11;
+  targetX =
+    x * -11;
 
-    targetY =
-      y * -8;
+  targetY =
+    y * -8;
 
-  }
-);
+});
 
 
 document.addEventListener(
@@ -2040,12 +2105,10 @@ document.addEventListener(
       event.touches[0];
 
     const x =
-      (touch.clientX /
-        window.innerWidth) - 0.5;
+      (touch.clientX / window.innerWidth) - 0.5;
 
     const y =
-      (touch.clientY /
-        window.innerHeight) - 0.5;
+      (touch.clientY / window.innerHeight) - 0.5;
 
     targetX =
       x * -11;
@@ -2097,7 +2160,6 @@ moveBackground();
 
 /* =========================================================
    GLOBAL GLASS SECTOR MOTION
-   PRESERVED FROM 1.2.3.2.3
 ========================================================= */
 
 const glassSectors =
@@ -2261,15 +2323,9 @@ function animateGlassSectors() {
 
       if (
         !state.active &&
-        Math.abs(
-          state.currentRotateX
-        ) < 0.01 &&
-        Math.abs(
-          state.currentRotateY
-        ) < 0.01 &&
-        Math.abs(
-          state.currentZ
-        ) < 0.01
+        Math.abs(state.currentRotateX) < 0.01 &&
+        Math.abs(state.currentRotateY) < 0.01 &&
+        Math.abs(state.currentZ) < 0.01
       ) {
 
         sector.style.transform =
@@ -2391,176 +2447,6 @@ glassSectors.forEach(
       }
     );
 
-  }
-);
-
-
-/* =========================================================
-   1.2.3.3 — JOURNEY BLUE FOCUS DOT
-========================================================= */
-
-const journeyProgress =
-  document.getElementById(
-    "journeyProgress"
-  );
-
-const journeyEntries =
-  journeyProgress.querySelectorAll(
-    ".journey-progress-entry"
-  );
-
-
-function focusJourneyEntry(
-  entry
-) {
-
-  journeyEntries.forEach(
-    (item) => {
-
-      item.classList.remove(
-        "focused"
-      );
-
-    }
-  );
-
-  if (entry) {
-
-    entry.classList.add(
-      "focused"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   JOURNEY CURSOR FOCUS
-========================================================= */
-
-journeyProgress.addEventListener(
-  "mousemove",
-  (event) => {
-
-    const rect =
-      journeyProgress.getBoundingClientRect();
-
-    const relativeX =
-      event.clientX - rect.left;
-
-    const sectionWidth =
-      rect.width /
-      journeyEntries.length;
-
-    const index =
-      Math.max(
-        0,
-        Math.min(
-          journeyEntries.length - 1,
-          Math.floor(
-            relativeX / sectionWidth
-          )
-        )
-      );
-
-    focusJourneyEntry(
-      journeyEntries[index]
-    );
-
-  }
-);
-
-
-/* =========================================================
-   JOURNEY FOCUS RESET
-========================================================= */
-
-journeyProgress.addEventListener(
-  "mouseleave",
-  () => {
-
-    focusJourneyEntry(
-      null
-    );
-
-  }
-);
-
-
-/* =========================================================
-   JOURNEY DOT CLICK
-========================================================= */
-
-journeyEntries.forEach(
-  (entry) => {
-
-    entry.addEventListener(
-      "click",
-      () => {
-
-        const target =
-          document.getElementById(
-            entry.dataset.target
-          );
-
-        if (!target)
-          return;
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   JOURNEY TOUCH FOCUS
-========================================================= */
-
-journeyProgress.addEventListener(
-  "touchstart",
-  (event) => {
-
-    if (!event.touches.length)
-      return;
-
-    const rect =
-      journeyProgress.getBoundingClientRect();
-
-    const touch =
-      event.touches[0];
-
-    const relativeX =
-      touch.clientX - rect.left;
-
-    const sectionWidth =
-      rect.width /
-      journeyEntries.length;
-
-    const index =
-      Math.max(
-        0,
-        Math.min(
-          journeyEntries.length - 1,
-          Math.floor(
-            relativeX / sectionWidth
-          )
-        )
-      );
-
-    focusJourneyEntry(
-      journeyEntries[index]
-    );
-
-  },
-  {
-    passive: true
   }
 );
 
@@ -2846,7 +2732,6 @@ navSearch.addEventListener(
 
     };
 
-
     if (
       destinations[query]
     ) {
@@ -2876,6 +2761,7 @@ const navButtons =
   document.querySelectorAll(
     ".nav-button"
   );
+
 
 const navSections = [
 
@@ -2925,7 +2811,6 @@ function updateActiveNav() {
 
     }
   );
-
 
   navButtons.forEach(
     button => {
