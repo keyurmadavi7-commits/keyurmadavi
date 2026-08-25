@@ -231,7 +231,6 @@ section {
 
 /* =========================================================
    GLASS SECTOR
-   1.2.3.3 / TRANSPARENT GLASS FOUNDATION
 ========================================================= */
 
 .glass-sector {
@@ -362,7 +361,6 @@ section {
 
 /* =========================================================
    NORGE CORE STRIP
-   UNTOUCHED
 ========================================================= */
 
 .norge-strip {
@@ -491,7 +489,6 @@ section {
 
 /* =========================================================
    PANEL 3 — MY JOURNEY
-   1.2.3.4 — HORIZONTAL VERSION
 ========================================================= */
 
 .journey-wrapper {
@@ -1015,6 +1012,402 @@ section {
 
 
 /* =========================================================
+   FEATURED PROJECT
+========================================================= */
+
+.featured-project {
+  padding: 42px;
+
+  border-radius: 25px;
+
+  box-sizing: border-box;
+
+  margin-bottom: 55px;
+
+  border-color:
+    rgba(255,255,255,0.38);
+}
+
+.featured-label {
+  font-size: 11px;
+
+  letter-spacing: 3px;
+
+  color: rgba(255,255,255,0.48);
+
+  margin-bottom: 14px;
+}
+
+.featured-project h3 {
+  margin: 0;
+
+  font-size: 34px;
+
+  letter-spacing: 1px;
+}
+
+.featured-project p {
+  max-width: 760px;
+
+  margin: 18px 0 28px;
+
+  color: #ddd;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+.featured-meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-bottom: 30px;
+}
+
+.featured-tag {
+  padding: 7px 12px;
+
+  border: 1px solid rgba(255,255,255,0.20);
+
+  border-radius: 999px;
+
+  color: rgba(255,255,255,0.68);
+
+  font-size: 12px;
+}
+
+.open-web-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 13px 19px;
+
+  border: 1px solid rgba(255,255,255,0.30);
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.open-web-button:hover {
+  background: rgba(255,255,255,0.15);
+
+  border-color:
+    rgba(255,255,255,0.50);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   DISCARDED PROJECTS
+========================================================= */
+
+.discarded-title {
+  margin: 0 0 25px;
+
+  font-size: 30px;
+
+  letter-spacing: 0.5px;
+
+  color: rgba(255,255,255,0.82);
+}
+
+.discarded-projects {
+  opacity: 0.72;
+}
+
+.discarded-projects .project-card {
+  border-color:
+    rgba(255,255,255,0.16);
+}
+
+.discarded-badge {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  padding: 5px 9px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255,255,255,0.16);
+
+  color: rgba(255,255,255,0.48);
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   NORGЕ CORE POPUP / CAMP RGHINI
+========================================================= */
+
+.norge-popup {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(0,0,0,0.62);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+
+  z-index: 5000;
+}
+
+.norge-popup.active {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+.norge-popup-card {
+  width: min(560px, 100%);
+
+  padding: 38px;
+
+  box-sizing: border-box;
+
+  border-radius: 28px;
+
+  background:
+    rgba(20,20,20,0.72);
+
+  border:
+    1px solid rgba(255,255,255,0.28);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.50);
+
+  transform:
+    translateY(20px)
+    scale(0.96);
+
+  transition:
+    transform 0.28s cubic-bezier(.18,.72,.28,1);
+}
+
+.norge-popup.active .norge-popup-card {
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+.norge-popup-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.norge-popup-label {
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  color: rgba(255,255,255,0.45);
+}
+
+.norge-popup-close {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,0.20);
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.07);
+
+  color: white;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.norge-popup-close:hover {
+  background: rgba(255,255,255,0.14);
+
+  transform: rotate(4deg);
+}
+
+.norge-popup-card h3 {
+  margin: 0 0 12px;
+
+  font-size: 32px;
+
+  letter-spacing: 1px;
+}
+
+.norge-popup-card p {
+  margin: 0 0 25px;
+
+  color: #ddd;
+
+  font-size: 16px;
+
+  line-height: 1.65;
+}
+
+.norge-link-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  margin-bottom: 22px;
+
+  border:
+    1px solid rgba(255,255,255,0.18);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  overflow: hidden;
+}
+
+.norge-link-icon {
+  width: 10px;
+  height: 10px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #ff3d3d;
+
+  box-shadow:
+    0 0 10px rgba(255,61,61,0.65);
+}
+
+.norge-link-text {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: rgba(255,255,255,0.70);
+
+  font-size: 13px;
+}
+
+.enter-norge {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid rgba(255,255,255,0.30);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,0.10);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.enter-norge:hover {
+  background:
+    rgba(255,255,255,0.17);
+
+  border-color:
+    rgba(255,255,255,0.48);
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -1146,6 +1539,23 @@ section {
 
     width: 108%;
     height: 108%;
+  }
+
+  .featured-project {
+    padding: 28px;
+  }
+
+  .featured-project h3 {
+    font-size: 28px;
+  }
+
+  .norge-popup-card {
+    padding: 28px;
+    border-radius: 24px;
+  }
+
+  .norge-popup-card h3 {
+    font-size: 27px;
   }
 
 }
@@ -1427,7 +1837,6 @@ section {
 
 <!-- =====================================================
      PANEL 3 — MY JOURNEY
-     1.2.3.4 — HORIZONTAL + AGE 14
 ===================================================== -->
 
 <section
@@ -1726,6 +2135,7 @@ section {
 
 <!-- =====================================================
      PANEL 5 — PROJECTS
+     1.2.3.5 — FEATURED PROJECT OPERATION
 ===================================================== -->
 
 <section
@@ -1740,10 +2150,90 @@ section {
     </h2>
 
 
-    <div class="projects-grid">
+    <!-- =================================================
+         FEATURED PROJECT
+    ================================================== -->
 
+    <div class="glass-sector featured-project">
+
+      <div class="featured-label">
+        FEATURED PROJECT
+      </div>
+
+      <h3>
+        NORGE CORE
+      </h3>
+
+      <p>
+
+        A technology and design project built around
+        hardware, software, operating-system concepts,
+        interface design, and a distinct frozen-glass
+        visual identity.
+
+        NORGE CORE is the current featured project
+        of KEYUR.
+
+      </p>
+
+
+      <div class="featured-meta">
+
+        <span class="featured-tag">
+          CORE I
+        </span>
+
+        <span class="featured-tag">
+          CORE II
+        </span>
+
+        <span class="featured-tag">
+          CORE III
+        </span>
+
+        <span class="featured-tag">
+          NC SYSTEM
+        </span>
+
+        <span class="featured-tag">
+          UI / DESIGN
+        </span>
+
+      </div>
+
+
+      <button
+        class="open-web-button"
+        id="openNorgeButton"
+        type="button"
+      >
+
+        OPEN WEB →
+
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         DISCARDED PROJECTS
+    ================================================== -->
+
+    <h3 class="discarded-title">
+      Discarded Projects
+    </h3>
+
+
+    <div class="projects-grid discarded-projects">
+
+
+      <!-- PROJECT ONE -->
 
       <div class="glass-sector project-card">
+
+        <span class="discarded-badge">
+          DISCARDED
+        </span>
 
         <h3>
           Project One — Universe Simulation
@@ -1751,19 +2241,25 @@ section {
 
         <p>
 
-          In this project, I will create a simulation
-          in which you can simulate literally everything
-          that you want.
+          In this project, I planned to create
+          a simulation in which you could simulate
+          different things throughout the universe.
 
-          I'll add a link here later,
-          then make an app on the same simulator too :D
+          The project was eventually discarded
+          as the direction of my work changed.
 
         </p>
 
       </div>
 
 
+      <!-- PROJECT TWO -->
+
       <div class="glass-sector project-card">
+
+        <span class="discarded-badge">
+          DISCARDED
+        </span>
 
         <h3>
           Project Two — Collab With My Friend
@@ -1771,21 +2267,24 @@ section {
 
         <p>
 
-          I would make an app with the help of my friend.
+          A planned application collaboration
+          with a friend.
 
-          Basically, in this collab, he'd do most of the stuff,
-          but don't worry, I'll do some things too.
-
-          The app would be hosted on his web too,
-          and mine, with his credentials because
-          he did most of the work.
+          The concept was eventually left behind
+          as my projects moved in a different direction.
 
         </p>
 
       </div>
 
 
+      <!-- PROJECT THREE -->
+
       <div class="glass-sector project-card">
+
+        <span class="discarded-badge">
+          DISCARDED
+        </span>
 
         <h3>
           Project Three — Ultima Scanner
@@ -1793,11 +2292,11 @@ section {
 
         <p>
 
-          In this app, you can check a web link
-          for potential security problems and many more.
+          A planned application for checking
+          web links for potential security problems
+          and other information.
 
-          Just copy its web link and put it
-          in the typer bar of this app :D
+          The project was later discarded.
 
         </p>
 
@@ -1809,6 +2308,82 @@ section {
   </div>
 
 </section>
+
+
+<!-- =====================================================
+     NORGE CORE POPUP
+===================================================== -->
+
+<div
+  class="norge-popup"
+  id="norgePopup"
+  aria-hidden="true"
+>
+
+  <div
+    class="norge-popup-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="norgePopupTitle"
+  >
+
+    <div class="norge-popup-top">
+
+      <div class="norge-popup-label">
+        FEATURED PROJECT / WEB CONNECTION
+      </div>
+
+      <button
+        class="norge-popup-close"
+        id="norgePopupClose"
+        type="button"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <h3 id="norgePopupTitle">
+      NORGE CORE
+    </h3>
+
+
+    <p>
+
+      You are about to leave KEYUR and enter
+      the dedicated NORGE CORE website.
+
+    </p>
+
+
+    <div class="norge-link-box">
+
+      <span class="norge-link-icon"></span>
+
+      <span class="norge-link-text">
+        keyurmadavi7-commits.github.io / NORGE-CORE
+      </span>
+
+    </div>
+
+
+    <a
+      class="enter-norge"
+      id="enterNorge"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      ENTER NORGE CORE →
+
+    </a>
+
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -2643,6 +3218,149 @@ window.addEventListener(
 );
 
 updateActiveNav();
+
+
+/* =========================================================
+   NORGE CORE FEATURED PROJECT POPUP
+========================================================= */
+
+const norgePopup =
+  document.getElementById(
+    "norgePopup"
+  );
+
+const openNorgeButton =
+  document.getElementById(
+    "openNorgeButton"
+  );
+
+const norgePopupClose =
+  document.getElementById(
+    "norgePopupClose"
+  );
+
+const enterNorge =
+  document.getElementById(
+    "enterNorge"
+  );
+
+
+/*
+   The destination is assembled here so the actual
+   NORGE CORE address remains a single configurable value.
+*/
+
+const norgeCoreParts = [
+  "https:",
+  "",
+  "keyurmadavi7-commits.github.io",
+  "NORGE-CORE/"
+];
+
+const norgeCoreURL =
+  norgeCoreParts.join("/");
+
+
+enterNorge.href =
+  norgeCoreURL;
+
+
+/* =========================================================
+   OPEN POPUP
+========================================================= */
+
+function openNorgePopup() {
+
+  norgePopup.classList.add(
+    "active"
+  );
+
+  norgePopup.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* =========================================================
+   CLOSE POPUP
+========================================================= */
+
+function closeNorgePopup() {
+
+  norgePopup.classList.remove(
+    "active"
+  );
+
+  norgePopup.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+openNorgeButton.addEventListener(
+  "click",
+  openNorgePopup
+);
+
+
+norgePopupClose.addEventListener(
+  "click",
+  closeNorgePopup
+);
+
+
+/* =========================================================
+   CLICK OUTSIDE POPUP
+========================================================= */
+
+norgePopup.addEventListener(
+  "click",
+  (event) => {
+
+    if (
+      event.target ===
+      norgePopup
+    ) {
+
+      closeNorgePopup();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key === "Escape" &&
+      norgePopup.classList.contains(
+        "active"
+      )
+    ) {
+
+      closeNorgePopup();
+
+    }
+
+  }
+);
 
 </script>
 
