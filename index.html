@@ -50,5 +50,298 @@
   </main>
 
   <script src="script.js"></script>
+  * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #0d0f12;
+  color: #ffffff;
+}
+
+/* Base Landscape Background with Parallax Support */
+.background {
+  position: fixed;
+  top: -5%;
+  left: -5%;
+  width: 110vw;
+  height: 110vh;
+  background-image: url('https://images.unsplash.com/photo-1762378828467-b6798bd92562?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.12s ease-out;
+  z-index: 0;
+  will-change: transform;
+  filter: brightness(0.85) contrast(1.05);
+}
+
+/* Weather Canvas Layer */
+#weather-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero Section Container */
+.hero-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Status Header Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 22, 28, 0.65);
+  backdrop-filter: blur(12px);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.status-dot {
+  color: #34d399;
+  font-size: 10px;
+}
+
+/* Staggered Clipped Typography */
+.hero-title {
+  display: flex;
+  font-size: 8rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.hero-title .letter {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: revealLetter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes revealLetter {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* Norge Core Strip Continuous Ticker */
+.norge-strip {
+  width: 100%;
+  max-width: 720px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 0;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  gap: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  animation: ticker 18s linear infinite;
+}
+
+.sep {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+  // ===================================================
+// KEYUR CORE SYSTEM v1.2.3.8
+// Restored Mouse Parallax & Live Mumbai Forecast Engine
+// ===================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  initMouseParallax();
+  initMumbaiWeatherSync();
+});
+
+/* --------------------------------------------------
+ * 1. RESTORED MOUSE BACKGROUND MOVEMENT (PARALLAX)
+ * -------------------------------------------------- */
+function initMouseParallax() {
+  const bg = document.getElementById('bg-wallpaper');
+  if (!bg) return;
+
+  window.addEventListener('mousemove', (e) => {
+    // Calculate normalized offset from center (-1 to +1)
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    // Smooth subtle tilt translation (max 18px movement)
+    const moveX = x * 18;
+    const moveY = y * 18;
+
+    bg.style.transform = `scale(1.08) translate(${moveX}px, ${moveY}px)`;
+  });
+}
+
+/* --------------------------------------------------
+ * 2. LIVE MUMBAI WEATHER API INTEGRATION
+ * -------------------------------------------------- */
+async function initMumbaiWeatherSync() {
+  const displayEl = document.getElementById('weather-status-display');
+  const displayDupEl = document.getElementById('weather-status-display-dup');
+
+  try {
+    // OpenWeatherMap public endpoint for Mumbai (using default metric units)
+    const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // Replace with your active OWM API key
+    const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=Mumbai,IN&units=metric&appid=${API_KEY}`;
+    
+    // Fetch live weather data
+    const res = await fetch(endpoint);
+    
+    if (!res.ok) throw new Error(`Weather HTTP error! status: ${res.status}`);
+    
+    const data = await res.json();
+    const temp = Math.round(data.main.temp);
+    const mainCondition = data.weather[0].main.toLowerCase();
+    const description = data.weather[0].description;
+
+    const weatherText = `MUMBAI: ${temp}°C, ${description.toUpperCase()}`;
+    if (displayEl) displayEl.textContent = weatherText;
+    if (displayDupEl) displayDupEl.textContent = weatherText;
+
+    // Trigger Canvas Precipitation ONLY when Mumbai weather condition dictates it
+    if (mainCondition.includes('rain') || mainCondition.includes('drizzle') || mainCondition.includes('thunderstorm')) {
+      startIOSRainEngine('rain');
+    } else if (mainCondition.includes('snow')) {
+      startIOSRainEngine('snow');
+    } else {
+      stopWeatherCanvas();
+    }
+
+  } catch (err) {
+    console.warn("Mumbai weather forecast fetch fallback:", err.message);
+    const fallbackText = "MUMBAI: 29°C, CLEAR SKY";
+    if (displayEl) displayEl.textContent = fallbackText;
+    if (displayDupEl) displayDupEl.textContent = fallbackText;
+    
+    // Default to clean clear view on fallback
+    stopWeatherCanvas();
+  }
+}
+
+/* --------------------------------------------------
+ * 3. DYNAMIC iOS-STYLE RAIN & SNOW CANVAS ENGINE
+ * -------------------------------------------------- */
+let weatherCanvas, ctx, animId;
+let particles = [];
+
+function startIOSRainEngine(mode = 'rain') {
+  weatherCanvas = document.getElementById('weather-canvas');
+  if (!weatherCanvas) return;
+
+  ctx = weatherCanvas.getContext('2d');
+  
+  function resizeCanvas() {
+    weatherCanvas.width = window.innerWidth;
+    weatherCanvas.height = window.innerHeight;
+  }
+  
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  particles = [];
+  const count = mode === 'rain' ? 140 : 80;
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * weatherCanvas.width,
+      y: Math.random() * weatherCanvas.height,
+      length: mode === 'rain' ? Math.random() * 22 + 15 : Math.random() * 4 + 2,
+      speed: mode === 'rain' ? Math.random() * 12 + 16 : Math.random() * 1.5 + 0.8,
+      opacity: mode === 'rain' ? Math.random() * 0.35 + 0.25 : Math.random() * 0.6 + 0.3,
+      radius: mode === 'snow' ? Math.random() * 3 + 1 : 0
+    });
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+    particles.forEach(p => {
+      ctx.beginPath();
+
+      if (mode === 'rain') {
+        // Vertical sleek iOS raindrop streak
+        ctx.strokeStyle = `rgba(220, 235, 255, ${p.opacity})`;
+        ctx.lineWidth = 1.2;
+        ctx.lineCap = 'round';
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - p.length * 0.08, p.y + p.length);
+        ctx.stroke();
+
+        p.y += p.speed;
+        p.x -= p.speed * 0.08;
+
+      } else if (mode === 'snow') {
+        // Soft snowfall particle
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y += p.speed;
+        p.x += Math.sin(p.y * 0.01) * 0.5;
+      }
+
+      // Loop particles back to the top
+      if (p.y > weatherCanvas.height) {
+        p.y = -p.length;
+        p.x = Math.random() * weatherCanvas.width;
+      }
+    });
+
+    animId = requestAnimationFrame(render);
+  }
+
+  render();
+}
+
+function stopWeatherCanvas() {
+  if (animId) cancelAnimationFrame(animId);
+  if (weatherCanvas && ctx) {
+    ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+  }
+}
 </body>
 </html>
