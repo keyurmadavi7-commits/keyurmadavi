@@ -315,10 +315,28 @@ section {
   letter-spacing: 7px;
 }
 
-.hero-title p {
-  margin: 12px 0 0;
+.daily-quote {
+  margin: 18px auto 0;
+  max-width: 720px;
 
-  font-size: 20px;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  letter-spacing: 0.3px;
+  transition: opacity 0.4s ease;
+}
+
+.daily-quote .quote-author {
+  display: block;
+  margin-top: 6px;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .availability {
@@ -1432,8 +1450,8 @@ section {
     letter-spacing: 5px;
   }
 
-  .hero-title p {
-    font-size: 17px;
+  .daily-quote {
+    font-size: 15px;
   }
 
   .content-section,
@@ -1658,9 +1676,9 @@ section {
 
       <h1>KEYUR</h1>
 
-      <p>
-        Creative Developer
-      </p>
+      <div class="daily-quote" id="dailyQuote">
+        <!-- Dynamically populated physics quote based on day -->
+      </div>
 
       <div class="availability">
 
@@ -2060,7 +2078,6 @@ section {
 
 <!-- =====================================================
      PANEL 5 — PROJECTS
-     1.2.3.5 — FEATURED PROJECT OPERATION
 ===================================================== -->
 
 <section
@@ -2201,7 +2218,55 @@ section {
 <script>
   document.addEventListener('DOMContentLoaded', () => {
 
-    /* 1. Cursor Follower */
+    /* 1. Physics Quotes Engine linked to Date System */
+    const physicsQuotes = [
+      {
+        quote: "“Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist.”",
+        author: "Stephen Hawking"
+      },
+      {
+        quote: "“The most beautiful thing we can experience is the mysterious. It is the source of all true art and science.”",
+        author: "Albert Einstein"
+      },
+      {
+        quote: "“I think it's much more interesting to live not knowing than to have answers which might be wrong.”",
+        author: "Richard Feynman"
+      },
+      {
+        quote: "“An expert is a person who has made all the mistakes that can be made in a very narrow field.”",
+        author: "Niels Bohr"
+      },
+      {
+        quote: "“Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.”",
+        author: "Marie Curie"
+      },
+      {
+        quote: "“Somewhere, something incredible is waiting to be known.”",
+        author: "Carl Sagan"
+      },
+      {
+        quote: "“In science one tries to tell people, in such a way as to be understood by everyone, something that no one ever knew before.”",
+        author: "Paul Dirac"
+      }
+    ];
+
+    let currentDayIndex = -1;
+
+    function updateDailyQuote() {
+      const quoteEl = document.getElementById('dailyQuote');
+      if (!quoteEl) return;
+
+      const now = new Date();
+      const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+
+      if (dayOfWeek !== currentDayIndex) {
+        currentDayIndex = dayOfWeek;
+        const q = physicsQuotes[dayOfWeek];
+        quoteEl.innerHTML = `${q.quote} <span class="quote-author">— ${q.author}</span>`;
+      }
+    }
+
+    /* 2. Cursor Follower */
     const cursor = document.getElementById('cursorFollower');
     const bg = document.getElementById('background');
 
@@ -2221,7 +2286,7 @@ section {
       }
     });
 
-    /* 2. Glass Sector 3D Tilt Effect */
+    /* 3. Glass Sector 3D Tilt Effect */
     const glassSectors = document.querySelectorAll('.glass-sector');
     
     glassSectors.forEach(sector => {
@@ -2246,11 +2311,10 @@ section {
       });
     });
 
-    /* 3. Live IST Clock */
+    /* 4. Live IST Clock & Midnight Check */
     function updateClock() {
       const clockEl = document.getElementById('clockText');
-      if (!clockEl) return;
-
+      
       const now = new Date();
       const options = {
         timeZone: 'Asia/Kolkata',
@@ -2260,12 +2324,17 @@ section {
         hour12: true
       };
 
-      clockEl.textContent = new Intl.DateTimeFormat('en-US', options).format(now);
+      if (clockEl) {
+        clockEl.textContent = new Intl.DateTimeFormat('en-US', options).format(now);
+      }
+
+      /* Synchronize quote switch whenever clock ticks */
+      updateDailyQuote();
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    /* 4. Live Weather Telemetry (Mumbai) */
+    /* 5. Live Weather Telemetry (Mumbai) */
     async function fetchMumbaiWeather() {
       const tempEl = document.getElementById('temperature');
       const condEl = document.getElementById('weather-condition');
@@ -2286,7 +2355,7 @@ section {
     }
     fetchMumbaiWeather();
 
-    /* 5. Norge Core Popup Open/Close Mechanics */
+    /* 6. Norge Core Popup Open/Close Mechanics */
     const openNorgeBtn = document.getElementById('openNorgeButton');
     const closeNorgeBtn = document.getElementById('closeNorgeButton');
     const norgeModal = document.getElementById('norgePopup');
@@ -2311,7 +2380,7 @@ section {
       });
     }
 
-    /* 6. Active Navigation Button Indicator on Scroll */
+    /* 7. Active Navigation Button Indicator on Scroll */
     const sections = document.querySelectorAll('section');
     const navButtons = document.querySelectorAll('.nav-button');
 
